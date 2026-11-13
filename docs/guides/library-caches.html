@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is it safe to delete ~/Library/Caches on Mac? — Glint guide</title>
+<meta name="description" content="When clearing ~/Library/Caches on a Mac is safe, what to watch out for, and how to do it by hand or with a free cleaner.">
+<link rel="canonical" href="https://bagsiz.github.io/glintapp/guides/library-caches.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://bagsiz.github.io/glintapp/guides/library-caches.html">
+<meta property="og:title" content="Is it safe to delete ~/Library/Caches on a Mac?">
+<meta property="og:description" content="When clearing ~/Library/Caches on a Mac is safe, what to watch out for, and how to do it by hand or with a free cleaner.">
+<meta property="og:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/page.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Is it safe to delete ~/Library/Caches on a Mac?",
+ "description": "When clearing ~/Library/Caches on a Mac is safe, what to watch out for, and how to do it by hand or with a free cleaner.",
+ "url": "https://bagsiz.github.io/glintapp/guides/library-caches.html",
+ "mainEntityOfPage": "https://bagsiz.github.io/glintapp/guides/library-caches.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://bagsiz.github.io/glintapp/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://bagsiz.github.io/glintapp/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://bagsiz.github.io/glintapp/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://bagsiz.github.io/glintapp/assets/icon.png"
+  }
+ }
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="">Glint</a>
+  <div class="spacer"></div>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <span class="eyebrow">Guide</span>
+  <h1>Is it safe to delete ~/Library/Caches on a Mac?</h1>
+  <p class="lead">Short answer: deleting the <em>contents</em> of <code>~/Library/Caches</code> is usually safe, because apps rebuild what they need. There are a few things worth knowing first.</p>
+
+  <h2>What the folder is for</h2>
+  <p><code>~/Library/Caches</code> is where apps keep data they can recreate: thumbnails, downloaded web content, compiled shaders, update files. Each app normally has its own subfolder, named after its bundle ID (for example <code>com.apple.Safari</code>). Sandboxed apps keep their caches inside their container instead, under <code>~/Library/Containers/&lt;app&gt;/Data/Library/Caches</code>.</p>
+
+  <h2>When it's safe, and when to be careful</h2>
+  <ul>
+    <li><b>Quit the app first.</b> Deleting a cache under a running app can make it misbehave until it is restarted.</li>
+    <li><b>Expect a slower first launch.</b> The app has to rebuild what it lost, and some data may be downloaded again.</li>
+    <li><b>Some apps keep real content there.</b> Offline media, map tiles or downloaded assets are sometimes stored as “cache”. They come back, but only after another download.</li>
+    <li><b>Delete the contents, not the folder.</b> Leave <code>~/Library/Caches</code> itself in place, and don't touch <code>/System/Library/Caches</code>, which belongs to macOS.</li>
+    <li><b>It won't speed up a healthy Mac.</b> Clearing caches frees space; it's not a performance fix by itself.</li>
+  </ul>
+
+  <h2>Doing it by hand</h2>
+  <ol>
+    <li>In Finder choose Go › Go to Folder… and enter <code>~/Library/Caches</code>.</li>
+    <li>Switch to List view and show folder sizes (View › Show View Options › Calculate all sizes).</li>
+    <li>Quit the app whose cache you want to clear, then move its folder to the Trash.</li>
+    <li>Empty the Trash to actually get the space back.</li>
+  </ol>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>Smart Clean</b> lists application caches next to logs and developer leftovers, with a size for each rule, and you approve what goes. Because caches regrow on their own, Glint deletes them outright instead of filling Quarantine. The Caches folder itself is protected, and files of running apps that aren't safe to touch, such as Docker Desktop's, are skipped. You can also schedule a daily, weekly or monthly clean of caches and logs from the menu bar.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>More guides</h2>
+  <ul>
+    <li><a href="system-data.html">What is “System Data” on a Mac, and how do you shrink it?</a></li>
+    <li><a href="duplicate-photos.html">How to find duplicate and similar photos on a Mac</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+# Glint — Disk Cleaner for Mac
+
+> Glint is a free, native macOS app (SwiftUI) for freeing disk space, protecting privacy, checking the Mac's security and disk health, and recovering deleted files from USB sticks and SD cards. It is available now, has no paid tier, subscription or cleaning limit, needs no account, and makes no network requests of its own: all scanning and analysis runs on the Mac. Turkish and English interface.
+
+- Download: https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg
+- Website: https://bagsiz.github.io/glintapp/
+- Source and issue tracker: https://github.com/bagsiz/glintapp
+- Price: free (no paid tier, no subscription, no per-clean limit)
+- Requirements: macOS 14 Sonoma or later; Apple Silicon or Intel (one universal app)
+- Distribution: signed with an Apple Developer ID and notarized by Apple
+- Note: Glint is an independent app, not affiliated with Apple Inc.
+
+## Features
+
+- Smart Clean: caches, logs, Xcode / npm / pnpm / Gradle / Cargo leftovers, Trash, old iOS backups, Mail attachments, downloaded installers
+- Large Files and Duplicate Files (size, first 64 KB, then full SHA-256; at least one copy always stays)
+- Similar Photos: bursts, edits and near-identical shots grouped on-device with Apple Vision; keeps the highest-resolution one
+- Space Map: sunburst chart and folder tree with drill-down
+- Disk Health: SSD wear, life left, temperature, data written, power-on time and error counters from NVMe SMART, no admin password needed
+- Applications: uninstall apps with their ~/Library leftovers
+- Startup Items, Maintenance (free RAM, flush DNS, reindex Spotlight, repair "Open With", reset Quick Look and font caches)
+- Auto Clean and menu bar: scheduled cleaning of caches and logs, free space at a glance, one-click quick clean
+- Sensitive Files: finds card numbers, IBANs, Turkish ID numbers, passwords and API keys in text, PDF, Office files and screenshots (on-device OCR); values are masked and stay on the Mac
+- Photo Locations: strips GPS and device metadata losslessly
+- Browser Privacy: history, cookies, cache and site data for Safari, Chrome, Edge, Brave, Arc, Vivaldi, Opera and Firefox, all profiles; passwords and bookmarks are never touched
+- Security Scan: signature and notarization checks, suspicious launch agents; App Permissions viewer with one-click revoke
+- File Recovery: signature carving on USB sticks, SD cards, external disks and disk images; original file names on FAT/exFAT
+- Quarantine and History: removals are logged and restorable
+
+## Safety
+
+- Only caches that apps rebuild themselves are deleted permanently; everything else goes to Quarantine first and can be restored for 7 days by default (configurable)
+- System folders and top-level user folders (Documents, Desktop, ~/Library…) are protected and can never be deleted
+- iCloud files that are not downloaded are never read
+- Scans stop at a configurable memory ceiling
+- Files of running apps that are unsafe to touch (such as Docker Desktop) are skipped
+- Root operations go through a signed privileged helper (SMAppService) that only accepts Glint's own signed app and runs a fixed set of operations; without it, the standard macOS admin prompt is used
+
+## Privacy
+
+- No analytics, telemetry, crash reporting, ads or account
+- Files, file names and scan results are never uploaded
+- Full privacy note: https://bagsiz.github.io/glintapp/privacy.html
+
+## Pages
+
+- [Home and FAQ](https://bagsiz.github.io/glintapp/): features, how it works, safety principles, frequently asked questions
+- [Privacy note](https://bagsiz.github.io/glintapp/privacy.html)
+- [What is "System Data" on a Mac?](https://bagsiz.github.io/glintapp/guides/system-data.html)
+- [Is it safe to delete ~/Library/Caches?](https://bagsiz.github.io/glintapp/guides/library-caches.html)
+- [How to find duplicate photos on a Mac](https://bagsiz.github.io/glintapp/guides/duplicate-photos.html)

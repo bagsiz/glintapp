@@ -1,0 +1,1320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glint — Free Disk Cleaner for Mac: Cleanup, Privacy &amp; File Recovery</title>
+<meta name="description" content="Glint is a free Mac disk cleaner: smart cleanup, space map, similar photos, disk health, browser privacy, security scan and file recovery. No limits, nothing sent anywhere.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<link rel="canonical" href="https://bagsiz.github.io/glintapp/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#07080d">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://bagsiz.github.io/glintapp/">
+<meta property="og:title" content="Glint — Free Disk Cleaner for Mac">
+<meta property="og:description" content="Clean gigabytes, find look-alike photos, check disk health, wipe browser trails and recover deleted files. Free, no limits, macOS 14+, everything stays on your Mac.">
+<meta property="og:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Glint — Free Disk Cleaner for Mac">
+<meta name="twitter:description" content="Smart cleanup, similar photos, disk health, browser privacy and file recovery. Free, no limits, nothing sent anywhere.">
+<meta name="twitter:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<!-- jsonld -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "SoftwareApplication",
+ "name": "Glint",
+ "alternateName": "Glint — Disk Cleaner",
+ "description": "Free disk cleaner for macOS with smart cleanup, space map, similar photos, disk health, browser privacy, sensitive-file and security scans, and file recovery. Everything runs on your Mac.",
+ "url": "https://bagsiz.github.io/glintapp/",
+ "image": "https://bagsiz.github.io/glintapp/assets/og.jpg",
+ "operatingSystem": "macOS 14 Sonoma or later",
+ "applicationCategory": "UtilitiesApplication",
+ "processorRequirements": "Apple Silicon or Intel",
+ "inLanguage": [
+  "en",
+  "tr"
+ ],
+ "isAccessibleForFree": true,
+ "downloadUrl": "https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "featureList": [
+  "Smart Clean",
+  "Large and duplicate files",
+  "Similar Photos",
+  "Space Map",
+  "Disk Health (NVMe SMART)",
+  "App uninstaller",
+  "Startup items",
+  "Maintenance",
+  "Auto Clean and menu bar",
+  "Sensitive Files scan",
+  "Photo location removal",
+  "Browser Privacy",
+  "Security Scan",
+  "App Permissions",
+  "File Recovery",
+  "Quarantine and History"
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Is Glint really free?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Glint is completely free: no paid tier, no subscription, no cap on how much you can clean and no account. Download the DMG and use every feature."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it safe? What won't it delete?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Glint refuses to delete protected locations: system folders such as /System, /usr and the keychains, and your top-level folders such as Documents, Desktop, Pictures and ~/Library itself. Caches that apps rebuild on their own are deleted permanently; everything else goes to Quarantine first and can be restored for 7 days by default (you can change this in Settings)."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does Glint send my files or data anywhere?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Glint makes no network requests of its own: no analytics, no crash reporting, no account, no uploads. Scanning, photo comparison and text recognition all run on your Mac. It only opens something online when you click it yourself, such as a photo's location in Apple Maps. Details are in the privacy note."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I undo a clean?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, for everything that went to Quarantine. Open Quarantine & History, select the items and restore them to where they were, until the retention period ends. Rebuildable caches are deleted for good, but apps recreate them when they need them."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which Macs are supported?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Any Mac running macOS 14 Sonoma or later, with Apple Silicon or an Intel processor. There's one universal download for both."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does it ask for Full Disk Access?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "macOS hides folders like Mail, Safari data and other apps' containers from every app until you allow it. Without Full Disk Access Glint still works, but it can't see those places, so some caches, browser data and sensitive files are missed. The access is used only to scan and clean on your Mac, and you can turn it off at any time in System Settings › Privacy & Security › Full Disk Access."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does it ask for an admin password, or for a helper approval in System Settings?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A few jobs need root: freeing RAM, flushing DNS, reindexing Spotlight, scanning a raw disk for File Recovery and moving admin-owned items to Quarantine. You can install Glint's small privileged helper in Settings and approve it once in System Settings › General › Login Items; after that these jobs run without a password prompt each time. The helper only accepts requests from Glint signed by the same developer, checks every request again and runs a fixed set of operations. If you skip it, Glint uses the standard macOS password prompt instead."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is Glint signed and notarized?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Glint is signed with an Apple Developer ID and notarized by Apple, so it opens normally after you drag it into Applications."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it work while Docker or other apps are running?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Glint checks for running apps whose files aren't safe to delete while they're in use. While Docker Desktop runs, its VM files, logs and sockets are skipped and Glint tells you why; quit Docker and scan again to include them. Browser Privacy asks to quit an open browser before cleaning it."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which languages does it speak?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Turkish and English. Glint follows your Mac's language, and you can switch at any time from Settings or the sidebar."
+   }
+  }
+ ]
+}
+</script>
+<!-- /jsonld -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07080d;
+  --bg2: #0e1018;
+  --panel: #12141e;
+  --panel2: #181b28;
+  --line: rgba(255,255,255,.08);
+  --text: #eef0f7;
+  --muted: #8b90a6;
+  --teal: #4fd8c4;
+  --blue: #3b6cf0;
+  --indigo: #5b4fe0;
+  --green: #3fd68a;
+  --red: #ff5d6c;
+  --orange: #ffad4a;
+  --accent: var(--teal);
+  --accent2: var(--blue);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 Inter, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font-family: "Space Grotesk", Inter, sans-serif; letter-spacing: -.02em; }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+/* ---------- nav ---------- */
+nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 50;
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px clamp(16px, 4vw, 40px);
+  backdrop-filter: blur(18px) saturate(1.4);
+  background: rgba(7,8,13,.55);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s;
+}
+nav.scrolled { border-bottom-color: var(--line); }
+nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-family: "Space Grotesk"; font-size: 19px; }
+nav .brand img { width: 30px; height: 30px; }
+nav .spacer { flex: 1; }
+.lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; font-size: 13px; }
+.lang button { background: none; border: 0; color: var(--muted); padding: 5px 11px; cursor: pointer; font: inherit; }
+.lang button.on { background: rgba(255,255,255,.1); color: var(--text); }
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 20px; border-radius: 999px; font-weight: 600;
+  background: linear-gradient(135deg, var(--teal), var(--blue) 55%, var(--indigo));
+  color: #fff; box-shadow: 0 8px 30px -8px rgba(59,108,240,.7);
+  transition: transform .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px rgba(59,108,240,.9); }
+.btn.small { padding: 8px 15px; font-size: 14px; }
+.btn svg { width: 18px; height: 18px; }
+
+/* ---------- hero ---------- */
+.hero {
+  min-height: 100vh; display: grid; place-items: center; text-align: center;
+  padding: 120px 20px 80px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ""; position: absolute; width: 1100px; height: 1100px; left: 50%; top: 45%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(59,108,240,.28), rgba(79,216,196,.08) 40%, transparent 65%);
+  filter: blur(10px); pointer-events: none;
+}
+.stars { position: absolute; inset: 0; pointer-events: none; }
+.hero-inner { position: relative; max-width: 860px; }
+.logo-orb { position: relative; width: 168px; height: 168px; margin: 0 auto 34px; }
+.logo-orb img { width: 100%; height: 100%; position: relative; z-index: 2; filter: drop-shadow(0 20px 50px rgba(59,108,240,.55)); animation: float 6s ease-in-out infinite; }
+.logo-orb .ring {
+  position: absolute; inset: -26px; border-radius: 50%;
+  border: 1px solid rgba(79,216,196,.35);
+  animation: pulse 3.2s ease-out infinite;
+}
+.logo-orb .ring:nth-child(2) { animation-delay: 1.06s; }
+.logo-orb .ring:nth-child(3) { animation-delay: 2.13s; }
+@keyframes pulse { from { transform: scale(.7); opacity: .9; } to { transform: scale(1.6); opacity: 0; } }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(2deg); } }
+.hero h1 { font-size: clamp(46px, 8vw, 92px); line-height: 1.02; font-weight: 700; }
+.grad {
+  background: linear-gradient(100deg, #fff 10%, var(--teal) 40%, var(--blue) 70%, #a99cff 95%);
+  background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shine 7s linear infinite;
+}
+@keyframes shine { to { background-position: 200% center; } }
+.hero p.lead { font-size: clamp(17px, 2.2vw, 21px); color: var(--muted); max-width: 640px; margin: 22px auto 34px; }
+.hero .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.hero .meta { color: var(--muted); font-size: 13px; margin-top: 16px; }
+.ghost { padding: 11px 18px; border-radius: 999px; border: 1px solid var(--line); color: var(--text); font-weight: 500; transition: background .2s; }
+.ghost:hover { background: rgba(255,255,255,.06); }
+.scroll-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; letter-spacing: .14em; text-transform: uppercase; }
+.scroll-hint span { width: 22px; height: 36px; border: 1.5px solid var(--muted); border-radius: 12px; position: relative; }
+.scroll-hint span::after { content: ""; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; border-radius: 2px; background: var(--text); transform: translateX(-50%); animation: wheel 1.8s infinite; }
+@keyframes wheel { 0% { opacity: 0; transform: translate(-50%, 0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, 12px); } }
+
+/* ---------- story ---------- */
+.story { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4vw, 60px); padding: 0 clamp(16px, 4vw, 56px); max-width: 1400px; margin: 0 auto; }
+.story::before {
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(800px 600px at 75% 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+              radial-gradient(700px 500px at 20% 80%, color-mix(in srgb, var(--accent2) 12%, transparent), transparent 70%);
+  transition: background 1s;
+  opacity: var(--glow, 0);
+}
+.steps { position: relative; }
+.step { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 10vh 0; opacity: .25; transition: opacity .5s; }
+.step.active { opacity: 1; }
+.step .kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+.step .kicker i { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-style: normal; background: color-mix(in srgb, var(--accent) 18%, transparent); font-size: 14px; }
+.step h2 { font-size: clamp(30px, 4vw, 48px); line-height: 1.08; margin-bottom: 16px; }
+.step p { color: var(--muted); font-size: 17px; max-width: 470px; }
+.step ul { list-style: none; margin-top: 18px; display: grid; gap: 8px; }
+.step li { display: flex; gap: 10px; color: #c9cde0; font-size: 15px; }
+.step li::before { content: "✦"; color: var(--accent); }
+.stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; }
+.progress { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 9px; z-index: 40; opacity: 0; transition: opacity .4s; }
+.progress.show { opacity: 1; }
+.progress a { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.2); transition: all .3s; }
+.progress a.on { background: var(--accent); height: 22px; border-radius: 4px; }
+
+/* ---------- mac window ---------- */
+.window {
+  width: 100%; aspect-ratio: 16 / 10.4; max-height: 82vh;
+  background: linear-gradient(180deg, #161926, #10121b);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 16px;
+  box-shadow: 0 50px 120px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(0,0,0,.4), 0 0 120px -40px color-mix(in srgb, var(--accent) 60%, transparent);
+  display: grid; grid-template-columns: 26% 1fr; grid-template-rows: 40px 1fr; overflow: hidden;
+  transition: box-shadow 1s; position: relative;
+}
+.titlebar { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; padding: 0 14px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.02); }
+.titlebar b { width: 12px; height: 12px; border-radius: 50%; }
+.titlebar b:nth-child(1) { background: #ff5f57; } .titlebar b:nth-child(2) { background: #febc2e; } .titlebar b:nth-child(3) { background: #28c840; }
+.titlebar .t { margin-left: 10px; font-size: 13px; color: var(--muted); font-weight: 500; }
+.titlebar .bar { margin-left: auto; width: 120px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
+.titlebar .bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--teal), var(--blue)); transition: width .3s; }
+.side { position: relative; border-right: 1px solid var(--line); padding: 12px 8px; display: flex; flex-direction: column; gap: 2px; font-size: 12.5px; overflow: hidden; background: rgba(255,255,255,.015); }
+.side .sec { font-size: 10.5px; color: #5d6279; font-weight: 600; margin: 9px 8px 3px; text-transform: uppercase; letter-spacing: .06em; }
+.side .it { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: 7px; color: #aeb3c8; transition: all .35s; white-space: nowrap; }
+.side .it .ic { width: 16px; text-align: center; font-size: 12px; opacity: .8; }
+.side .it.on { background: color-mix(in srgb, var(--accent) 22%, transparent); color: #fff; }
+.content { position: relative; overflow: hidden; }
+.scene { position: absolute; inset: 0; padding: 22px 24px; opacity: 0; transform: translateY(18px) scale(.985); transition: opacity .5s, transform .6s cubic-bezier(.2,.8,.2,1); pointer-events: none; display: flex; flex-direction: column; }
+.scene.on { opacity: 1; transform: none; }
+.scene h4 { font-family: "Space Grotesk"; font-size: 21px; font-weight: 700; }
+.scene .sub { color: var(--muted); font-size: 12.5px; margin-bottom: 14px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
+.card { background: rgba(255,255,255,.035); border: 1px solid var(--line); border-radius: 12px; }
+
+/* smart clean */
+.rules { display: grid; gap: 7px; }
+.rule { display: flex; align-items: center; gap: 10px; padding: 9px 12px; font-size: 13px; transition: all .5s; }
+.rule .ck { width: 16px; height: 16px; border-radius: 5px; background: var(--blue); display: grid; place-items: center; font-size: 10px; }
+.rule .sz { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rule.gone { opacity: 0; transform: translateX(60px); }
+.freed { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; opacity: 0; transition: opacity .6s; pointer-events: none; }
+.freed.on { opacity: 1; }
+.freed .big { font-family: "Space Grotesk"; font-size: 54px; font-weight: 700; line-height: 1; }
+.freed .lbl { color: var(--muted); margin-top: 6px; }
+.check-orb { width: 78px; height: 78px; border-radius: 50%; margin: 0 auto 16px; display: grid; place-items: center; font-size: 36px; background: radial-gradient(circle, rgba(63,214,138,.35), rgba(63,214,138,.08)); border: 1px solid rgba(63,214,138,.5); transform: scale(0); transition: transform .6s cubic-bezier(.3,1.6,.5,1); }
+.freed.on .check-orb { transform: scale(1); }
+canvas.fx { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+/* space map */
+.sun { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; align-items: center; }
+.sun svg { width: 100%; max-height: 100%; }
+.sun path { transform-origin: 150px 150px; transform: scale(.4) rotate(-40deg); opacity: 0; transition: transform .9s cubic-bezier(.2,.9,.2,1), opacity .6s; }
+.scene.on .sun path { transform: none; opacity: 1; }
+.sun .legend { display: grid; gap: 9px; font-size: 12.5px; }
+.sun .legend div { display: flex; align-items: center; gap: 9px; }
+.sun .legend i { width: 10px; height: 10px; border-radius: 3px; }
+.sun .legend span:last-child { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+.spin { animation: spin 40s linear infinite; transform-origin: 150px 150px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* similar photos */
+.photos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.ph { aspect-ratio: 1; border-radius: 10px; position: relative; overflow: hidden; transition: all .5s; outline: 3px solid transparent; outline-offset: -3px; }
+.ph::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.35), transparent 45%); }
+.ph .sunny { position: absolute; width: 24%; aspect-ratio: 1; border-radius: 50%; background: #ffe7a3; top: 16%; right: 18%; }
+.ph .hill { position: absolute; inset: auto -10% -20% -10%; height: 55%; border-radius: 50% 50% 0 0; }
+.ph .tag { position: absolute; left: 6px; bottom: 6px; z-index: 2; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; opacity: 0; transform: scale(.6); transition: all .4s; }
+.ph.best { outline-color: var(--green); }
+.ph.best .tag { opacity: 1; transform: none; background: var(--green); color: #052; }
+.ph.reject { outline-color: rgba(255,93,108,.8); filter: saturate(.4) brightness(.6); }
+.ph.reject .tag { opacity: 1; transform: none; background: var(--red); color: #fff; }
+.groups-note { margin-top: 14px; font-size: 13px; color: var(--muted); }
+.groups-note b { color: var(--text); }
+
+/* disk health */
+.health { display: flex; gap: 28px; align-items: center; flex: 1; }
+.gauge { position: relative; width: 44%; max-width: 230px; aspect-ratio: 1; flex: none; }
+.gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.gauge circle { fill: none; stroke-width: 14; }
+.gauge .bg { stroke: rgba(255,255,255,.07); }
+.gauge .fg { stroke: url(#gg); stroke-linecap: round; stroke-dasharray: 534; stroke-dashoffset: 534; transition: stroke-dashoffset 1.8s cubic-bezier(.2,.8,.2,1); }
+.gauge .val { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+.gauge .val b { font-family: "Space Grotesk"; font-size: 46px; line-height: 1; }
+.gauge .val > span { color: var(--muted); font-size: 12px; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 22px; font-size: 12px; flex: 1; }
+.stats div > span { display: block; color: var(--muted); }
+.stats div b { font-size: 16px; font-variant-numeric: tabular-nums; }
+
+/* apps */
+.apps { position: relative; flex: 1; }
+.app { position: absolute; left: 0; right: 0; height: 40px; display: flex; align-items: center; gap: 11px; padding: 0 12px; font-size: 13px; border-bottom: 1px solid var(--line); transition: top .7s cubic-bezier(.3,.9,.2,1); }
+.app .ai { width: 24px; height: 24px; border-radius: 6px; flex: none; }
+.app .v { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 12px; }
+.sortbar { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.sortbar b { color: var(--text); background: rgba(255,255,255,.07); padding: 3px 10px; border-radius: 999px; transition: all .3s; }
+
+/* browser */
+.browsers { display: grid; gap: 10px; }
+.br { display: flex; align-items: center; gap: 12px; padding: 11px 13px; }
+.br .logo { width: 30px; height: 30px; border-radius: 50%; flex: none; display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+.br .data { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+.br .data .chip { background: rgba(255,255,255,.06); transition: all .6s cubic-bezier(.5,0,.5,1); }
+.br .data .chip.gone { transform: translate(140px, 80px) scale(.3); opacity: 0; position: absolute; }
+.br .data { position: relative; min-height: 24px; align-items: center; }
+.br .data .clean { color: var(--green); background: rgba(63,214,138,.12); animation: pop .45s cubic-bezier(.3,1.5,.5,1) both; }
+.bin { position: absolute; right: 26px; bottom: 22px; display: flex; align-items: center; gap: 10px; padding: 10px 14px; font-size: 13px; }
+.bin .n { font-family: "Space Grotesk"; font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* sensitive */
+.doc { padding: 18px 20px; position: relative; overflow: hidden; font-size: 13px; line-height: 2; flex: 1; }
+.doc .scan { position: absolute; left: 0; right: 0; height: 60px; top: -60px; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--accent) 35%, transparent), transparent); border-bottom: 1px solid var(--accent); }
+.scene.on .doc .scan { animation: scan 3.6s ease-in-out infinite; }
+@keyframes scan { 0% { top: -60px; } 70% { top: 100%; } 100% { top: 100%; } }
+.doc .ln { height: 9px; border-radius: 5px; background: rgba(255,255,255,.08); margin: 14px 0; }
+.secret { font-family: "JetBrains Mono"; padding: 1px 6px; border-radius: 5px; background: rgba(255,173,74,.15); color: var(--orange); transition: all .4s; }
+.secret.masked { background: rgba(63,214,138,.14); color: var(--green); }
+.secret .k { color: var(--muted); font-family: Inter; font-size: 11px; margin-right: 6px; }
+
+/* location */
+.loc { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; flex: 1; align-items: center; }
+.photo-big { aspect-ratio: 4 / 5; border-radius: 14px; position: relative; overflow: hidden; background: linear-gradient(180deg, #ffb37d, #ff7aa2 45%, #4a3a8f); }
+.photo-big .sea { position: absolute; inset: 62% 0 0; background: linear-gradient(180deg, #2b2f7a, #12163f); }
+.photo-big .sunb { position: absolute; width: 34%; aspect-ratio: 1; border-radius: 50%; background: #ffe3a6; left: 33%; top: 44%; box-shadow: 0 0 60px #ffd58a; }
+.pin { position: absolute; left: 50%; top: 18%; font-size: 34px; transform: translateX(-50%); transition: all .8s cubic-bezier(.6,-0.4,.7,1); filter: drop-shadow(0 6px 10px rgba(0,0,0,.4)); }
+.pin.off { transform: translate(-50%, 260px) rotate(40deg); opacity: 0; }
+.meta-rows { display: grid; gap: 8px; font-size: 12.5px; }
+.meta-rows div { display: flex; justify-content: space-between; padding: 9px 12px; transition: all .5s; }
+.meta-rows div span:first-child { color: var(--muted); }
+.meta-rows div.strip { opacity: .25; text-decoration: line-through; }
+.okline { margin-top: 10px; color: var(--green); font-size: 13px; font-weight: 600; opacity: 0; transition: opacity .5s; }
+.okline.on { opacity: 1; }
+
+/* security */
+.sec-list { display: grid; gap: 8px; }
+.sec-row { display: flex; align-items: center; gap: 11px; padding: 10px 13px; font-size: 13px; transition: all .4s; }
+.sec-row .st { margin-left: auto; font-size: 11.5px; font-weight: 600; min-width: 120px; text-align: right; color: var(--muted); }
+.sec-row.ok .st { color: var(--green); }
+.sec-row.bad { border-color: rgba(255,93,108,.5); background: rgba(255,93,108,.08); }
+.sec-row.bad .st { color: var(--red); }
+.shield { position: absolute; right: 22px; top: 20px; font-size: 28px; }
+.scene.on .shield { animation: beat 1.6s ease-in-out infinite; }
+@keyframes beat { 50% { transform: scale(1.15); } }
+
+/* recovery */
+.rec { display: grid; grid-template-columns: 1.15fr 1fr; gap: 16px; flex: 1; min-height: 0; }
+.blocks { display: grid; grid-template-columns: repeat(14, 1fr); gap: 3px; align-content: start; }
+.blocks i { aspect-ratio: 1; border-radius: 3px; background: rgba(255,255,255,.06); transition: background .3s, transform .3s; }
+.blocks i.hit { background: var(--accent); transform: scale(1.12); box-shadow: 0 0 10px var(--accent); }
+.blocks i.done { background: color-mix(in srgb, var(--accent) 40%, transparent); }
+.found { display: grid; gap: 6px; align-content: start; font-size: 12px; }
+.found div { display: flex; align-items: center; gap: 8px; padding: 7px 10px; animation: pop .45s cubic-bezier(.3,1.5,.5,1) both; }
+.found div span:last-child { margin-left: auto; color: var(--muted); }
+@keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.9); } }
+.fsbadge { margin-bottom: 10px; color: var(--green); font-size: 12px; font-weight: 600; }
+
+/* maintenance */
+.mem { padding: 14px; margin-bottom: 12px; }
+.membar { display: flex; height: 16px; border-radius: 6px; overflow: hidden; gap: 2px; margin: 10px 0 8px; background: rgba(255,255,255,.05); }
+.membar i { transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+.mem .row { display: flex; justify-content: space-between; font-size: 12.5px; }
+.tasks { display: grid; gap: 7px; }
+.task { display: flex; align-items: center; gap: 11px; padding: 9px 12px; font-size: 13px; }
+.task .r { margin-left: auto; font-size: 11.5px; color: var(--muted); min-width: 70px; text-align: right; }
+.task.done .r { color: var(--green); }
+.task.run .r::after { content: ""; display: inline-block; width: 11px; height: 11px; border: 2px solid var(--muted); border-top-color: transparent; border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -2px; }
+
+/* menu bar */
+.desk { position: absolute; inset: 0; background: radial-gradient(circle at 70% 120%, #3b6cf0 0%, #241a5c 40%, #0b0c18 75%); }
+.menubar { position: absolute; top: 0; left: 0; right: 0; height: 26px; background: rgba(15,16,28,.6); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 16px; padding: 0 14px; font-size: 12px; }
+.menubar .r { margin-left: auto; display: flex; gap: 14px; align-items: center; }
+.menubar .gl { padding: 1px 8px; border-radius: 5px; background: rgba(255,255,255,.18); font-weight: 600; }
+.drop { position: absolute; right: 70px; top: 32px; width: 270px; padding: 14px; border-radius: 12px; background: rgba(28,30,44,.92); border: 1px solid rgba(255,255,255,.12); box-shadow: 0 20px 50px rgba(0,0,0,.5); font-size: 12.5px; transform-origin: top right; transform: scale(.85); opacity: 0; transition: all .45s cubic-bezier(.3,1.4,.5,1); }
+.drop.on { transform: none; opacity: 1; }
+.drop .pb { height: 7px; border-radius: 4px; background: rgba(255,255,255,.1); overflow: hidden; margin: 8px 0 4px; }
+.drop .pb i { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), var(--blue)); transition: width 1s; }
+.drop hr { border: 0; border-top: 1px solid var(--line); margin: 10px 0; }
+.drop .act { color: var(--teal); font-weight: 600; transition: all .3s; }
+.drop .act.press { opacity: .5; }
+.drop .muted { color: var(--muted); font-size: 11.5px; }
+
+/* ---------- sections after story ---------- */
+section.pad { padding: 120px clamp(16px, 4vw, 56px); max-width: 1200px; margin: 0 auto; }
+.center { text-align: center; }
+.big-h { font-size: clamp(32px, 5vw, 56px); line-height: 1.08; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 44px; }
+.feat { padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015)); border: 1px solid var(--line); transition: transform .3s, border-color .3s; }
+.feat:hover { transform: translateY(-4px); border-color: rgba(79,216,196,.35); }
+.feat .e { font-size: 24px; }
+.feat h3 { font-size: 18px; margin: 10px 0 6px; }
+.feat p { color: var(--muted); font-size: 14.5px; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s, transform .8s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.final { text-align: center; padding: 140px 20px 120px; position: relative; overflow: hidden; }
+.final::before { content: ""; position: absolute; left: 50%; top: 50%; width: 900px; height: 500px; transform: translate(-50%, -50%); background: radial-gradient(ellipse, rgba(59,108,240,.3), transparent 65%); pointer-events: none; }
+.final .icon { width: 110px; margin-bottom: 26px; filter: drop-shadow(0 18px 40px rgba(59,108,240,.55)); }
+.final p { color: var(--muted); margin: 16px auto 30px; max-width: 520px; }
+.final .meta { color: var(--muted); font-size: 13px; margin-top: 18px; }
+.eyebrow { display: inline-block; font-size: 13px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 12px; }
+.sec-lead { color: var(--muted); max-width: 620px; margin: 16px auto 0; font-size: 17px; }
+
+/* how it works */
+.flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 44px; counter-reset: flow; text-align: left; }
+.flow .feat { position: relative; padding-top: 26px; }
+.flow .feat .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--teal); letter-spacing: .1em; }
+.flow .feat:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 18px; z-index: 1; }
+.flow-note { margin-top: 18px; color: var(--muted); font-size: 14.5px; }
+.flow-note b { color: var(--text); }
+
+/* safe by design */
+.cards.safe { text-align: left; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+nav .ghost { padding: 8px 15px; font-size: 14px; }
+.safe .feat .e { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; font-size: 18px; background: rgba(79,216,196,.12); color: var(--teal); }
+
+/* no catch */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 40px; text-align: left; }
+.fact { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.025); }
+.fact::before { content: "✓"; flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: #052; background: var(--green); margin-top: 2px; }
+.fact b { display: block; font-size: 15px; }
+.fact span { color: var(--muted); font-size: 13.5px; }
+
+/* faq */
+.faq { max-width: 820px; margin: 44px auto 0; text-align: left; display: grid; gap: 10px; }
+.faq details { border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.015)); transition: border-color .3s, background .3s; }
+.faq details[open] { border-color: rgba(79,216,196,.35); }
+.faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px; padding: 17px 20px; font-weight: 600; font-size: 16.5px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ""; flex: none; margin-left: auto; width: 9px; height: 9px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg) translate(-2px, -2px); transition: transform .3s, border-color .3s; }
+.faq details[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); border-color: var(--teal); }
+.faq summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; border-radius: 14px; }
+.faq .a { padding: 0 20px 18px; color: var(--muted); font-size: 15px; animation: faqIn .35s cubic-bezier(.2,.8,.2,1); }
+.faq .a a, .guides a, footer a { color: var(--teal); }
+.faq .a a:hover, footer a:hover { text-decoration: underline; }
+@keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } }
+.guides { margin-top: 36px; color: var(--muted); font-size: 14.5px; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; }
+
+footer { border-top: 1px solid var(--line); padding: 34px 20px 40px; text-align: center; color: #5d6279; font-size: 13px; display: grid; gap: 10px; }
+footer .links { display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: center; font-size: 14px; }
+footer .legal { max-width: 640px; margin: 0 auto; font-size: 12px; }
+
+/* ---------- mobile ---------- */
+@media (max-width: 860px) {
+  .story { grid-template-columns: 1fr; }
+  .stage { order: -1; height: auto; top: 58px; padding: 10px 0; z-index: 5; background: linear-gradient(180deg, var(--bg) 85%, transparent); }
+  .window { aspect-ratio: 4 / 3.4; grid-template-columns: 1fr; max-height: 54vh; }
+  .side { display: none; }
+  .step { min-height: 70vh; padding: 6vh 0; }
+  .progress { display: none; }
+  .scene { padding: 14px; }
+  .scene h4 { font-size: 16px; }
+  .scene .sub { margin-bottom: 8px; }
+  nav .ghost { display: none; }
+  .freed { top: 44px; }
+  .freed .big { font-size: 36px; }
+  .check-orb { width: 52px; height: 52px; font-size: 24px; margin-bottom: 8px; }
+  .step { justify-content: flex-start; padding-top: 4vh; }
+  .health { gap: 14px; }
+  .stats b { font-size: 13px; }
+  .loc { gap: 10px; }
+  .meta-rows div { padding: 6px 8px; font-size: 11px; }
+  .bin { right: 12px; bottom: 10px; }
+  .drop { right: 12px; }
+  .rec { grid-template-columns: 1fr 1fr; }
+  section.pad { padding: 80px 16px; }
+  .flow { grid-template-columns: 1fr; }
+  .flow .feat:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -19px; transform: translateX(-50%); }
+  .faq summary { padding: 15px 16px; font-size: 15.5px; }
+  .faq .a { padding: 0 16px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01s !important; transition-duration: .01s !important; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="brand" href="#top"><img src="assets/icon.png" alt="">Glint</a>
+  <div class="spacer"></div>
+  <div class="lang"><button data-lang="en">EN</button><button data-lang="tr">TR</button></div>
+  <a class="ghost" href="#faq" data-i18n="fFaq">FAQ</a>
+  <a class="ghost" href="https://github.com/bagsiz/glintapp" data-i18n="github">GitHub</a>
+  <a class="btn small dl" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg><span data-i18n="download">Download</span>
+  </a>
+</nav>
+
+<header class="hero" id="top">
+  <canvas class="stars" id="stars"></canvas>
+  <div class="hero-inner">
+    <div class="logo-orb"><div class="ring"></div><div class="ring"></div><div class="ring"></div><img src="assets/icon.png" alt="Glint"></div>
+    <h1><span class="grad" data-i18n="heroTitle">Your Mac, sparkling again.</span></h1>
+    <p class="lead" data-i18n="heroLead">Glint cleans gigabytes of clutter, finds your look‑alike photos, guards your privacy and even rescues deleted files from SD cards — all on your Mac, nothing sent anywhere.</p>
+    <div class="cta">
+      <a class="btn dl" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-1.9-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.3-1.2 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.8-1.1-2.8-4.3zM14 5.3c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></svg>
+        <span data-i18n="downloadMac">Download for Mac</span>
+      </a>
+      <a class="ghost" href="#story" data-i18n="seeHow">See what it does ↓</a>
+    </div>
+    <div class="meta" data-i18n="meta">Available now · Free · macOS 14+ · Apple Silicon &amp; Intel · Signed &amp; notarized by Apple</div>
+  </div>
+  <div class="scroll-hint"><span></span><em data-i18n="scroll" style="font-style:normal">Scroll</em></div>
+</header>
+
+<div class="story" id="story">
+  <div class="steps" id="steps"></div>
+  <div class="stage">
+    <div class="window" id="win">
+      <div class="titlebar"><b></b><b></b><b></b><span class="t">Glint</span><span class="bar"><i id="winbar"></i></span></div>
+      <div class="side" id="side"></div>
+      <div class="content" id="content">
+
+        <!-- 0 smart clean -->
+        <div class="scene" data-scene="smart">
+          <h4 data-i18n="m_smart">Smart Clean</h4>
+          <div class="sub" data-i18n="m_smart_sub">Safe to remove — nothing goes without your OK.</div>
+          <div class="rules" id="rules"></div>
+          <canvas class="fx" id="fx"></canvas>
+          <div class="freed" id="freed"><div><div class="check-orb">✓</div><div class="big"><span id="freedN">0</span> GB</div><div class="lbl" data-i18n="m_freed">freed · restorable from Quarantine</div></div></div>
+        </div>
+
+        <!-- 1 space map -->
+        <div class="scene" data-scene="space">
+          <h4 data-i18n="m_space">Space Map</h4>
+          <div class="sub">Macintosh HD · 512 GB</div>
+          <div class="sun"><svg viewBox="0 0 300 300" id="sunsvg"><g class="spin" id="sung"></g><circle cx="150" cy="150" r="46" fill="#10121b"/><text x="150" y="146" text-anchor="middle" fill="#eef0f7" font-family="Space Grotesk" font-weight="700" font-size="22">398 GB</text><text x="150" y="166" text-anchor="middle" fill="#8b90a6" font-size="11" data-i18n="m_used">used</text></svg>
+            <div class="legend" id="legend"></div></div>
+        </div>
+
+        <!-- 2 similar photos -->
+        <div class="scene" data-scene="similar">
+          <h4 data-i18n="m_similar">Similar Photos</h4>
+          <div class="sub" data-i18n="m_similar_sub">Compared on‑device with Apple Vision.</div>
+          <div class="photos" id="photos"></div>
+          <div class="groups-note" id="simnote"></div>
+        </div>
+
+        <!-- 3 disk health -->
+        <div class="scene" data-scene="health">
+          <h4 data-i18n="m_health">Disk Health</h4>
+          <div class="sub">APPLE SSD AP0512Z · <span style="color:var(--green)" data-i18n="m_healthy">Healthy</span></div>
+          <div class="health">
+            <div class="gauge"><svg viewBox="0 0 200 200"><defs><linearGradient id="gg"><stop offset="0" stop-color="#4fd8c4"/><stop offset="1" stop-color="#3fd68a"/></linearGradient></defs><circle class="bg" cx="100" cy="100" r="85"/><circle class="fg" id="gfg" cx="100" cy="100" r="85"/></svg>
+              <div class="val"><b><span id="life">0</span>%</b><span data-i18n="m_life">life left</span></div></div>
+            <div class="stats">
+              <div><span data-i18n="m_temp">Temperature</span><b><span data-count="29">0</span> °C</b></div>
+              <div><span data-i18n="m_written">Data written</span><b><span data-count="73">0</span> TB</b></div>
+              <div><span data-i18n="m_hours">Power‑on time</span><b><span data-count="57">0</span> <span data-i18n="m_days">days</span></b></div>
+              <div><span data-i18n="m_cycles">Power cycles</span><b><span data-count="165">0</span></b></div>
+              <div><span data-i18n="m_spare">Available spare</span><b><span data-count="100">0</span>%</b></div>
+              <div><span data-i18n="m_errors">Media errors</span><b style="color:var(--green)">0</b></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 apps -->
+        <div class="scene" data-scene="apps">
+          <h4 data-i18n="m_apps">Applications</h4>
+          <div class="sortbar"><span data-i18n="m_apps_n">42 apps</span><b id="sortlbl">Name</b></div>
+          <div class="apps" id="apps"></div>
+        </div>
+
+        <!-- 5 browser -->
+        <div class="scene" data-scene="browser">
+          <h4 data-i18n="m_browser">Browser Privacy</h4>
+          <div class="sub" data-i18n="m_browser_sub">Every browser, every profile, one click.</div>
+          <div class="browsers" id="browsers"></div>
+          <div class="bin card"><span>🧺</span><div><div class="n" id="binN">0 MB</div><div style="color:var(--muted);font-size:11px" data-i18n="m_bin">to Quarantine</div></div></div>
+        </div>
+
+        <!-- 6 sensitive -->
+        <div class="scene" data-scene="sensitive">
+          <h4 data-i18n="m_sens">Sensitive Files</h4>
+          <div class="sub">~/Documents/kira-sozlesmesi.pdf</div>
+          <div class="doc card">
+            <div class="scan"></div>
+            <div class="ln" style="width:70%"></div>
+            <div><span class="secret" data-mask="•••• •••• •••• 4821"><span class="k">CARD</span><span class="v">5408 1123 7790 4821</span></span></div>
+            <div class="ln" style="width:85%"></div><div class="ln" style="width:60%"></div>
+            <div><span class="secret" data-mask="TR•• •••• •••• •••• •••• 13"><span class="k">IBAN</span><span class="v">TR33 0006 1005 1978 6457 8413</span></span></div>
+            <div class="ln" style="width:78%"></div>
+            <div><span class="secret" data-mask="•••••••••42"><span class="k">ID</span><span class="v">10000000146</span></span></div>
+            <div class="ln" style="width:50%"></div>
+            <div><span class="secret" data-mask="sk-••••••••••••"><span class="k">API</span><span class="v">sk-live-9f3a2c71be</span></span></div>
+          </div>
+        </div>
+
+        <!-- 7 location -->
+        <div class="scene" data-scene="location">
+          <h4 data-i18n="m_loc">Photo Locations</h4>
+          <div class="sub">IMG_4417.HEIC</div>
+          <div class="loc">
+            <div class="photo-big"><div class="sunb"></div><div class="sea"></div><div class="pin" id="pin">📍</div></div>
+            <div>
+              <div class="meta-rows" id="metarows">
+                <div class="card gps"><span>GPS</span><span class="mono">41.0082, 28.9784</span></div>
+                <div class="card gps"><span data-i18n="m_place">Place</span><span>Kadıköy, İstanbul</span></div>
+                <div class="card dev"><span data-i18n="m_camera">Camera</span><span>iPhone 16 Pro</span></div>
+                <div class="card"><span data-i18n="m_size">Size</span><span>4032 × 3024</span></div>
+                <div class="card"><span data-i18n="m_date">Taken</span><span>12 Aug 2026</span></div>
+              </div>
+              <div class="okline" id="okline" data-i18n="m_loc_ok">✓ Location removed · photo pixels untouched</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 security -->
+        <div class="scene" data-scene="security">
+          <h4 data-i18n="m_sec">Security Scan</h4>
+          <div class="sub" data-i18n="m_sec_sub">Signatures, notarization and background services.</div>
+          <div class="shield">🛡️</div>
+          <div class="sec-list" id="seclist"></div>
+        </div>
+
+        <!-- 9 recovery -->
+        <div class="scene" data-scene="recovery">
+          <h4 data-i18n="m_rec">File Recovery</h4>
+          <div class="sub">SD CARD · exFAT · 64 GB</div>
+          <div class="rec"><div class="blocks" id="blocks"></div><div><div class="fsbadge" data-i18n="m_rec_fs">✦ exFAT found — original names restored</div><div class="found" id="found"></div></div></div>
+        </div>
+
+        <!-- 10 maintenance -->
+        <div class="scene" data-scene="maint">
+          <h4 data-i18n="m_maint">Maintenance</h4>
+          <div class="mem card">
+            <div class="row"><b data-i18n="m_memory">Memory</b><span class="mono" id="memtxt">41.2 / 48 GB</span></div>
+            <div class="membar"><i id="mApp" style="width:36%;background:#3b6cf0"></i><i style="width:9%;background:#ffad4a"></i><i style="width:19%;background:#8f6bff"></i><i id="mCache" style="width:22%;background:#4fd8c4"></i></div>
+            <div class="row" style="color:var(--muted)"><span data-i18n="m_mem_legend">Apps · Wired · Compressed · Cache</span><span id="memfree"></span></div>
+          </div>
+          <div class="tasks" id="tasks"></div>
+        </div>
+
+        <!-- 11 menu bar -->
+        <div class="scene" data-scene="menubar" style="padding:0">
+          <div class="desk"></div>
+          <div class="menubar"><b></b><span style="font-weight:600">Finder</span><span>File</span><span>Edit</span><span>View</span>
+            <div class="r"><span class="gl" id="mbfree">✦ 112 GB</span><span>🔋</span><span>Wi‑Fi</span><span>Sun 9:41</span></div></div>
+          <div class="drop" id="drop">
+            <div style="display:flex;align-items:center;gap:8px"><img src="assets/icon.png" width="22" alt=""><b>Glint</b></div>
+            <div style="display:flex;justify-content:space-between;margin-top:10px"><span>Macintosh HD</span><b id="dfree">112 GB free</b></div>
+            <div class="pb"><i id="dpb" style="width:78%"></i></div>
+            <div class="muted" data-i18n="m_mb_q">Quarantine 2.1 GB</div>
+            <hr>
+            <div class="act" id="qc" data-i18n="m_mb_clean">✦ Quick clean (caches & logs)</div>
+            <div class="muted" style="margin-top:6px" data-i18n="m_mb_next">Next automatic clean: Sunday</div>
+            <hr>
+            <div style="display:flex;justify-content:space-between"><span data-i18n="m_mb_open">Open Glint</span><span class="muted" data-i18n="m_mb_quit">Quit</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="progress" id="progress"></div>
+
+<section class="pad center" id="more">
+  <h2 class="big-h reveal" data-i18n="moreTitle">And everything else you'd expect.</h2>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="pad center" id="how">
+  <span class="eyebrow reveal" data-i18n="howEyebrow">How it works</span>
+  <h2 class="big-h reveal" data-i18n="howTitle">Scan, review, clean. You decide every step.</h2>
+  <div class="flow">
+    <div class="feat reveal"><div class="n">01</div><h3 data-i18n="how1t">Scan</h3><p data-i18n="how1p">Pick a tool and press Scan. Glint reads your disk locally and sorts what it finds into clear groups with sizes and dates.</p></div>
+    <div class="feat reveal"><div class="n">02</div><h3 data-i18n="how2t">Review</h3><p data-i18n="how2p">Nothing is pre-deleted. Untick anything you want to keep, or show it in Finder before you decide.</p></div>
+    <div class="feat reveal"><div class="n">03</div><h3 data-i18n="how3t">Clean</h3><p data-i18n="how3p">Only what you approved is removed. Rebuildable caches go for good; everything else waits in Quarantine.</p></div>
+  </div>
+  <p class="flow-note reveal" data-i18n-html="howNote"><b>Changed your mind?</b> Open Quarantine &amp; History and put it back — for 7 days by default, longer if you like.</p>
+</section>
+
+<section class="pad center" id="safety">
+  <span class="eyebrow reveal" data-i18n="safeEyebrow">Safe by design</span>
+  <h2 class="big-h reveal" data-i18n="safeTitle">Built so a cleaner can't hurt your Mac.</h2>
+  <p class="sec-lead reveal" data-i18n="safeLead">These rules are part of the code, not settings you have to get right.</p>
+  <div class="cards safe">
+    <div class="feat reveal"><div class="e">↩︎</div><h3 data-i18n="safe1t">Quarantine first</h3><p data-i18n="safe1p">Only caches that apps rebuild by themselves are deleted outright. Everything else is moved to Quarantine, logged in History and restorable.</p></div>
+    <div class="feat reveal"><div class="e">⛨</div><h3 data-i18n="safe2t">Protected folders</h3><p data-i18n="safe2p">System locations like /System, /usr and the keychains, and your top-level folders like Documents, Desktop and ~/Library, can never be deleted.</p></div>
+    <div class="feat reveal"><div class="e">☁︎</div><h3 data-i18n="safe3t">iCloud stays in the cloud</h3><p data-i18n="safe3p">Files that aren't downloaded are never read, so a scan doesn't quietly pull gigabytes from iCloud Drive.</p></div>
+    <div class="feat reveal"><div class="e">◷</div><h3 data-i18n="safe4t">Running apps are left alone</h3><p data-i18n="safe4p">While an app like Docker Desktop is running, its live files are skipped and Glint tells you why.</p></div>
+    <div class="feat reveal"><div class="e">≡</div><h3 data-i18n="safe5t">A memory ceiling</h3><p data-i18n="safe5p">Scans stop at a memory limit you set, so even a huge disk can't bog your Mac down.</p></div>
+    <div class="feat reveal"><div class="e">⚿</div><h3 data-i18n="safe6t">Root work through a signed helper</h3><p data-i18n="safe6p">Admin jobs go through a small helper that only accepts Glint's own signed app and runs a fixed set of operations, never free-form commands.</p></div>
+    <div class="feat reveal"><div class="e">✱</div><h3 data-i18n="safe7t">Secrets stay masked</h3><p data-i18n="safe7p">Sensitive-file scans show card numbers, IBANs and keys masked, and the results never leave your Mac.</p></div>
+    <div class="feat reveal"><div class="e">⊘</div><h3 data-i18n="safe8t">No network, no tracking</h3><p data-i18n="safe8p">No account, no analytics, no uploads. Photo comparison and text recognition run on-device.</p></div>
+  </div>
+</section>
+
+<section class="pad center" id="free">
+  <span class="eyebrow reveal" data-i18n="freeEyebrow">No catch</span>
+  <h2 class="big-h reveal" data-i18n="freeTitle">The whole app, today, for free.</h2>
+  <div class="facts">
+    <div class="fact reveal"><div><b data-i18n="fact1t">Available now</b><span data-i18n="fact1p">Download the DMG and start cleaning. No waitlist.</span></div></div>
+    <div class="fact reveal"><div><b data-i18n="fact2t">No limits, no plans</b><span data-i18n="fact2p">Clean as much as you want. No size cap, subscription or lifetime licence.</span></div></div>
+    <div class="fact reveal"><div><b data-i18n="fact3t">macOS 14 Sonoma and up</b><span data-i18n="fact3p">One universal app for Apple Silicon and Intel Macs.</span></div></div>
+    <div class="fact reveal"><div><b data-i18n="fact4t">Restore, not just Trash</b><span data-i18n="fact4p">Quarantine with a full history, so one click undoes a clean.</span></div></div>
+    <div class="fact reveal"><div><b data-i18n="fact5t">More than a cleaner</b><span data-i18n="fact5p">Privacy, security scan, disk health and file recovery are built in.</span></div></div>
+  </div>
+</section>
+
+<section class="pad center" id="faq">
+  <span class="eyebrow reveal" data-i18n="faqEyebrow">FAQ</span>
+  <h2 class="big-h reveal" data-i18n="faqTitle">Questions, answered.</h2>
+  <div class="faq">
+    <details><summary data-i18n="q1">Is Glint really free?</summary><p class="a" data-i18n="a1">Yes. Glint is completely free: no paid tier, no subscription, no cap on how much you can clean and no account. Download the DMG and use every feature.</p></details>
+    <details><summary data-i18n="q2">Is it safe? What won't it delete?</summary><p class="a" data-i18n="a2">Glint refuses to delete protected locations: system folders such as /System, /usr and the keychains, and your top-level folders such as Documents, Desktop, Pictures and ~/Library itself. Caches that apps rebuild on their own are deleted permanently; everything else goes to Quarantine first and can be restored for 7 days by default (you can change this in Settings).</p></details>
+    <details><summary data-i18n="q3">Does Glint send my files or data anywhere?</summary><p class="a" data-i18n-html="a3">No. Glint makes no network requests of its own: no analytics, no crash reporting, no account, no uploads. Scanning, photo comparison and text recognition all run on your Mac. It only opens something online when you click it yourself, such as a photo's location in Apple Maps. Details are in the <a href="privacy.html">privacy note</a>.</p></details>
+    <details><summary data-i18n="q4">Can I undo a clean?</summary><p class="a" data-i18n="a4">Yes, for everything that went to Quarantine. Open Quarantine &amp; History, select the items and restore them to where they were, until the retention period ends. Rebuildable caches are deleted for good, but apps recreate them when they need them.</p></details>
+    <details><summary data-i18n="q5">Which Macs are supported?</summary><p class="a" data-i18n="a5">Any Mac running macOS 14 Sonoma or later, with Apple Silicon or an Intel processor. There's one universal download for both.</p></details>
+    <details><summary data-i18n="q6">Why does it ask for Full Disk Access?</summary><p class="a" data-i18n="a6">macOS hides folders like Mail, Safari data and other apps' containers from every app until you allow it. Without Full Disk Access Glint still works, but it can't see those places, so some caches, browser data and sensitive files are missed. The access is used only to scan and clean on your Mac, and you can turn it off at any time in System Settings › Privacy &amp; Security › Full Disk Access.</p></details>
+    <details><summary data-i18n="q7">Why does it ask for an admin password, or for a helper approval in System Settings?</summary><p class="a" data-i18n="a7">A few jobs need root: freeing RAM, flushing DNS, reindexing Spotlight, scanning a raw disk for File Recovery and moving admin-owned items to Quarantine. You can install Glint's small privileged helper in Settings and approve it once in System Settings › General › Login Items; after that these jobs run without a password prompt each time. The helper only accepts requests from Glint signed by the same developer, checks every request again and runs a fixed set of operations. If you skip it, Glint uses the standard macOS password prompt instead.</p></details>
+    <details><summary data-i18n="q8">Is Glint signed and notarized?</summary><p class="a" data-i18n="a8">Yes. Glint is signed with an Apple Developer ID and notarized by Apple, so it opens normally after you drag it into Applications.</p></details>
+    <details><summary data-i18n="q9">Does it work while Docker or other apps are running?</summary><p class="a" data-i18n="a9">Yes. Glint checks for running apps whose files aren't safe to delete while they're in use. While Docker Desktop runs, its VM files, logs and sockets are skipped and Glint tells you why; quit Docker and scan again to include them. Browser Privacy asks to quit an open browser before cleaning it.</p></details>
+    <details><summary data-i18n="q10">Which languages does it speak?</summary><p class="a" data-i18n="a10">Turkish and English. Glint follows your Mac's language, and you can switch at any time from Settings or the sidebar.</p></details>
+  </div>
+  <div class="guides reveal"><span data-i18n="guidesLbl">Guides (English):</span>
+    <a href="guides/system-data.html">What is “System Data” on a Mac?</a>
+    <a href="guides/library-caches.html">Is it safe to delete ~/Library/Caches?</a>
+    <a href="guides/duplicate-photos.html">How to find duplicate photos on a Mac</a>
+  </div>
+</section>
+
+<section class="final" id="get">
+  <img class="icon reveal" src="assets/icon.png" alt="">
+  <h2 class="big-h reveal"><span class="grad" data-i18n="finalTitle">Give your Mac a glint.</span></h2>
+  <p class="reveal" data-i18n="finalText">Every removal goes to Quarantine first, so you can always bring it back. No accounts, no tracking, no cloud.</p>
+  <a class="btn reveal dl" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg><span data-i18n="downloadMac">Download for Mac</span></a>
+  <div class="meta reveal" data-i18n="meta">Available now · Free · macOS 14+ · Apple Silicon &amp; Intel · Signed &amp; notarized by Apple</div>
+</section>
+
+<footer>
+  <div class="links">
+    <a href="privacy.html" data-i18n="fPrivacy">Privacy</a>
+    <a href="https://github.com/bagsiz/glintapp/issues" data-i18n="fSupport">Support &amp; bug reports</a>
+    <a href="#faq" data-i18n="fFaq">FAQ</a>
+    <a href="https://github.com/bagsiz/glintapp" data-i18n="github">GitHub</a>
+  </div>
+  <div data-i18n="footer">Glint · Made for macOS · Türkçe & English</div>
+  <div class="legal" data-i18n="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+
+<script>
+// ---------------------------------------------------------------- i18n
+const T = {
+  en: {
+    github: "GitHub", download: "Download", downloadMac: "Download for Mac", seeHow: "See what it does ↓", scroll: "Scroll",
+    heroTitle: "Your Mac, sparkling again.",
+    heroLead: "Glint cleans gigabytes of clutter, finds your look‑alike photos, guards your privacy and even rescues deleted files from SD cards — all on your Mac, nothing sent anywhere.",
+    meta: "Available now · Free · macOS 14+ · Apple Silicon & Intel · Signed & notarized by Apple",
+    moreTitle: "And everything else you'd expect.",
+    finalTitle: "Give your Mac a glint.",
+    finalText: "Every removal goes to Quarantine first, so you can always bring it back. No accounts, no tracking, no cloud.",
+    footer: "Glint · Made for macOS · Türkçe & English",
+    m_smart: "Smart Clean", m_smart_sub: "Safe to remove — nothing goes without your OK.", m_freed: "freed · restorable from Quarantine",
+    m_space: "Space Map", m_used: "used", m_similar: "Similar Photos", m_similar_sub: "Compared on‑device with Apple Vision.",
+    m_health: "Disk Health", m_healthy: "Healthy", m_life: "life left", m_temp: "Temperature", m_written: "Data written", m_hours: "Power‑on time", m_days: "days", m_cycles: "Power cycles", m_spare: "Available spare", m_errors: "Media errors",
+    m_apps: "Applications", m_apps_n: "42 apps", m_browser: "Browser Privacy", m_browser_sub: "Every browser, every profile, one click.", m_bin: "to Quarantine",
+    m_sens: "Sensitive Files", m_loc: "Photo Locations", m_place: "Place", m_camera: "Camera", m_size: "Size", m_date: "Taken", m_loc_ok: "✓ Location removed · photo pixels untouched",
+    m_sec: "Security Scan", m_sec_sub: "Signatures, notarization and background services.",
+    m_rec: "File Recovery", m_rec_fs: "✦ exFAT found — original names restored",
+    m_maint: "Maintenance", m_memory: "Memory", m_mem_legend: "Apps · Wired · Compressed · Cache",
+    m_mb_q: "Quarantine 2.1 GB", m_mb_clean: "✦ Quick clean (caches & logs)", m_mb_next: "Next automatic clean: Sunday", m_mb_open: "Open Glint", m_mb_quit: "Quit",
+    sort: { name: "Name", size: "Size", used: "Last opened" },
+    simNote: (g, s) => `<b>${g} groups</b> · keeps the sharpest shot · <b>${s}</b> reclaimable`,
+    secOk: "Notarized", secStore: "App Store", secBad: "Fake Apple name", scanning: "Checking…",
+    tasks: ["Free up RAM", "Flush DNS cache", "Repair “Open With” list", "Reset Quick Look cache"],
+    done: "Done", freedMem: (n) => `${n} GB freed`,
+  },
+  tr: {
+    github: "GitHub", download: "İndir", downloadMac: "Mac için indir", seeHow: "Neler yapıyor ↓", scroll: "Kaydır",
+    heroTitle: "Mac'in yeniden ışıl ışıl.",
+    heroLead: "Glint gigabaytlarca gereksiz dosyayı temizler, birbirine benzeyen fotoğraflarını bulur, gizliliğini korur ve SD karttan silinen dosyaları bile kurtarır — hepsi Mac'inde, hiçbir şey dışarı gönderilmez.",
+    meta: "Şimdi indirilebilir · Ücretsiz · macOS 14+ · Apple Silicon ve Intel · Apple tarafından imzalı ve onaylı",
+    moreTitle: "Beklediğin her şey de var.",
+    finalTitle: "Mac'ine biraz ışıltı kat.",
+    finalText: "Silinen her şey önce karantinaya gider, istediğin zaman geri getirirsin. Hesap yok, takip yok, bulut yok.",
+    footer: "Glint · macOS için · Türkçe & English",
+    m_smart: "Akıllı Temizlik", m_smart_sub: "Güvenle silinebilir — onayın olmadan hiçbir şey gitmez.", m_freed: "boşaldı · karantinadan geri alınabilir",
+    m_space: "Alan Haritası", m_used: "dolu", m_similar: "Benzer Fotoğraflar", m_similar_sub: "Cihazda, Apple Vision ile karşılaştırılır.",
+    m_health: "Disk Sağlığı", m_healthy: "Sağlıklı", m_life: "ömür kaldı", m_temp: "Sıcaklık", m_written: "Yazılan veri", m_hours: "Çalışma süresi", m_days: "gün", m_cycles: "Açılma sayısı", m_spare: "Yedek alan", m_errors: "Ortam hatası",
+    m_apps: "Uygulamalar", m_apps_n: "42 uygulama", m_browser: "Tarayıcı İzleri", m_browser_sub: "Tüm tarayıcılar, tüm profiller, tek tık.", m_bin: "karantinaya",
+    m_sens: "Hassas Dosyalar", m_loc: "Fotoğraf Konumları", m_place: "Yer", m_camera: "Kamera", m_size: "Boyut", m_date: "Çekim", m_loc_ok: "✓ Konum silindi · fotoğrafa dokunulmadı",
+    m_sec: "Güvenlik Taraması", m_sec_sub: "İmzalar, Apple onayı ve arka plan servisleri.",
+    m_rec: "Dosya Kurtarma", m_rec_fs: "✦ exFAT bulundu — asıl dosya adları geri geldi",
+    m_maint: "Sistem Bakımı", m_memory: "Bellek", m_mem_legend: "Uygulama · Sabit · Sıkıştırılmış · Önbellek",
+    m_mb_q: "Karantinada 2,1 GB", m_mb_clean: "✦ Hızlı temizlik (önbellek ve loglar)", m_mb_next: "Sonraki otomatik temizlik: Pazar", m_mb_open: "Glint'i Aç", m_mb_quit: "Çıkış",
+    sort: { name: "İsim", size: "Boyut", used: "Son kullanım" },
+    simNote: (g, s) => `<b>${g} grup</b> · en net kare kalır · <b>${s}</b> kazanılabilir`,
+    secOk: "Apple onaylı", secStore: "App Store", secBad: "Sahte Apple adı", scanning: "Kontrol…",
+    tasks: ["RAM boşalt", "DNS önbelleğini temizle", "“Birlikte Aç” listesini onar", "Quick Look önbelleğini sıfırla"],
+    done: "Tamam", freedMem: (n) => `${n} GB boşaldı`,
+    fFaq: "SSS", fPrivacy: "Gizlilik", fSupport: "Destek ve hata bildirimi",
+    legal: "Glint bağımsız bir uygulamadır ve Apple Inc. ile bağlantılı değildir. Mac ve macOS, Apple Inc.'in ticari markalarıdır.",
+    howEyebrow: "Nasıl çalışır", howTitle: "Tara, gözden geçir, temizle. Her adımda karar senin.",
+    how1t: "Tara", how1p: "Bir araç seç ve Tara'ya bas. Glint diskini yerelde okur, bulduklarını boyut ve tarihleriyle anlaşılır gruplara ayırır.",
+    how2t: "Gözden geçir", how2p: "Hiçbir şey kendiliğinden silinmez. Tutmak istediğinin işaretini kaldır ya da karar vermeden önce Finder'da göster.",
+    how3t: "Temizle", how3p: "Yalnızca onayladıkların kaldırılır. Yeniden oluşan önbellekler kalıcı silinir; geri kalan her şey karantinada bekler.",
+    howNote: "<b>Fikrini mi değiştirdin?</b> Karantina ve Geçmiş'i aç, geri koy — varsayılan olarak 7 gün, istersen daha uzun.",
+    safeEyebrow: "Tasarımı gereği güvenli", safeTitle: "Bir temizleyici Mac'ine zarar veremesin diye.",
+    safeLead: "Bu kurallar kodun içinde; doğru ayarlaman gereken seçenekler değil.",
+    safe1t: "Önce karantina", safe1p: "Doğrudan yalnızca uygulamaların kendiliğinden yeniden oluşturduğu önbellekler silinir. Gerisi karantinaya taşınır, geçmişe yazılır ve geri getirilebilir.",
+    safe2t: "Korunan klasörler", safe2p: "/System, /usr ve anahtar zincirleri gibi sistem konumları ile Belgeler, Masaüstü ve ~/Library gibi ana klasörlerin asla silinemez.",
+    safe3t: "iCloud bulutta kalır", safe3p: "İndirilmemiş dosyalar asla okunmaz; böylece bir tarama iCloud Drive'dan sessizce gigabaytlarca veri çekmez.",
+    safe4t: "Çalışan uygulamalara dokunulmaz", safe4p: "Docker Desktop gibi bir uygulama çalışırken canlı dosyaları atlanır ve Glint nedenini söyler.",
+    safe5t: "Bellek sınırı", safe5p: "Taramalar senin belirlediğin bellek sınırında durur; dev bir disk bile Mac'ini yoramaz.",
+    safe6t: "Root işleri imzalı yardımcıyla", safe6p: "Yönetici işleri, yalnızca Glint'in kendi imzalı uygulamasını kabul eden ve sabit bir işlem listesini çalıştıran küçük bir yardımcıdan geçer; serbest komut asla çalışmaz.",
+    safe7t: "Sırlar maskeli kalır", safe7p: "Hassas dosya taramasında kart numaraları, IBAN'lar ve anahtarlar maskeli gösterilir; sonuçlar Mac'inden asla çıkmaz.",
+    safe8t: "Ağ yok, takip yok", safe8p: "Hesap yok, analiz yok, yükleme yok. Fotoğraf karşılaştırma ve metin tanıma cihazda çalışır.",
+    freeEyebrow: "Şartı yok", freeTitle: "Uygulamanın tamamı, bugün, ücretsiz.",
+    fact1t: "Şimdi indirilebilir", fact1p: "DMG'yi indir, temizlemeye başla. Bekleme listesi yok.",
+    fact2t: "Sınır yok, paket yok", fact2p: "İstediğin kadar temizle. Boyut sınırı, abonelik ya da ömür boyu lisans yok.",
+    fact3t: "macOS 14 Sonoma ve sonrası", fact3p: "Apple Silicon ve Intel Mac'ler için tek bir evrensel uygulama.",
+    fact4t: "Sadece Çöp Kutusu değil, geri alma", fact4p: "Tam geçmişiyle karantina; bir temizliği tek tıkla geri alırsın.",
+    fact5t: "Temizleyiciden fazlası", fact5p: "Gizlilik, güvenlik taraması, disk sağlığı ve dosya kurtarma içinde.",
+    faqEyebrow: "SSS", faqTitle: "Merak ettiklerin.",
+    q1: "Glint gerçekten ücretsiz mi?", a1: "Evet. Glint tamamen ücretsiz: ücretli sürümü, aboneliği, temizlik sınırı ya da hesabı yok. DMG'yi indir ve tüm özellikleri kullan.",
+    q2: "Güvenli mi? Neleri silmez?", a2: "Glint korunan konumları silmeyi reddeder: /System, /usr ve anahtar zincirleri gibi sistem klasörleri ile Belgeler, Masaüstü, Resimler ve ~/Library'nin kendisi gibi ana klasörlerin. Uygulamaların kendiliğinden yeniden oluşturduğu önbellekler kalıcı silinir; geri kalan her şey önce karantinaya gider ve varsayılan olarak 7 gün içinde geri getirilebilir (süreyi Ayarlar'dan değiştirebilirsin).",
+    q3: "Glint dosyalarımı ya da verilerimi bir yere gönderiyor mu?", a3: "Hayır. Glint kendi başına hiçbir ağ isteği yapmaz: analiz yok, çökme raporu yok, hesap yok, yükleme yok. Tarama, fotoğraf karşılaştırma ve metin tanıma tamamen Mac'inde çalışır. İnternette bir şeyi yalnızca sen tıkladığında açar, örneğin bir fotoğrafın konumunu Apple Haritalar'da. Ayrıntılar <a href=\"privacy.html\">gizlilik notunda</a>.",
+    q4: "Bir temizliği geri alabilir miyim?", a4: "Evet, karantinaya giden her şeyi. Karantina ve Geçmiş'i aç, öğeleri seç ve saklama süresi dolana kadar eski yerlerine geri getir. Yeniden oluşan önbellekler kalıcı silinir ama uygulamalar ihtiyaç duyduklarında onları yeniden oluşturur.",
+    q5: "Hangi Mac'leri destekliyor?", a5: "macOS 14 Sonoma ya da sonrasını çalıştıran, Apple Silicon ya da Intel işlemcili her Mac. İkisi için tek bir evrensel indirme var.",
+    q6: "Neden Tam Disk Erişimi istiyor?", a6: "macOS, Mail, Safari verileri ve diğer uygulamaların kapsayıcıları gibi klasörleri sen izin verene kadar her uygulamadan gizler. Tam Disk Erişimi olmadan da Glint çalışır, ama bu yerleri göremediği için bazı önbellekler, tarayıcı verileri ve hassas dosyalar gözden kaçar. Erişim yalnızca Mac'inde tarama ve temizlik için kullanılır; istediğin zaman Sistem Ayarları › Gizlilik ve Güvenlik › Tam Disk Erişimi'nden kapatabilirsin.",
+    q7: "Neden yönetici şifresi ya da Sistem Ayarları'nda yardımcı onayı istiyor?", a7: "Bazı işler root yetkisi ister: RAM boşaltma, DNS önbelleğini temizleme, Spotlight'ı yeniden indeksleme, Dosya Kurtarma için ham disk tarama ve yönetici sahipli öğeleri karantinaya taşıma. Glint'in küçük ayrıcalıklı yardımcısını Ayarlar'dan kurup Sistem Ayarları › Genel › Giriş Öğeleri'nde bir kez onaylayabilirsin; sonra bu işler her seferinde şifre sormadan çalışır. Yardımcı yalnızca aynı geliştiricinin imzaladığı Glint'ten gelen istekleri kabul eder, her isteği yeniden denetler ve sabit bir işlem listesini çalıştırır. Kurmazsan Glint bunun yerine macOS'in standart şifre penceresini kullanır.",
+    q8: "Glint imzalı ve Apple onaylı mı?", a8: "Evet. Glint bir Apple Developer ID ile imzalanmış ve Apple tarafından onaylanmıştır (notarized); Uygulamalar'a sürükledikten sonra normal şekilde açılır.",
+    q9: "Docker ya da başka uygulamalar çalışırken de çalışır mı?", a9: "Evet. Glint, kullanımdayken dosyalarını silmenin güvenli olmadığı uygulamaların çalışıp çalışmadığına bakar. Docker Desktop çalışırken sanal makine dosyaları, logları ve soketleri atlanır ve Glint nedenini söyler; onları da dahil etmek için Docker'ı kapatıp yeniden tara. Tarayıcı İzleri de temizlemeden önce açık tarayıcıyı kapatmayı önerir.",
+    q10: "Hangi dilleri konuşuyor?", a10: "Türkçe ve İngilizce. Glint Mac'inin dilini izler; istediğin zaman Ayarlar'dan ya da kenar çubuğundan değiştirebilirsin.",
+    guidesLbl: "Rehberler (İngilizce):",
+  },
+};
+
+const STEPS = [
+  { id: "smart", icon: "✦", side: "smart", accent: ["#4fd8c4", "#3b6cf0"],
+    en: ["Smart Clean", "Gigabytes back, in one click.", "Caches, logs, Xcode and npm leftovers, old iOS backups, Mail attachments, forgotten installers. Glint knows what's safe — and anything that can't regrow goes to Quarantine first.", ["Developer junk: Xcode, npm, pnpm, Gradle, Cargo", "Rule by rule, with a live cleaning view", "Undo anything for 7 days"]],
+    tr: ["Akıllı Temizlik", "Tek tıkla gigabaytlarca yer.", "Önbellekler, loglar, Xcode ve npm artıkları, eski iOS yedekleri, Mail ekleri, unutulmuş kurulum dosyaları. Glint neyin güvenli olduğunu bilir — kendiliğinden yeniden oluşmayan her şey önce karantinaya gider.", ["Geliştirici artıkları: Xcode, npm, pnpm, Gradle, Cargo", "Kural kural, canlı temizlik ekranı", "7 gün içinde her şeyi geri al"]] },
+  { id: "space", icon: "◔", side: "space", accent: ["#8f6bff", "#3b6cf0"],
+    en: ["Space Map", "See where your disk went.", "A living sunburst of your drive. Dive into any folder and spot the giants in seconds — without the scan eating your RAM.", ["Instant drill‑down into any folder", "Small folders summarized, memory stays flat", "Large files & exact duplicates (SHA‑256) too"]],
+    tr: ["Alan Haritası", "Diskin nereye gitti, gör.", "Diskinin canlı bir güneş patlaması grafiği. İstediğin klasöre in, devleri saniyeler içinde gör — tarama belleğini yemeden.", ["Her klasöre anında in", "Küçük klasörler özetlenir, bellek sabit kalır", "Büyük dosyalar ve birebir kopyalar (SHA‑256)"]] },
+  { id: "similar", icon: "▦", side: "similar", accent: ["#ff8a65", "#ff5d9e"],
+    en: ["Similar Photos", "Ten shots of the same sunset? Keep one.", "Bursts, edits and near‑identical frames are grouped using Apple's on‑device image recognition. Glint keeps the sharpest, highest‑resolution one and marks the rest.", ["Three strictness levels", "Thousands of photos in seconds", "Nothing leaves your Mac"]],
+    tr: ["Benzer Fotoğraflar", "Aynı gün batımından on kare mi? Birini tut.", "Seri çekimler, düzenlemeler ve neredeyse aynı kareler Apple'ın cihaz içi görüntü tanımasıyla gruplanır. Glint en net, en yüksek çözünürlüklüyü tutar, gerisini işaretler.", ["Üç benzerlik seviyesi", "Binlerce fotoğraf saniyeler içinde", "Hiçbir şey Mac'inden çıkmaz"]] },
+  { id: "health", icon: "♥", side: "health", accent: ["#3fd68a", "#4fd8c4"],
+    en: ["Disk Health", "Know your SSD before it lets you down.", "Wear level, life left, temperature, terabytes written and error counters — read straight from the drive's SMART log. No admin password needed.", ["NVMe SMART, read natively", "Clear verdict: healthy, worn or failing", "Warns on media errors and low spare"]],
+    tr: ["Disk Sağlığı", "SSD'n seni yarı yolda bırakmadan tanı.", "Yıpranma, kalan ömür, sıcaklık, yazılan terabaytlar ve hata sayaçları — doğrudan diskin SMART kaydından. Yönetici şifresi gerekmez.", ["NVMe SMART, doğrudan okunur", "Net karar: sağlıklı, yıpranmış ya da sorunlu", "Ortam hatası ve az yedek alanda uyarır"]] },
+  { id: "apps", icon: "▣", side: "apps", accent: ["#3b6cf0", "#4fd8c4"],
+    en: ["Applications", "Uninstall for real.", "Remove an app together with its settings, caches and support files hiding in ~/Library. Sort by size, install date or when you last opened it.", ["Finds leftovers automatically", "Handles admin‑owned apps", "Sort by last opened to spot the forgotten ones"]],
+    tr: ["Uygulamalar", "Gerçekten kaldır.", "Bir uygulamayı ~/Library'de saklanan ayarları, önbellekleri ve destek dosyalarıyla birlikte kaldır. Boyuta, yüklenme tarihine ya da son açılışa göre sırala.", ["Artıkları kendiliğinden bulur", "Yönetici sahipli uygulamaları da kaldırır", "Unutulanları son kullanıma göre bul"]] },
+  { id: "browser", icon: "◎", side: "browser", accent: ["#ffad4a", "#ff5d6c"],
+    en: ["Browser Privacy", "Wipe your trail in every browser.", "History, cookies, cache, sessions and site data for Safari, Chrome, Edge, Brave, Arc, Vivaldi, Opera and Firefox — across all profiles. Passwords and bookmarks are never touched.", ["8 browsers, every profile", "Quits open browsers for you", "Restorable from Quarantine"]],
+    tr: ["Tarayıcı İzleri", "İzlerini her tarayıcıda sil.", "Safari, Chrome, Edge, Brave, Arc, Vivaldi, Opera ve Firefox için geçmiş, çerezler, önbellek, oturumlar ve site verileri — tüm profillerde. Şifrelere ve yer imlerine asla dokunulmaz.", ["8 tarayıcı, tüm profiller", "Açık tarayıcıyı senin yerine kapatır", "Karantinadan geri alınabilir"]] },
+  { id: "sensitive", icon: "⌕", side: "sensitive", accent: ["#ffad4a", "#3fd68a"],
+    en: ["Sensitive Files", "Find the documents that shouldn't be lying around.", "Card numbers (Luhn‑checked), IBANs, national ID numbers, passwords and API keys — in PDFs, Office files, text and even screenshots via on‑device OCR.", ["Checksums mean almost no false alarms", "Values are always masked", "Reads screenshots with Vision OCR"]],
+    tr: ["Hassas Dosyalar", "Ortada durmaması gereken belgeleri bul.", "Kart numaraları (Luhn kontrollü), IBAN, TC kimlik numarası, şifreler ve API anahtarları — PDF'lerde, Office dosyalarında, metinlerde ve cihaz içi OCR ile ekran görüntülerinde bile.", ["Kontrol haneleri sayesinde neredeyse hiç yanlış alarm yok", "Değerler hep maskelenir", "Ekran görüntülerini Vision OCR ile okur"]] },
+  { id: "location", icon: "⌖", side: "location", accent: ["#ff5d9e", "#8f6bff"],
+    en: ["Photo Locations", "Share the photo, not your home address.", "Glint finds photos that carry GPS coordinates and device details, and strips them losslessly. The originals wait in Quarantine.", ["Lossless — pixels are untouched", "Removes GPS and camera info", "Batch over whole folders"]],
+    tr: ["Fotoğraf Konumları", "Fotoğrafı paylaş, ev adresini değil.", "Glint GPS koordinatı ve cihaz bilgisi taşıyan fotoğrafları bulur ve kayıpsız temizler. Orijinaller karantinada bekler.", ["Kayıpsız — piksellere dokunulmaz", "GPS ve kamera bilgisini siler", "Bütün klasörde toplu"]] },
+  { id: "security", icon: "⛨", side: "security", accent: ["#3fd68a", "#3b6cf0"],
+    en: ["Security Scan", "Spot what's pretending to be Apple.", "Every app's signature and notarization is verified. Background services with fake Apple names, hidden folders or code downloads are flagged — and app permissions can be revoked in one click.", ["Signature, App Store & notarization checks", "Suspicious launch agents", "Camera, mic & screen permissions"]],
+    tr: ["Güvenlik Taraması", "Apple kılığına girenleri yakala.", "Her uygulamanın imzası ve Apple onayı doğrulanır. Sahte Apple adı taşıyan, gizli klasörden çalışan ya da kod indiren arka plan servisleri işaretlenir — uygulama izinleri tek tıkla geri alınır.", ["İmza, App Store ve onay kontrolü", "Şüpheli başlangıç servisleri", "Kamera, mikrofon ve ekran izinleri"]] },
+  { id: "recovery", icon: "⟲", side: "recovery", accent: ["#4fd8c4", "#8f6bff"],
+    en: ["File Recovery", "Deleted from the SD card? Not gone yet.", "Glint reads the raw card sector by sector and rebuilds photos, videos and documents. On FAT and exFAT cards it even brings back the original file names.", ["USB sticks, SD cards, external disks, images", "Original names on FAT/exFAT", "Never writes to the card it scans"]],
+    tr: ["Dosya Kurtarma", "SD karttan mı sildin? Henüz gitmedi.", "Glint kartı sektör sektör okur ve fotoğrafları, videoları, belgeleri yeniden oluşturur. FAT ve exFAT kartlarda asıl dosya adlarını bile geri getirir.", ["USB bellek, SD kart, harici disk, disk görüntüsü", "FAT/exFAT'ta asıl adlar", "Taradığı karta asla yazmaz"]] },
+  { id: "maint", icon: "⚙", side: "maint", accent: ["#8f6bff", "#4fd8c4"],
+    en: ["Maintenance", "The fixes power users type in Terminal.", "Free up RAM, flush DNS, reindex Spotlight, repair the “Open With” menu, reset Quick Look and font caches — one button each, with live memory usage.", ["macOS's own maintenance commands", "Admin password only when needed", "Never deletes your files"]],
+    tr: ["Sistem Bakımı", "Uzmanların Terminal'e yazdığı çözümler.", "RAM boşalt, DNS'i temizle, Spotlight'ı yeniden indeksle, “Birlikte Aç” menüsünü onar, Quick Look ve yazı tipi önbelleklerini sıfırla — her biri tek düğme, canlı bellek kullanımıyla.", ["macOS'in kendi bakım komutları", "Yönetici şifresi sadece gerekince", "Dosyalarını asla silmez"]] },
+  { id: "menubar", icon: "☰", side: "auto", accent: ["#4fd8c4", "#3b6cf0"],
+    en: ["Menu Bar & Auto Clean", "Clean Mac, on autopilot.", "Free space at a glance in your menu bar, a one‑click quick clean, and scheduled cleaning of caches and logs — daily, weekly or monthly.", ["Lives quietly in the menu bar", "Scheduled cleaning with a notification", "Opens at login if you like"]],
+    tr: ["Menü Çubuğu ve Otomatik Temizlik", "Temiz Mac, otomatik pilotta.", "Menü çubuğunda bir bakışta boş alan, tek tıkla hızlı temizlik ve önbellekle logların zamanlanmış temizliği — günlük, haftalık ya da aylık.", ["Menü çubuğunda sessizce durur", "Bildirimli zamanlanmış temizlik", "İstersen girişte açılır"]] },
+];
+
+const SIDE = [
+  ["", "◉", "overview", { en: "Overview", tr: "Genel Bakış" }],
+  [{ en: "Cleanup", tr: "Temizlik" }],
+  ["smart", "✦", 0, { en: "Smart Clean", tr: "Akıllı Temizlik" }],
+  ["similar", "▦", 0, { en: "Similar Photos", tr: "Benzer Fotoğraflar" }],
+  [{ en: "Analysis", tr: "Analiz" }],
+  ["space", "◔", 0, { en: "Space Map", tr: "Alan Haritası" }],
+  ["health", "♥", 0, { en: "Disk Health", tr: "Disk Sağlığı" }],
+  [{ en: "Manage", tr: "Yönetim" }],
+  ["apps", "▣", 0, { en: "Applications", tr: "Uygulamalar" }],
+  ["maint", "⚙", 0, { en: "Maintenance", tr: "Sistem Bakımı" }],
+  ["auto", "◷", 0, { en: "Auto Clean", tr: "Otomatik Temizlik" }],
+  [{ en: "Privacy", tr: "Gizlilik" }],
+  ["sensitive", "⌕", 0, { en: "Sensitive Files", tr: "Hassas Dosyalar" }],
+  ["location", "⌖", 0, { en: "Photo Locations", tr: "Fotoğraf Konumları" }],
+  ["browser", "◎", 0, { en: "Browser Privacy", tr: "Tarayıcı İzleri" }],
+  ["security", "⛨", 0, { en: "Security Scan", tr: "Güvenlik Taraması" }],
+  [{ en: "Recovery", tr: "Kurtarma" }],
+  ["recovery", "⟲", 0, { en: "File Recovery", tr: "Dosya Kurtarma" }],
+];
+
+const MORE = [
+  ["🗂", { en: "Large & duplicate files", tr: "Büyük ve kopya dosyalar" }, { en: "Find the giants and the byte‑for‑byte copies. At least one copy always stays.", tr: "Devleri ve birebir kopyaları bul. Her gruptan en az biri hep kalır." }],
+  ["🚀", { en: "Startup items", tr: "Başlangıç öğeleri" }, { en: "See every launch agent and daemon, stop and remove the ones you don't want.", tr: "Tüm başlangıç servislerini gör, istemediklerini durdur ve kaldır." }],
+  ["🔐", { en: "App permissions", tr: "Uygulama izinleri" }, { en: "Who can use your camera, mic, screen and files — revoke with one click.", tr: "Kamera, mikrofon, ekran ve dosyalarını kim kullanıyor — tek tıkla geri al." }],
+  ["↩︎", { en: "Quarantine & history", tr: "Karantina ve geçmiş" }, { en: "Everything Glint removes is logged and restorable until you say otherwise.", tr: "Glint'in kaldırdığı her şey kayıtlı ve sen silene kadar geri getirilebilir." }],
+  ["🧠", { en: "Memory ceiling", tr: "Bellek sınırı" }, { en: "Scans stop at a limit you choose, so even huge disks never slow you down.", tr: "Taramalar senin seçtiğin sınırda durur; dev diskler bile Mac'ini yavaşlatmaz." }],
+  ["🇹🇷", { en: "Türkçe & English", tr: "Türkçe ve İngilizce" }, { en: "Follows your Mac's language and switches instantly.", tr: "Mac'inin dilini izler, anında değiştirilebilir." }],
+];
+
+let lang = (localStorage.getItem("glint-lang") || (navigator.language || "en")).toLowerCase().startsWith("tr") ? "tr" : "en";
+
+// ---------------------------------------------------------------- build DOM
+const stepsEl = document.getElementById("steps");
+const progressEl = document.getElementById("progress");
+STEPS.forEach((s, i) => {
+  const d = document.createElement("div");
+  d.className = "step"; d.dataset.i = i; d.id = "f-" + s.id;
+  stepsEl.appendChild(d);
+  const a = document.createElement("a"); a.href = "#f-" + s.id; progressEl.appendChild(a);
+});
+
+function renderText() {
+  document.documentElement.lang = lang;
+  // Strings missing from T.en fall back to the English text written in the HTML.
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    if (el.dataset.en === undefined) el.dataset.en = el.textContent;
+    const v = T[lang][el.dataset.i18n] ?? el.dataset.en;
+    if (typeof v === "string") el.textContent = v;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el => {
+    if (el.dataset.en === undefined) el.dataset.en = el.innerHTML;
+    el.innerHTML = T[lang][el.dataset.i18nHtml] ?? el.dataset.en;
+  });
+  document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.lang === lang));
+  STEPS.forEach((s, i) => {
+    const [kicker, title, body, bullets] = s[lang];
+    stepsEl.children[i].innerHTML =
+      `<div class="kicker"><i>${s.icon}</i>${kicker}</div><h2>${title}</h2><p>${body}</p><ul>${bullets.map(b => `<li>${b}</li>`).join("")}</ul>`;
+    progressEl.children[i].title = kicker;
+  });
+  document.getElementById("side").innerHTML = SIDE.map(r =>
+    r.length === 1 ? `<div class="sec">${r[0][lang]}</div>`
+      : `<div class="it" data-side="${r[0] || r[2]}"><span class="ic">${r[1]}</span>${r[3][lang]}</div>`).join("");
+  document.getElementById("cards").innerHTML = MORE.map(m =>
+    `<div class="feat reveal"><div class="e">${m[0]}</div><h3>${m[1][lang]}</h3><p>${m[2][lang]}</p></div>`).join("");
+  observeReveals();
+  if (current >= 0) { const c = current; current = -1; activate(c); }
+}
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem("glint-lang", lang); } catch (e) {}
+  renderText();
+});
+
+// ---------------------------------------------------------------- helpers
+let timers = [];
+const later = (ms, fn) => timers.push(setTimeout(fn, ms));
+const every = (ms, fn) => timers.push(setInterval(fn, ms));
+function clearTimers() { timers.forEach(t => { clearTimeout(t); clearInterval(t); }); timers = []; cancelAnimationFrame(fxRaf); }
+function countTo(el, to, dur = 1400, dec = 0) {
+  const start = performance.now();
+  const step = now => {
+    const p = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - p, 3);
+    el.textContent = (to * e).toFixed(dec);
+    if (p < 1 && el.isConnected) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+const fmtGB = n => (lang === "tr" ? n.toFixed(1).replace(".", ",") : n.toFixed(1)) + " GB";
+
+// ---------------------------------------------------------------- scenes
+let fxRaf = 0;
+const scenes = {
+  smart(el) {
+    const rules = [["Application caches", "Uygulama önbellekleri", 6.4], ["Xcode DerivedData", "Xcode DerivedData", 4.8], ["User logs", "Kullanıcı günlükleri", 0.9], ["npm cache", "npm önbelleği", 1.6], ["Trash", "Çöp Kutusu", 2.3]];
+    const box = el.querySelector("#rules");
+    box.innerHTML = rules.map(r => `<div class="rule card"><span class="ck">✓</span>${lang === "tr" ? r[1] : r[0]}<span class="sz">0 GB</span></div>`).join("");
+    const freed = el.querySelector("#freed"); freed.classList.remove("on");
+    [...box.children].forEach((row, i) => later(150 * i, () => {
+      const sz = row.querySelector(".sz"); const to = rules[i][2]; const st = performance.now();
+      const tick = n => { const p = Math.min(1, (n - st) / 900); sz.textContent = fmtGB(to * p); if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    }));
+    later(2200, () => {
+      particles(el.querySelector("#fx"), 2600);
+      [...box.children].forEach((row, i) => later(260 * i, () => row.classList.add("gone")));
+    });
+    later(3900, () => { freed.classList.add("on"); countTo(el.querySelector("#freedN"), 16, 1300); });
+  },
+  space(el) {
+    const g = el.querySelector("#sung"); g.innerHTML = "";
+    const data = [
+      ["Library", "#3b6cf0", 34], ["Projects", "#4fd8c4", 22], ["Photos", "#ff8a65", 16], ["Applications", "#8f6bff", 12], ["Downloads", "#ffad4a", 9], ["Other", "#5d6279", 7]];
+    const arc = (r0, r1, a0, a1) => {
+      const p = (r, a) => [150 + r * Math.cos(a), 150 + r * Math.sin(a)];
+      const [x0, y0] = p(r1, a0), [x1, y1] = p(r1, a1), [x2, y2] = p(r0, a1), [x3, y3] = p(r0, a0);
+      const big = a1 - a0 > Math.PI ? 1 : 0;
+      return `M${x0} ${y0}A${r1} ${r1} 0 ${big} 1 ${x1} ${y1}L${x2} ${y2}A${r0} ${r0} 0 ${big} 0 ${x3} ${y3}Z`;
+    };
+    let a = -Math.PI / 2, k = 0, html = "";
+    data.forEach(([, c, pct]) => {
+      const span = pct / 100 * Math.PI * 2;
+      html += `<path d="${arc(52, 92, a + .01, a + span - .01)}" fill="${c}" style="transition-delay:${k++ * 70}ms"/>`;
+      const parts = 2 + Math.floor(pct / 8); let b = a;
+      for (let j = 0; j < parts; j++) {
+        const s = span * (0.25 + Math.random() * 0.75) / parts * (j === parts - 1 ? 1.4 : 1);
+        if (b + s > a + span) break;
+        html += `<path d="${arc(96, 128 - Math.random() * 18, b + .012, b + s - .012)}" fill="${c}" fill-opacity="${0.55 + Math.random() * 0.3}" style="transition-delay:${300 + k++ * 40}ms"/>`;
+        b += s;
+      }
+      a += span;
+    });
+    g.innerHTML = html;
+    el.querySelector("#legend").innerHTML = data.map(([n, c, p]) => `<div><i style="background:${c}"></i><span>${n}</span><span>${(p * 3.98).toFixed(0)} GB</span></div>`).join("");
+  },
+  similar(el) {
+    const palettes = [["#ffb37d", "#ff7aa2", "#5a3f8f"], ["#7fd3ff", "#3b6cf0", "#20306b"], ["#b6f0a0", "#3fd68a", "#1e5b45"]];
+    const order = [0, 1, 0, 2, 1, 0, 2, 1];
+    const box = el.querySelector("#photos");
+    box.innerHTML = order.map((g, i) => {
+      const [a, b, c] = palettes[g]; const tilt = (i % 3 - 1) * 4;
+      return `<div class="ph" data-g="${g}" style="background:linear-gradient(${160 + tilt * 3}deg,${a},${b})"><div class="sunny" style="transform:translate(${tilt}px,${tilt / 2}px)"></div><div class="hill" style="background:${c};transform:translateX(${tilt * 2}px)"></div><span class="tag"></span></div>`;
+    }).join("");
+    el.querySelector("#simnote").innerHTML = "";
+    const best = { 0: 2, 1: 4, 2: 6 };
+    [0, 1, 2].forEach((g, gi) => later(900 + gi * 700, () => {
+      box.querySelectorAll(`.ph[data-g="${g}"]`).forEach((p, j) => {
+        const idx = [...box.children].indexOf(p);
+        const isBest = idx === best[g];
+        p.classList.add(isBest ? "best" : "reject");
+        p.querySelector(".tag").textContent = isBest ? (lang === "tr" ? "En iyi" : "Best") : "✕";
+      });
+    }));
+    later(3100, () => { el.querySelector("#simnote").innerHTML = T[lang].simNote(3, "184 MB"); });
+  },
+  health(el) {
+    const fg = el.querySelector("#gfg"); fg.style.strokeDashoffset = 534;
+    later(150, () => { fg.style.strokeDashoffset = 534 * (1 - .98); countTo(el.querySelector("#life"), 98, 1800); });
+    el.querySelectorAll("[data-count]").forEach(s => countTo(s, +s.dataset.count, 1600));
+  },
+  apps(el) {
+    const apps = [["Xcode", "#3b6cf0", 12.4, 2], ["Figma", "#ff7262", 0.6, 1], ["Docker", "#2496ed", 2.1, 40], ["Slack", "#7b3fa0", 0.5, 0], ["Android Studio", "#3ddc84", 3.3, 120], ["Spotify", "#1db954", 0.4, 3], ["Final Cut Pro", "#2b2b2b", 5.8, 210]];
+    const box = el.querySelector("#apps");
+    box.innerHTML = apps.map(a => `<div class="app"><span class="ai" style="background:linear-gradient(135deg,${a[1]},#111)"></span>${a[0]}<span class="v"></span></div>`).join("");
+    const rows = [...box.children];
+    const sorts = [
+      ["name", (a, b) => a[0].localeCompare(b[0]), a => fmtGB(a[2])],
+      ["size", (a, b) => b[2] - a[2], a => fmtGB(a[2])],
+      ["used", (a, b) => b[3] - a[3], a => a[3] === 0 ? (lang === "tr" ? "bugün" : "today") : (lang === "tr" ? `${a[3]} gün önce` : `${a[3]} days ago`)],
+    ];
+    let k = 0;
+    const apply = () => {
+      const [key, cmp, fmt] = sorts[k % sorts.length];
+      el.querySelector("#sortlbl").textContent = (lang === "tr" ? "Sırala: " : "Sort: ") + T[lang].sort[key];
+      const sorted = apps.map((a, i) => [a, i]).sort((x, y) => cmp(x[0], y[0]));
+      sorted.forEach(([a, i], pos) => { rows[i].style.top = pos * 42 + "px"; rows[i].querySelector(".v").textContent = fmt(a); });
+      k++;
+    };
+    apply(); every(2000, apply);
+  },
+  browser(el) {
+    const brs = [["Safari", "#1a8cff", "S", [["History", "Geçmiş", 0.2], ["Cookies", "Çerezler", 0.1]]],
+                 ["Chrome", "#fbbc05", "C", [["Cache", "Önbellek", 4100], ["Cookies", "Çerezler", 5], ["History", "Geçmiş", 68]]],
+                 ["Firefox", "#ff7139", "F", [["Cache", "Önbellek", 310], ["History", "Geçmiş", 22]]],
+                 ["Arc", "#ff5d9e", "A", [["Site data", "Site verileri", 120], ["Cookies", "Çerezler", 3]]]];
+    const box = el.querySelector("#browsers");
+    box.innerHTML = brs.map(b => `<div class="br card"><span class="logo" style="background:${b[1]};color:#111">${b[2]}</span><b style="font-size:13px">${b[0]}</b><div class="data">${b[3].map(d => `<span class="chip" data-mb="${d[2]}">${lang === "tr" ? d[1] : d[0]} · ${d[2] >= 1000 ? (d[2] / 1000).toFixed(1) + " GB" : d[2] + " MB"}</span>`).join("")}</div></div>`).join("");
+    const bin = el.querySelector("#binN"); bin.textContent = "0 MB";
+    let total = 0;
+    const chips = [...box.querySelectorAll(".chip")];
+    chips.forEach((c, i) => later(1000 + i * 260, () => {
+      c.classList.add("gone"); total += +c.dataset.mb;
+      bin.textContent = total >= 1000 ? (total / 1000).toFixed(2) + " GB" : Math.round(total) + " MB";
+      const data = c.parentElement;
+      if ([...data.querySelectorAll(".chip:not(.clean)")].every(x => x.classList.contains("gone"))) {
+        later(450, () => data.insertAdjacentHTML("beforeend", `<span class="chip clean">✓ ${lang === "tr" ? "Temiz" : "Clean"}</span>`));
+      }
+    }));
+  },
+  sensitive(el) {
+    const s = [...el.querySelectorAll(".secret")];
+    s.forEach(x => { x.classList.remove("masked"); x.querySelector(".v").textContent = x.dataset.orig || (x.dataset.orig = x.querySelector(".v").textContent); });
+    s.forEach((x, i) => later(700 + i * 650, () => { x.classList.add("masked"); x.querySelector(".v").textContent = x.dataset.mask; }));
+  },
+  location(el) {
+    const pin = el.querySelector("#pin"), ok = el.querySelector("#okline");
+    pin.classList.remove("off"); ok.classList.remove("on");
+    el.querySelectorAll(".meta-rows div").forEach(d => d.classList.remove("strip"));
+    later(1300, () => el.querySelectorAll(".meta-rows .gps").forEach((d, i) => later(i * 250, () => d.classList.add("strip"))));
+    later(1900, () => pin.classList.add("off"));
+    later(2300, () => el.querySelectorAll(".meta-rows .dev").forEach(d => d.classList.add("strip")));
+    later(2800, () => ok.classList.add("on"));
+  },
+  security(el) {
+    const rows = [["Visual Studio Code", "ok", "secOk"], ["Things 3", "ok", "secStore"], ["Docker", "ok", "secOk"], ["com.apple.updaterd.plist", "bad", "secBad"], ["Raycast", "ok", "secOk"]];
+    const box = el.querySelector("#seclist");
+    box.innerHTML = rows.map(r => `<div class="sec-row card"><span>${r[1] === "bad" ? "⚙︎" : "◆"}</span>${r[0]}<span class="st">${T[lang].scanning}</span></div>`).join("");
+    [...box.children].forEach((row, i) => later(500 + i * 520, () => {
+      row.classList.add(rows[i][1]);
+      row.querySelector(".st").textContent = (rows[i][1] === "ok" ? "✓ " : "⚠ ") + T[lang][rows[i][2]];
+    }));
+  },
+  recovery(el) {
+    const blocks = el.querySelector("#blocks"), found = el.querySelector("#found");
+    blocks.innerHTML = "<i></i>".repeat(14 * 9); found.innerHTML = "";
+    const cells = [...blocks.children];
+    const files = [["📷", "IMG_2041.JPG", "4.2 MB"], ["🎬", "Doğum günü.MOV", "182 MB"], ["📷", "IMG_2042.JPG", "3.9 MB"], ["📄", "Sunum son hali.pdf", "2.1 MB"], ["📷", "DSC_0815.NEF", "24 MB"], ["🎵", "Ses kaydı 3.m4a", "6.4 MB"]];
+    let f = 0;
+    every(90, () => {
+      const c = cells[Math.floor(Math.random() * cells.length)];
+      c.classList.add("hit"); setTimeout(() => { c.classList.remove("hit"); c.classList.add("done"); }, 260);
+    });
+    every(700, () => {
+      if (f >= files.length) return;
+      const [ic, n, sz] = files[f++];
+      found.insertAdjacentHTML("beforeend", `<div class="card"><span>${ic}</span>${n}<span>${sz}</span></div>`);
+    });
+  },
+  maint(el) {
+    const app = el.querySelector("#mApp"), cache = el.querySelector("#mCache"), txt = el.querySelector("#memtxt"), free = el.querySelector("#memfree");
+    cache.style.width = "22%"; app.style.width = "36%"; txt.textContent = "41.2 / 48 GB"; free.textContent = "";
+    const box = el.querySelector("#tasks");
+    box.innerHTML = T[lang].tasks.map(t => `<div class="task card">${t}<span class="r"></span></div>`).join("");
+    const rows = [...box.children];
+    rows.forEach((r, i) => later(500 + i * 900, () => {
+      r.classList.add("run");
+      later(700, () => {
+        r.classList.remove("run"); r.classList.add("done"); r.querySelector(".r").textContent = "✓ " + T[lang].done;
+        if (i === 0) { cache.style.width = "7%"; txt.textContent = "34.0 / 48 GB"; free.textContent = T[lang].freedMem(lang === "tr" ? "7,2" : "7.2"); }
+      });
+    }));
+  },
+  menubar(el) {
+    const drop = el.querySelector("#drop"), qc = el.querySelector("#qc"), pb = el.querySelector("#dpb");
+    drop.classList.remove("on"); pb.style.width = "78%";
+    const set = gb => { el.querySelector("#mbfree").textContent = "✦ " + gb + " GB"; el.querySelector("#dfree").textContent = gb + (lang === "tr" ? " GB boş" : " GB free"); };
+    set(112);
+    later(700, () => drop.classList.add("on"));
+    later(2000, () => qc.classList.add("press"));
+    later(2300, () => {
+      qc.classList.remove("press"); pb.style.width = "75%";
+      const st = performance.now();
+      const tick = n => { const p = Math.min(1, (n - st) / 1200); set(Math.round(112 + 9 * (1 - Math.pow(1 - p, 3)))); if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    });
+  },
+};
+
+function particles(canvas, dur) {
+  const ctx = canvas.getContext("2d");
+  const r = canvas.getBoundingClientRect(), dpr = devicePixelRatio || 1;
+  canvas.width = r.width * dpr; canvas.height = r.height * dpr; ctx.scale(dpr, dpr);
+  const ps = [];
+  const start = performance.now();
+  const colors = ["#4fd8c4", "#3b6cf0", "#8f6bff", "#ffffff"];
+  const loop = now => {
+    const t = now - start;
+    if (t < dur * 0.7) for (let i = 0; i < 6; i++) ps.push({ x: 40 + Math.random() * (r.width - 80), y: 90 + Math.random() * (r.height - 140), vx: 2 + Math.random() * 4, vy: -1.5 - Math.random() * 2.5, life: 1, s: 1 + Math.random() * 2.5, c: colors[(Math.random() * 4) | 0] });
+    ctx.clearRect(0, 0, r.width, r.height);
+    ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy -= 0.03; p.life -= 0.018; ctx.globalAlpha = Math.max(0, p.life); ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, 7); ctx.fill(); });
+    for (let i = ps.length - 1; i >= 0; i--) if (ps[i].life <= 0) ps.splice(i, 1);
+    if (t < dur || ps.length) fxRaf = requestAnimationFrame(loop); else ctx.clearRect(0, 0, r.width, r.height);
+  };
+  fxRaf = requestAnimationFrame(loop);
+}
+
+// ---------------------------------------------------------------- scroll logic
+let current = -1;
+const sceneEls = [...document.querySelectorAll(".scene")];
+function activate(i) {
+  if (i === current) return;
+  current = i;
+  clearTimers();
+  const s = STEPS[i];
+  document.documentElement.style.setProperty("--accent", s.accent[0]);
+  document.documentElement.style.setProperty("--accent2", s.accent[1]);
+  [...stepsEl.children].forEach((el, k) => el.classList.toggle("active", k === i));
+  [...progressEl.children].forEach((el, k) => el.classList.toggle("on", k === i));
+  document.querySelectorAll(".side .it").forEach(el => el.classList.toggle("on", el.dataset.side === s.side));
+  const side = document.getElementById("side"), on = side.querySelector(".it.on");
+  if (on) side.scrollTo({ top: Math.max(0, on.offsetTop - side.clientHeight / 2), behavior: "smooth" });
+  sceneEls.forEach(el => el.classList.toggle("on", el.dataset.scene === s.id));
+  const el = sceneEls.find(e => e.dataset.scene === s.id);
+  scenes[s.id] && scenes[s.id](el);
+  document.getElementById("winbar").style.width = ((i + 1) / STEPS.length * 100) + "%";
+}
+
+function onScroll() {
+  const story = document.getElementById("story").getBoundingClientRect();
+  const inStory = story.top < innerHeight * 0.5 && story.bottom > innerHeight * 0.5;
+  document.documentElement.style.setProperty("--glow", inStory ? 1 : 0);
+  progressEl.classList.toggle("show", inStory);
+  document.getElementById("nav").classList.toggle("scrolled", scrollY > 20);
+  // The active step is the one crossing the middle of the viewport.
+  // On phones the window sits on top, so read the step under it rather than mid‑screen.
+  const mid = innerHeight * (innerWidth <= 860 ? 0.72 : 0.5);
+  let best = 0, bestD = Infinity;
+  [...stepsEl.children].forEach((el, i) => {
+    const r = el.getBoundingClientRect();
+    const d = Math.abs((r.top + r.bottom) / 2 - mid);
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  activate(best);
+}
+addEventListener("scroll", onScroll, { passive: true });
+addEventListener("resize", onScroll);
+
+// ---------------------------------------------------------------- reveals
+let revealObs;
+function observeReveals() {
+  revealObs?.disconnect();
+  revealObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); revealObs.unobserve(e.target); } }), { threshold: .15 });
+  document.querySelectorAll(".reveal:not(.in)").forEach(el => revealObs.observe(el));
+}
+
+// ---------------------------------------------------------------- hero stars
+(function stars() {
+  const c = document.getElementById("stars"), ctx = c.getContext("2d");
+  let w, h, pts = [];
+  const resize = () => {
+    const dpr = devicePixelRatio || 1;
+    w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    pts = Array.from({ length: Math.round(w * h / 9000) }, () => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.4 + .2, p: Math.random() * 6.28, s: .5 + Math.random() * 1.5 }));
+  };
+  resize(); addEventListener("resize", resize);
+  const draw = t => {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of pts) {
+      const a = .25 + .75 * Math.abs(Math.sin(p.p + t / 1000 * p.s));
+      ctx.globalAlpha = a * .8; ctx.fillStyle = "#cfe9ff";
+      ctx.beginPath(); ctx.arc(p.x, p.y - (scrollY * .15 * p.r) % h, p.r, 0, 7); ctx.fill();
+      if (p.r > 1.45) { ctx.globalAlpha = a * .35; ctx.fillRect(p.x - p.r * 3, p.y - (scrollY * .15 * p.r) % h - .3, p.r * 6, .6); ctx.fillRect(p.x - .3, p.y - (scrollY * .15 * p.r) % h - p.r * 3, .6, p.r * 6); }
+    }
+    if (scrollY < innerHeight * 1.2) requestAnimationFrame(draw); else setTimeout(() => requestAnimationFrame(draw), 400);
+  };
+  requestAnimationFrame(draw);
+})();
+
+renderText();
+// Steps are built by script, so jump to a #f-… link ourselves once they exist.
+if (location.hash.startsWith("#f-")) document.querySelector(location.hash)?.scrollIntoView({ behavior: "instant", block: "center" });
+onScroll();
+</script>
+</body>
+</html>

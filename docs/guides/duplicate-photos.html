@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to find duplicate photos on Mac — Glint guide</title>
+<meta name="description" content="Find duplicate and similar photos on a Mac: the Photos Duplicates album, exact copies in folders, and look-alike shots, safely.">
+<link rel="canonical" href="https://bagsiz.github.io/glintapp/guides/duplicate-photos.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://bagsiz.github.io/glintapp/guides/duplicate-photos.html">
+<meta property="og:title" content="How to find duplicate and similar photos on a Mac">
+<meta property="og:description" content="Find duplicate and similar photos on a Mac: the Photos Duplicates album, exact copies in folders, and look-alike shots, safely.">
+<meta property="og:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/page.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to find duplicate and similar photos on a Mac",
+ "description": "Find duplicate and similar photos on a Mac: the Photos Duplicates album, exact copies in folders, and look-alike shots, safely.",
+ "url": "https://bagsiz.github.io/glintapp/guides/duplicate-photos.html",
+ "mainEntityOfPage": "https://bagsiz.github.io/glintapp/guides/duplicate-photos.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://bagsiz.github.io/glintapp/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://bagsiz.github.io/glintapp/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://bagsiz.github.io/glintapp/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://bagsiz.github.io/glintapp/assets/icon.png"
+  }
+ }
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="">Glint</a>
+  <div class="spacer"></div>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <span class="eyebrow">Guide</span>
+  <h1>How to find duplicate and similar photos on a Mac</h1>
+  <p class="lead">Duplicate photos pile up from phone imports, exports, messaging apps and backups. How you find them depends on where they live: inside the Photos library, or in ordinary folders.</p>
+
+  <h2>Inside the Photos library</h2>
+  <p>On macOS 13 Ventura and later, Photos finds duplicates itself. Open Photos, look under <b>Utilities › Duplicates</b> in the sidebar, review each group and click <b>Merge</b>. Merging keeps the best version and combines the metadata. If you use iCloud Photos, the change applies on all your devices, and removed items stay in <b>Recently Deleted</b> for 30 days.</p>
+  <p>Don't delete files from inside the Photos library package in Finder; that can damage the library. Always work through the Photos app.</p>
+
+  <h2>In folders: exact duplicates</h2>
+  <p>Downloads, Desktop, exported albums and camera-card imports often hold byte-for-byte copies (<code>IMG_1234.JPG</code> and <code>IMG_1234 2.JPG</code>). Comparing names is unreliable; comparing contents is what counts. A good tool narrows candidates by size first, then confirms with a checksum such as SHA‑256 so different photos are never treated as copies.</p>
+
+  <h2>In folders: similar photos</h2>
+  <p>Bursts, slightly different shots and edited copies aren't identical files, so checksum tools miss them. Finding these needs image comparison. Here you want to <em>review</em> each group rather than delete in bulk, because “nearly the same” is a judgement call.</p>
+
+  <h2>Doing it with Glint</h2>
+  <ul>
+    <li><b>Duplicate Files</b> compares size, then the first 64 KB, then a full SHA‑256 hash. At least one copy of every group always stays.</li>
+    <li><b>Similar Photos</b> groups bursts, edits and near-identical shots using Apple's on-device Vision image analysis, with three strictness levels. It suggests keeping the highest-resolution image and marks the rest for your review.</li>
+    <li>Both work on folders you choose. Similar Photos doesn't scan the Photos library; use Photos' own Duplicates album for that.</li>
+    <li>Everything you remove goes to Quarantine first, and nothing is uploaded: the comparison happens on your Mac.</li>
+  </ul>
+
+  <div class="note">
+    <p><b>Tip:</b> RAW + JPEG pairs from a camera are two different files, not duplicates. Decide whether you want to keep both before cleaning a camera import.</p>
+  </div>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>More guides</h2>
+  <ul>
+    <li><a href="system-data.html">What is “System Data” on a Mac, and how do you shrink it?</a></li>
+    <li><a href="library-caches.html">Is it safe to delete ~/Library/Caches on a Mac?</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

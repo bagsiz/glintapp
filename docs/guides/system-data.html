@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is “System Data” on Mac and how to reduce it — Glint guide</title>
+<meta name="description" content="What fills the System Data category in macOS storage (caches, logs, snapshots, swap, developer data) and how to shrink it safely.">
+<link rel="canonical" href="https://bagsiz.github.io/glintapp/guides/system-data.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://bagsiz.github.io/glintapp/guides/system-data.html">
+<meta property="og:title" content="What is “System Data” on a Mac, and how do you shrink it?">
+<meta property="og:description" content="What fills the System Data category in macOS storage (caches, logs, snapshots, swap, developer data) and how to shrink it safely.">
+<meta property="og:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/page.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "What is “System Data” on a Mac, and how do you shrink it?",
+ "description": "What fills the System Data category in macOS storage (caches, logs, snapshots, swap, developer data) and how to shrink it safely.",
+ "url": "https://bagsiz.github.io/glintapp/guides/system-data.html",
+ "mainEntityOfPage": "https://bagsiz.github.io/glintapp/guides/system-data.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://bagsiz.github.io/glintapp/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://bagsiz.github.io/glintapp/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://bagsiz.github.io/glintapp/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://bagsiz.github.io/glintapp/assets/icon.png"
+  }
+ }
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="">Glint</a>
+  <div class="spacer"></div>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <span class="eyebrow">Guide</span>
+  <h1>What is “System Data” on a Mac, and how do you shrink it?</h1>
+  <p class="lead">Open System Settings › General › Storage and there is often a large grey bar called “System Data”. It's a catch‑all, not a single thing, which is why it's hard to clean by hand.</p>
+
+  <h2>What ends up in System Data</h2>
+  <p>macOS puts files that don't fit its other categories (Applications, Documents, Photos, Mail and so on) under System Data. Depending on your Mac and macOS version it can include:</p>
+  <ul>
+    <li><b>Caches and logs</b> written by apps and by macOS itself.</li>
+    <li><b>Time Machine local snapshots</b>, kept on the internal disk between backups.</li>
+    <li><b>Virtual memory</b>: swap files and the sleep image.</li>
+    <li><b>App support data</b> in <code>~/Library/Application Support</code> and app containers.</li>
+    <li><b>Developer and virtual-machine data</b>: Xcode build folders and simulators, Docker disk images, VM disks.</li>
+  </ul>
+  <p>Because several of these grow and shrink on their own, the number can change between two looks at the Storage pane.</p>
+
+  <h2>How to shrink it safely</h2>
+  <h3>1. Restart</h3>
+  <p>Swap files are cleared at restart. If your Mac has been up for weeks, a restart alone can give back several gigabytes.</p>
+  <h3>2. Check local snapshots</h3>
+  <p>macOS removes Time Machine snapshots by itself when space runs low, but you can list them in Terminal:</p>
+  <pre><code>tmutil listlocalsnapshots /</code></pre>
+  <p>A specific snapshot can be removed with <code>sudo tmutil deletelocalsnapshots &lt;date&gt;</code>, using the date from the list.</p>
+  <h3>3. Clear caches and logs</h3>
+  <p>Caches are rebuilt by the apps that made them, so clearing them is usually safe (see <a href="library-caches.html">Is it safe to delete ~/Library/Caches?</a>). Quit the apps first.</p>
+  <h3>4. Clean developer leftovers</h3>
+  <p>Xcode's DerivedData, old simulators, and package-manager caches (npm, pnpm, Gradle, Cargo) can reach tens of gigabytes. Xcode can delete unavailable simulators with <code>xcrun simctl delete unavailable</code>. For Docker, <code>docker system prune</code> removes stopped containers and unused images, so read its prompt before you confirm.</p>
+  <h3>5. Find the big folders</h3>
+  <p>Look for large folders before deleting anything. Many folders that count toward System Data are hidden from apps that don't have Full Disk Access, so give your disk tool that permission before trusting its totals.</p>
+
+  <div class="note">
+    <p><b>Don't delete things in /System, /private/var or /Library at random.</b> Some of those files belong to macOS and other users, and removing the wrong one can stop your Mac from booting or apps from launching.</p>
+  </div>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>Smart Clean</b> covers caches, logs, Xcode, npm, pnpm, Gradle and Cargo leftovers, old iOS backups and downloaded installers, rule by rule with sizes. <b>Space Map</b> shows where the rest went as a sunburst you can drill into. System folders are protected and can't be deleted, files of running apps like Docker Desktop are skipped, and anything that doesn't regrow on its own goes to Quarantine first, so you can restore it.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>More guides</h2>
+  <ul>
+    <li><a href="library-caches.html">Is it safe to delete ~/Library/Caches on a Mac?</a></li>
+    <li><a href="duplicate-photos.html">How to find duplicate and similar photos on a Mac</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bagsiz.github.io/glintapp/sitemap.xml

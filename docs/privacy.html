@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Glint, the free disk cleaner for Mac</title>
+<meta name="description" content="What Glint collects: nothing. No analytics, no account, no network requests from the app. What stays on your Mac, and what this website loads.">
+<link rel="canonical" href="https://bagsiz.github.io/glintapp/privacy.html">
+<link rel="icon" href="assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://bagsiz.github.io/glintapp/privacy.html">
+<meta property="og:title" content="Glint privacy note">
+<meta property="og:description" content="No analytics, no account, no network requests from the app. Everything stays on your Mac.">
+<meta property="og:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="assets/page.css">
+</head>
+<body>
+<nav>
+  <a class="brand" href="./"><img src="assets/icon.png" alt="">Glint</a>
+  <div class="spacer"></div>
+  <div class="lang"><button data-lang="en">EN</button><button data-lang="tr">TR</button></div>
+  <a class="btn hide-sm" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg"><span data-lang-block="en">Download</span><span data-lang-block="tr">İndir</span></a>
+</nav>
+
+<main>
+<article data-lang-block="en">
+  <span class="eyebrow">Privacy</span>
+  <h1>Glint collects nothing.</h1>
+  <p class="lead">Glint works entirely on your Mac. This note explains what the app does and doesn't do with your data, and what this website loads. Last updated: November 2026.</p>
+
+  <h2>The app</h2>
+  <ul>
+    <li><b>No data collection.</b> Glint has no analytics, no telemetry, no crash reporting, no advertising and no account.</li>
+    <li><b>No network requests of its own.</b> Scanning, cleaning, photo comparison (Apple Vision), text recognition in screenshots (OCR), disk health and file recovery all run locally. Your files, file names and scan results are never uploaded.</li>
+    <li><b>Links you click.</b> Glint opens something outside the app only when you ask it to: for example, showing a photo's GPS location in Apple Maps or opening a pane of System Settings. These open in the system's own apps.</li>
+    <li><b>Sensitive-file scans.</b> Card numbers, IBANs, ID numbers, passwords and API keys are shown masked in the app and never leave your Mac.</li>
+  </ul>
+
+  <h2>What stays on your Mac</h2>
+  <ul>
+    <li><b>Settings</b> (language, retention period, memory ceiling, schedules) are stored in macOS's standard preferences.</li>
+    <li><b>Quarantine and History</b>: items you remove (except rebuildable caches) and a log of each removal are kept in Glint's folder in <code>~/Library/Application Support</code> until the retention period ends (7 days by default), so you can restore them.</li>
+    <li><b>Recovered files</b> are written only to the folder you choose.</li>
+  </ul>
+
+  <h2>Permissions Glint asks for</h2>
+  <ul>
+    <li><b>Full Disk Access</b> lets Glint scan folders macOS otherwise hides, such as Mail and other apps' data. It is used only to scan and clean locally. You can turn it off in System Settings › Privacy &amp; Security › Full Disk Access.</li>
+    <li><b>Administrator rights</b> are needed for a few jobs (freeing RAM, flushing DNS, reindexing Spotlight, raw-disk recovery, removing admin-owned items). They run through the macOS password prompt or, if you install it, Glint's signed privileged helper, which only accepts requests from Glint itself. You can remove the helper in Glint's Settings.</li>
+  </ul>
+
+  <h2>Downloads</h2>
+  <p>Glint is downloaded from GitHub Releases. GitHub's own <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">privacy statement</a> applies to that download.</p>
+
+  <h2>This website</h2>
+  <ul>
+    <li>No cookies, no analytics, no tracking scripts.</li>
+    <li>The site is hosted on GitHub Pages, which may log visitors' IP addresses for security, as described in GitHub's privacy statement.</li>
+    <li>The home page loads its typefaces from Google Fonts, so your browser contacts Google's servers for those files.</li>
+    <li>Your language choice (EN/TR) is kept in your browser's local storage and never sent anywhere.</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>Questions or concerns? <a href="https://github.com/bagsiz/glintapp/issues">Open an issue on GitHub</a>.</p>
+</article>
+
+<article data-lang-block="tr">
+  <span class="eyebrow">Gizlilik</span>
+  <h1>Glint hiçbir şey toplamaz.</h1>
+  <p class="lead">Glint tamamen Mac'inde çalışır. Bu not, uygulamanın verilerinle ne yapıp ne yapmadığını ve bu web sitesinin neler yüklediğini anlatır. Son güncelleme: Kasım 2026.</p>
+
+  <h2>Uygulama</h2>
+  <ul>
+    <li><b>Veri toplanmaz.</b> Glint'te analiz, telemetri, çökme raporu, reklam ya da hesap yoktur.</li>
+    <li><b>Kendi başına ağ isteği yapmaz.</b> Tarama, temizlik, fotoğraf karşılaştırma (Apple Vision), ekran görüntülerinde metin tanıma (OCR), disk sağlığı ve dosya kurtarma tamamen yerelde çalışır. Dosyaların, dosya adların ve tarama sonuçların asla yüklenmez.</li>
+    <li><b>Tıkladığın bağlantılar.</b> Glint uygulama dışında bir şeyi yalnızca sen istediğinde açar: örneğin bir fotoğrafın GPS konumunu Apple Haritalar'da göstermek ya da Sistem Ayarları'nın bir bölümünü açmak. Bunlar sistemin kendi uygulamalarında açılır.</li>
+    <li><b>Hassas dosya taramaları.</b> Kart numaraları, IBAN'lar, kimlik numaraları, şifreler ve API anahtarları uygulamada maskeli gösterilir ve Mac'inden asla çıkmaz.</li>
+  </ul>
+
+  <h2>Mac'inde kalanlar</h2>
+  <ul>
+    <li><b>Ayarlar</b> (dil, saklama süresi, bellek sınırı, zamanlamalar) macOS'in standart tercihlerinde saklanır.</li>
+    <li><b>Karantina ve Geçmiş</b>: kaldırdığın öğeler (yeniden oluşan önbellekler hariç) ve her kaldırmanın kaydı, saklama süresi dolana kadar (varsayılan 7 gün) Glint'in <code>~/Library/Application Support</code> içindeki klasöründe tutulur; böylece geri getirebilirsin.</li>
+    <li><b>Kurtarılan dosyalar</b> yalnızca senin seçtiğin klasöre yazılır.</li>
+  </ul>
+
+  <h2>Glint'in istediği izinler</h2>
+  <ul>
+    <li><b>Tam Disk Erişimi</b>, macOS'in normalde gizlediği Mail ve diğer uygulamaların verileri gibi klasörleri taramaya yarar. Yalnızca yerelde tarama ve temizlik için kullanılır. Sistem Ayarları › Gizlilik ve Güvenlik › Tam Disk Erişimi'nden kapatabilirsin.</li>
+    <li><b>Yönetici yetkisi</b> birkaç iş için gerekir (RAM boşaltma, DNS temizleme, Spotlight'ı yeniden indeksleme, ham diskten kurtarma, yönetici sahipli öğeleri kaldırma). Bunlar macOS şifre penceresiyle ya da kurarsan yalnızca Glint'in kendisinden gelen istekleri kabul eden imzalı ayrıcalıklı yardımcıyla çalışır. Yardımcıyı Glint'in Ayarlar'ından kaldırabilirsin.</li>
+  </ul>
+
+  <h2>İndirme</h2>
+  <p>Glint, GitHub Releases üzerinden indirilir. Bu indirme için GitHub'ın kendi <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">gizlilik bildirimi</a> geçerlidir.</p>
+
+  <h2>Bu web sitesi</h2>
+  <ul>
+    <li>Çerez yok, analiz yok, takip betiği yok.</li>
+    <li>Site GitHub Pages'te barındırılır; GitHub, gizlilik bildiriminde anlatıldığı gibi güvenlik amacıyla ziyaretçilerin IP adreslerini kaydedebilir.</li>
+    <li>Ana sayfa yazı tiplerini Google Fonts'tan yükler; bu yüzden tarayıcın bu dosyalar için Google sunucularına bağlanır.</li>
+    <li>Dil tercihin (EN/TR) tarayıcının yerel depolamasında tutulur ve hiçbir yere gönderilmez.</li>
+  </ul>
+
+  <h2>İletişim</h2>
+  <p>Sorun ya da soru mu var? <a href="https://github.com/bagsiz/glintapp/issues">GitHub'da bir kayıt aç</a>.</p>
+</article>
+</main>
+
+<footer>
+  <div class="links">
+    <a href="./">Glint</a>
+    <a href="./#faq"><span data-lang-block="en">FAQ</span><span data-lang-block="tr">SSS</span></a>
+    <a href="https://github.com/bagsiz/glintapp/issues"><span data-lang-block="en">Support &amp; bug reports</span><span data-lang-block="tr">Destek ve hata bildirimi</span></a>
+  </div>
+  <div class="legal" data-lang-block="en">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+  <div class="legal" data-lang-block="tr">Glint bağımsız bir uygulamadır ve Apple Inc. ile bağlantılı değildir. Mac ve macOS, Apple Inc.'in ticari markalarıdır.</div>
+</footer>
+
+<script>
+// Same language choice as the home page (stored only in this browser).
+let lang;
+try { lang = localStorage.getItem("glint-lang"); } catch (e) {}
+lang = (lang || navigator.language || "en").toLowerCase().startsWith("tr") ? "tr" : "en";
+function apply() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("on", b.dataset.lang === lang));
+}
+document.querySelectorAll(".lang button").forEach(b => b.onclick = () => {
+  lang = b.dataset.lang;
+  try { localStorage.setItem("glint-lang", lang); } catch (e) {}
+  apply();
+});
+apply();
+</script>
+</body>
+</html>
