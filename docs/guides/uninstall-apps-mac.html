@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to completely uninstall apps on Mac (leftovers too)</title>
+<meta name="description" content="Dragging an app to the Trash leaves files behind. Find and remove an app&#x27;s caches, containers, preferences and launch agents on macOS, safely.">
+<link rel="canonical" href="https://glintmac.com/guides/uninstall-apps-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/uninstall-apps-mac.html">
+<meta property="og:title" content="How to completely uninstall apps on a Mac, leftovers included">
+<meta property="og:description" content="Dragging an app to the Trash leaves files behind. Find and remove an app&#x27;s caches, containers, preferences and launch agents on macOS, safely.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to completely uninstall apps on a Mac, leftovers included">
+<meta name="twitter:description" content="Dragging an app to the Trash leaves files behind. Find and remove an app&#x27;s caches, containers, preferences and launch agents on macOS, safely.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to completely uninstall apps on a Mac, leftovers included",
+ "description": "Dragging an app to the Trash leaves files behind. Find and remove an app's caches, containers, preferences and launch agents on macOS, safely.",
+ "url": "https://glintmac.com/guides/uninstall-apps-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/uninstall-apps-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to completely uninstall apps on a Mac, leftovers included",
+   "item": "https://glintmac.com/guides/uninstall-apps-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Is dragging an app to the Trash enough?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "For most small apps, yes: the leftovers are a few megabytes and do no harm. For large apps, apps with background services, or when you want to reset an app completely, also remove its files in ~/Library and any launch agents it installed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Will deleting leftovers remove my documents?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not documents you saved in Documents, Desktop or iCloud Drive. But some apps keep libraries, projects or databases in ~/Library/Application Support or their container, so look inside before deleting anything you might want later."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I uninstall an app that won't move to the Trash?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It is usually still running. Quit it, check the menu bar and Activity Monitor for a helper process, and quit that too. Apps installed by an administrator may also ask for an admin password."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to completely uninstall apps on a Mac, leftovers included</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">On a Mac, uninstalling looks easy: drag the app to the Trash. But the app is only part of what it installed. Settings, caches, containers, logs and sometimes background services stay behind in your Library folder. Usually that's harmless; sometimes it's gigabytes, or a helper that keeps running at login.</p>
+
+  <h2>Step 1: use the developer's uninstaller if there is one</h2>
+  <p>Apps that install system components ship their own uninstaller, and it's the safest way to remove them. Look for an "Uninstall" app in the app's folder or disk image, or an uninstall option in its menu or settings. Typical examples:</p>
+  <ul>
+    <li>Adobe apps: uninstall from the <b>Creative Cloud</b> app.</li>
+    <li>Antivirus, VPN and security tools: almost always have a dedicated uninstaller, because they install system extensions.</li>
+    <li>Virtualisation, audio drivers and printer software: often include kernel or system extensions.</li>
+  </ul>
+
+  <h2>Step 2: quit the app and move it to the Trash</h2>
+  <ol>
+    <li>Quit the app. Check the menu bar for an icon, and Activity Monitor for helper processes with the app's name.</li>
+    <li>In Finder, open <b>Applications</b> (<kbd>⇧⌘A</kbd>), and drag the app to the Trash, or select it and press <kbd>⌘⌫</kbd>.</li>
+    <li>For App Store apps you can also go to <b>System Settings › General › Storage › Applications</b>, select the app and click <b>Delete</b>.</li>
+  </ol>
+  <p>Don't empty the Trash yet. If you change your mind, you can drag it back.</p>
+
+  <h2>Step 3: find the app's bundle ID</h2>
+  <p>Most leftover files are named after the app's bundle identifier, such as <code>com.spotify.client</code>. Before emptying the Trash, get it:</p>
+  <pre><code>osascript -e 'id of app "Spotify"'</code></pre>
+  <p>Or right‑click the app, choose <b>Show Package Contents</b>, and open <code>Contents/Info.plist</code>; it's the <code>CFBundleIdentifier</code> value.</p>
+
+  <h2>Step 4: remove the leftovers</h2>
+  <p>In Finder, choose <b>Go › Go to Folder…</b> (<kbd>⇧⌘G</kbd>) and check each of these folders for items named after the app, its developer or its bundle ID:</p>
+  <ul>
+    <li><code>~/Library/Application Support</code>: app data. Can be large (and can contain your projects or libraries; look first).</li>
+    <li><code>~/Library/Caches</code>: safe to delete.</li>
+    <li><code>~/Library/Preferences</code>: <code>.plist</code> settings files. Delete to reset the app.</li>
+    <li><code>~/Library/Containers</code> and <code>~/Library/Group Containers</code>: sandboxed apps keep everything here.</li>
+    <li><code>~/Library/Logs</code>, <code>~/Library/Saved Application State</code>, <code>~/Library/HTTPStorages</code>, <code>~/Library/WebKit</code>, <code>~/Library/Cookies</code>.</li>
+    <li><code>~/Library/LaunchAgents</code>: background helpers that start when you log in.</li>
+  </ul>
+  <p>To search everything at once from Terminal (replace the ID and name with your app's):</p>
+  <pre><code>find ~/Library -maxdepth 3 \( -iname "*com.spotify.client*" -o -iname "*spotify*" \) 2&gt;/dev/null</code></pre>
+  <p>Some apps also install system‑wide components that need an admin password to remove:</p>
+  <ul>
+    <li><code>/Library/Application Support</code></li>
+    <li><code>/Library/LaunchAgents</code> and <code>/Library/LaunchDaemons</code></li>
+    <li><code>/Library/PrivilegedHelperTools</code></li>
+  </ul>
+  <div class="note">
+    <p><b>Be strict about matching names.</b> Only remove items that clearly belong to the app you uninstalled. Never delete the folders above themselves, anything named <code>com.apple.*</code>, or shared folders used by a developer's other apps (for example a Google or Microsoft folder while you still use another of their apps).</p>
+  </div>
+  <p>If you remove a launch agent or daemon, unload it as well so it stops running before the next restart; see <a href="remove-login-items-mac.html">How to remove login items and launch agents</a>.</p>
+
+  <h2>Step 5: check login items and background permissions</h2>
+  <p>Open <b>System Settings › General › Login Items &amp; Extensions</b> (called <b>Login Items</b> on macOS 13 and 14). Items from the deleted app usually disappear by themselves; if one remains, remove it there. You can also reset the app's privacy permissions so it doesn't keep entries in Privacy &amp; Security:</p>
+  <pre><code>tccutil reset All com.spotify.client</code></pre>
+
+  <h2>Step 6: empty the Trash</h2>
+  <p>Once you're sure, empty the Trash to get the space back.</p>
+
+  <h2>Installer packages (.pkg)</h2>
+  <p>Apps installed with a <code>.pkg</code> may have put files outside <code>/Applications</code>. macOS keeps receipts that list them:</p>
+  <pre><code>pkgutil --pkgs | grep -i spotify
+pkgutil --files &lt;package-id&gt;</code></pre>
+  <p>Use the file list to find what was installed. <code>sudo pkgutil --forget &lt;package-id&gt;</code> only removes the receipt, not the files.</p>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>Applications</b> page lists your apps with their sizes, and lets you sort by name, size, install date, modified date or when you last opened them, which is a quick way to spot apps you haven't used in a year. Select an app and Glint finds its leftovers in the <code>~/Library</code> folders above, launch agents included, and shows each one with its size. Items that match the bundle ID are selected; items that only match the app's name are left unticked, because another app might use the same folder name. The app and the selected files go to <b>Quarantine</b>, so an uninstall can be undone for 7 days by default. Glint doesn't run developers' uninstallers or remove system‑wide components in <code>/Library</code>, so use the vendor's uninstaller for those.</p>
+
+  <h2>FAQ</h2>
+  <h3>Is dragging an app to the Trash enough?</h3>
+  <p>For most small apps, yes: the leftovers are a few megabytes and do no harm. For large apps, apps with background services, or when you want to reset an app completely, also remove its files in ~/Library and any launch agents it installed.</p>
+  <h3>Will deleting leftovers remove my documents?</h3>
+  <p>Not documents you saved in Documents, Desktop or iCloud Drive. But some apps keep libraries, projects or databases in ~/Library/Application Support or their container, so look inside before deleting anything you might want later.</p>
+  <h3>How do I uninstall an app that won't move to the Trash?</h3>
+  <p>It is usually still running. Quit it, check the menu bar and Activity Monitor for a helper process, and quit that too. Apps installed by an administrator may also ask for an admin password.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="remove-login-items-mac.html">How to remove login items and launch agents on a Mac</a></li>
+    <li><a href="free-up-disk-space-mac.html">How to free up disk space on a Mac</a></li>
+    <li><a href="library-caches.html">Is it safe to delete ~/Library/Caches on a Mac?</a></li>
+    <li><a href="free-cleanmymac-alternatives.html">Free CleanMyMac alternatives for macOS</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

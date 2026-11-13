@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remove location data (GPS, EXIF) from photos on Mac</title>
+<meta name="description" content="Strip GPS coordinates and camera details from photos on macOS using Photos, Preview, exiftool or a free app, and check what a photo reveals first.">
+<link rel="canonical" href="https://glintmac.com/guides/remove-photo-location-data-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/remove-photo-location-data-mac.html">
+<meta property="og:title" content="How to remove location data from photos on a Mac">
+<meta property="og:description" content="Strip GPS coordinates and camera details from photos on macOS using Photos, Preview, exiftool or a free app, and check what a photo reveals first.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to remove location data from photos on a Mac">
+<meta name="twitter:description" content="Strip GPS coordinates and camera details from photos on macOS using Photos, Preview, exiftool or a free app, and check what a photo reveals first.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to remove location data from photos on a Mac",
+ "description": "Strip GPS coordinates and camera details from photos on macOS using Photos, Preview, exiftool or a free app, and check what a photo reveals first.",
+ "url": "https://glintmac.com/guides/remove-photo-location-data-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/remove-photo-location-data-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to remove location data from photos on a Mac",
+   "item": "https://glintmac.com/guides/remove-photo-location-data-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Do social networks remove location data from photos?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Most large platforms strip EXIF data from the public copy, but you can't rely on that for every service, and email attachments, AirDrop, cloud links and messaging apps sending the original file can keep it. Remove the location yourself before sharing."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does removing GPS data reduce photo quality?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not if it's done losslessly. Tools like exiftool only rewrite the metadata block. Re‑exporting or re‑saving a JPEG can re‑compress it, though, so prefer tools that don't re‑encode the image."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What else besides GPS can a photo reveal?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The date and time it was taken, the camera or phone model, the lens, the software used to edit it, and sometimes a camera serial number."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to remove location data from photos on a Mac</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">Photos taken with an iPhone or a GPS‑enabled camera usually carry the exact coordinates where they were taken, accurate to a few metres. Share the original file and you may share your home address with it. Here's how to check a photo and strip that data on a Mac.</p>
+
+  <h2>What's hidden in a photo</h2>
+  <p>JPEG, HEIC, PNG, TIFF and RAW files can contain EXIF, XMP and other metadata. Besides the picture itself this can include:</p>
+  <ul>
+    <li><b>GPS latitude, longitude and altitude</b>, sometimes with direction and speed.</li>
+    <li><b>Date and time</b> the photo was taken.</li>
+    <li><b>Device details</b>: camera or phone make and model, lens, software version, sometimes a body or lens serial number.</li>
+  </ul>
+
+  <h2>Check what a photo reveals</h2>
+  <ul>
+    <li><b>Finder</b>: select the file and press <kbd>⌘I</kbd> (Get Info). Under <b>More Info</b> you'll see dimensions, device and, if present, latitude and longitude.</li>
+    <li><b>Preview</b>: open the photo, choose <b>Tools › Show Inspector</b> (<kbd>⌘I</kbd>), and look for the <b>GPS</b> tab. It also shows a small map.</li>
+    <li><b>Terminal</b>: <code>mdls -name kMDItemLatitude -name kMDItemLongitude photo.jpg</code> prints the coordinates Spotlight has indexed.</li>
+  </ul>
+
+  <h2>Method 1: Preview, for a single photo</h2>
+  <ol>
+    <li>Open the photo in Preview.</li>
+    <li>Choose <b>Tools › Show Inspector</b> and open the <b>GPS</b> tab.</li>
+    <li>Click <b>Remove Location Info</b>, then save.</li>
+  </ol>
+  <p>This removes the coordinates but leaves the camera model and date. Saving can re‑encode some formats, so work on a copy if the original matters.</p>
+
+  <h2>Method 2: the Photos app</h2>
+  <p>If the photo is in your Photos library:</p>
+  <ul>
+    <li><b>Hide it in the library</b>: select the photos, then <b>Image › Location › Hide Location</b>. The location no longer shows in Photos, and it's left out when you share from Photos.</li>
+    <li><b>Export without it</b>: <b>File › Export › Export Photos</b>, and turn off <b>Location Information</b> under the metadata options. The exported files don't contain GPS data.</li>
+  </ul>
+  <p>To stop new iPhone photos being tagged at all, turn off <b>Settings › Privacy &amp; Security › Location Services › Camera</b> on the phone. When sharing from an iPhone, the <b>Options</b> link at the top of the share sheet lets you switch off Location for that share.</p>
+
+  <h2>Method 3: exiftool, for whole folders</h2>
+  <p><b>exiftool</b> is the standard open source tool for metadata. Install it with <code>brew install exiftool</code>. Work on a copy of the folder until you're comfortable with it.</p>
+  <pre><code># see GPS data in a file
+exiftool -gps:all photo.jpg
+
+# remove GPS data from every photo in a folder (keeps *_original backups)
+exiftool -gps:all= -xmp:geotag= -r ~/Desktop/to-share
+
+# remove all metadata, including date and camera model
+exiftool -all= -r ~/Desktop/to-share</code></pre>
+  <p>exiftool keeps a backup of each file with <code>_original</code> appended. Once you've checked the results, delete the backups with <code>exiftool -delete_original -r ~/Desktop/to-share</code>. Removing <i>all</i> metadata also removes the orientation tag on some files, so a few photos may appear rotated.</p>
+
+  <h2>Method 4: strip it when you export</h2>
+  <p>Lightroom, Capture One and most photo editors have an export option to leave out location or all metadata. If you share a lot of photos, setting that once in an export preset is the simplest habit.</p>
+
+  <h2>What to check after stripping</h2>
+  <p>Run the Finder Get Info or <code>exiftool -gps:all</code> check again on the new files. Remember that <b>the image itself</b> can still reveal a location: street signs, house numbers, landmarks or a view from a window. Metadata tools can't help with that.</p>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>Photo Locations</b> scans a folder you choose for JPEG, HEIC, PNG, TIFF and DNG files that carry GPS data, and shows the coordinates, device and date it found. You pick which photos to clean and whether to remove device details too. Glint removes the GPS data <b>losslessly</b> by copying the encoded image without re‑compressing it (only if that isn't possible for a file does it fall back to a high‑quality re‑encode), writes a clean copy in place of the original, and moves the original to Quarantine so you can restore it. Everything happens on your Mac. It works on photo files in folders; for pictures inside the Photos library, use Photos' own Hide Location or export options above.</p>
+
+  <h2>FAQ</h2>
+  <h3>Do social networks remove location data from photos?</h3>
+  <p>Most large platforms strip EXIF data from the public copy, but you can't rely on that for every service, and email attachments, AirDrop, cloud links and messaging apps sending the original file can keep it. Remove the location yourself before sharing.</p>
+  <h3>Does removing GPS data reduce photo quality?</h3>
+  <p>Not if it's done losslessly. Tools like exiftool only rewrite the metadata block. Re‑exporting or re‑saving a JPEG can re‑compress it, though, so prefer tools that don't re‑encode the image.</p>
+  <h3>What else besides GPS can a photo reveal?</h3>
+  <p>The date and time it was taken, the camera or phone model, the lens, the software used to edit it, and sometimes a camera serial number.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="duplicate-photos.html">How to find duplicate and similar photos on a Mac</a></li>
+    <li><a href="recover-deleted-files-sd-card-mac.html">How to recover deleted files from an SD card or USB stick on a Mac</a></li>
+    <li><a href="free-up-disk-space-mac.html">How to free up disk space on a Mac</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to check SSD health on a Mac (SMART, wear, TBW)</title>
+<meta name="description" content="Read your Mac SSD&#x27;s SMART data: wear level, available spare, terabytes written and errors, with System Information, smartctl or a free app.">
+<link rel="canonical" href="https://glintmac.com/guides/check-ssd-health-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/check-ssd-health-mac.html">
+<meta property="og:title" content="How to check SSD health on a Mac">
+<meta property="og:description" content="Read your Mac SSD&#x27;s SMART data: wear level, available spare, terabytes written and errors, with System Information, smartctl or a free app.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to check SSD health on a Mac">
+<meta name="twitter:description" content="Read your Mac SSD&#x27;s SMART data: wear level, available spare, terabytes written and errors, with System Information, smartctl or a free app.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to check SSD health on a Mac",
+ "description": "Read your Mac SSD's SMART data: wear level, available spare, terabytes written and errors, with System Information, smartctl or a free app.",
+ "url": "https://glintmac.com/guides/check-ssd-health-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/check-ssd-health-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to check SSD health on a Mac",
+   "item": "https://glintmac.com/guides/check-ssd-health-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What does “S.M.A.R.T. Status: Verified” mean?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Only that the drive hasn't reported a failure. It says nothing about wear. To see how much of the SSD's rated life is used, read the Percentage Used value from the full SMART log."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How many terabytes can a Mac SSD write before it fails?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Apple doesn't publish TBW ratings for its SSDs. As a rough guide, consumer SSDs of 256 GB to 1 TB are typically rated for a few hundred terabytes written, and many drives keep working well past their rating. Percentage Used is the drive's own estimate and the better number to watch."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I check the health of a USB external SSD?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Often not. Most USB enclosures don't pass SMART data through to macOS. Thunderbolt NVMe enclosures usually do."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to check SSD health on a Mac</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">Every SSD wears out a little with each write. Macs with Apple Silicon have the SSD soldered to the board, so knowing its condition matters more than it used to: you can't swap it, and a failing SSD means a logic board repair. The good news is that NVMe SSDs report their own health, and you can read it in a minute.</p>
+
+  <h2>The quick check: System Information</h2>
+  <p>Hold <kbd>Option</kbd>, click the Apple menu and choose <b>System Information</b>. Under Hardware, select <b>NVMExpress</b> (or <b>Storage</b>) and look for <b>S.M.A.R.T. Status</b>. Or in Terminal:</p>
+  <pre><code>diskutil info disk0 | grep -i smart</code></pre>
+  <p><b>Verified</b> means the drive hasn't flagged a failure. <b>Failing</b> means back up immediately. But this is a pass/fail flag: a drive with 90% of its rated life used still reads "Verified". For the details, you need the full SMART log.</p>
+
+  <h2>The detailed check: smartctl</h2>
+  <p>The open source <b>smartmontools</b> package reads the NVMe SMART / Health log. With <a href="https://brew.sh">Homebrew</a> installed:</p>
+  <pre><code>brew install smartmontools
+smartctl -a disk0</code></pre>
+  <p>No <code>sudo</code> is needed for the internal NVMe drive. Look for the section called <b>SMART/Health Information</b>.</p>
+
+  <h2>What the numbers mean</h2>
+  <h3>Percentage Used</h3>
+  <p>The drive's own estimate of how much of its rated endurance has been used, based on the manufacturer's write rating. 0–10% is typical for a Mac that's a few years old. It can go above 100%; that means the drive has passed its rating, not that it has failed. "Life left" is simply 100 minus this value.</p>
+  <h3>Available Spare and Available Spare Threshold</h3>
+  <p>SSDs keep spare blocks to replace worn ones. Available Spare starts at 100%. If it drops to the threshold (often 10%), the drive raises a critical warning. A spare value that keeps falling is a stronger warning sign than Percentage Used.</p>
+  <h3>Data Units Written (TBW)</h3>
+  <p>The total written to the drive. One NVMe "data unit" is 1,000 sectors of 512 bytes, so 512,000 bytes; smartctl prints the converted value in brackets, for example <code>[48.2 TB]</code>. Divide by how long you've owned the Mac to get a yearly rate. Apple doesn't publish TBW ratings, so use Percentage Used to judge wear and TBW to understand why.</p>
+  <h3>Media and Data Integrity Errors</h3>
+  <p>Should be <b>0</b>. Any non‑zero, growing count means the drive has hit data it couldn't read correctly. Back up and keep watching.</p>
+  <h3>Critical Warning</h3>
+  <p>Should be <code>0x00</code>. Anything else means the drive is reporting a problem with spare space, temperature, reliability or read‑only mode.</p>
+  <h3>Unsafe Shutdowns, Power On Hours, Temperature</h3>
+  <p>Unsafe shutdowns count power losses and forced shutdowns. They're mostly informational. Power‑on hours tell you how much the Mac has actually been used, which is handy when buying second‑hand. Temperature at idle is usually 30–45 °C.</p>
+
+  <h2>Why some Macs write a lot</h2>
+  <p>High write counts usually come from <b>swap</b>: when apps need more memory than the Mac has, macOS pages memory out to the SSD. 8 GB Macs running many browser tabs, Xcode, Docker or large photo libraries can write tens of gigabytes a day this way. To reduce it:</p>
+  <ul>
+    <li>Watch <b>Activity Monitor › Memory</b>. Steady yellow or red Memory Pressure and a large "Swap Used" mean the Mac is short of RAM for your workload.</li>
+    <li>Close apps and tabs you aren't using, and cap Docker's memory in its Resources settings.</li>
+    <li>Keep free space on the disk. A nearly full SSD has less room for wear levelling.</li>
+  </ul>
+
+  <h2>What to do if the numbers look bad</h2>
+  <ol>
+    <li><b>Back up now</b> with Time Machine or another backup tool, and check that the backup completes.</li>
+    <li>Re‑check in a week. A stable value matters less than a rising one.</li>
+    <li>If Media Errors or Critical Warning are non‑zero, or Available Spare is near the threshold, contact Apple or an authorised service provider. Bring the smartctl output.</li>
+  </ol>
+
+  <h2>External drives</h2>
+  <p>Most USB enclosures and SD card readers don't pass SMART data to macOS, so neither System Information nor smartctl can read them. Thunderbolt NVMe enclosures usually can. For external hard disks, smartctl sometimes works with <code>-d sat</code>.</p>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>Disk Health</b> page reads the same NVMe SMART log directly, without an admin password or Homebrew. It shows wear level and life left, available spare, temperature, data written, power‑on time, unsafe shutdowns and media errors for each drive that exposes NVMe SMART, and sums them up as a simple good, fair or poor rating. Drives that don't report SMART, such as most USB sticks and SD cards, are listed without health data.</p>
+
+  <h2>FAQ</h2>
+  <h3>What does “S.M.A.R.T. Status: Verified” mean?</h3>
+  <p>Only that the drive hasn't reported a failure. It says nothing about wear. To see how much of the SSD's rated life is used, read the Percentage Used value from the full SMART log.</p>
+  <h3>How many terabytes can a Mac SSD write before it fails?</h3>
+  <p>Apple doesn't publish TBW ratings for its SSDs. As a rough guide, consumer SSDs of 256 GB to 1 TB are typically rated for a few hundred terabytes written, and many drives keep working well past their rating. Percentage Used is the drive's own estimate and the better number to watch.</p>
+  <h3>Can I check the health of a USB external SSD?</h3>
+  <p>Often not. Most USB enclosures don't pass SMART data through to macOS. Thunderbolt NVMe enclosures usually do.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="free-up-disk-space-mac.html">How to free up disk space on a Mac</a></li>
+    <li><a href="recover-deleted-files-sd-card-mac.html">How to recover deleted files from an SD card or USB stick on a Mac</a></li>
+    <li><a href="system-data.html">What is “System Data” on a Mac, and how do you shrink it?</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

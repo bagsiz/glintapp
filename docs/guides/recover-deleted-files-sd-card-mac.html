@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recover deleted files from an SD card or USB on Mac</title>
+<meta name="description" content="Step-by-step recovery of deleted photos and videos from FAT32/exFAT SD cards and USB sticks on macOS, and what to avoid so files aren&#x27;t overwritten.">
+<link rel="canonical" href="https://glintmac.com/guides/recover-deleted-files-sd-card-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/recover-deleted-files-sd-card-mac.html">
+<meta property="og:title" content="How to recover deleted files from an SD card or USB stick on a Mac">
+<meta property="og:description" content="Step-by-step recovery of deleted photos and videos from FAT32/exFAT SD cards and USB sticks on macOS, and what to avoid so files aren&#x27;t overwritten.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to recover deleted files from an SD card or USB stick on a Mac">
+<meta name="twitter:description" content="Step-by-step recovery of deleted photos and videos from FAT32/exFAT SD cards and USB sticks on macOS, and what to avoid so files aren&#x27;t overwritten.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to recover deleted files from an SD card or USB stick on a Mac",
+ "description": "Step-by-step recovery of deleted photos and videos from FAT32/exFAT SD cards and USB sticks on macOS, and what to avoid so files aren't overwritten.",
+ "url": "https://glintmac.com/guides/recover-deleted-files-sd-card-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/recover-deleted-files-sd-card-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to recover deleted files from an SD card or USB stick on a Mac",
+   "item": "https://glintmac.com/guides/recover-deleted-files-sd-card-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Can I recover files deleted from my Mac's internal SSD the same way?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Usually not. macOS uses TRIM on internal SSDs, so the drive erases freed blocks soon after deletion. For internal files, check the Trash, Time Machine, iCloud Drive's Recently Deleted, or the app's own trash."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does formatting an SD card make recovery impossible?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A quick format usually only rewrites the file system tables, so carving tools can often still find photos and videos. A full or secure erase overwrites the data, and then nothing can be recovered."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why are some recovered photos corrupt or half grey?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Large files are sometimes stored in pieces spread across the card. Signature carving assumes a file is in one piece, so fragmented files can come back broken. Recovering early, before the card is written to again, gives the best results."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to recover deleted files from an SD card or USB stick on a Mac</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">Deleted the wrong folder from your camera's SD card, or formatted a USB stick too quickly? On FAT32 and exFAT cards the data is usually still there until something new is written over it. What you do in the next few minutes matters most.</p>
+
+  <h2>Stop using the card right now</h2>
+  <p>When a file is deleted on FAT32 or exFAT, the file system only marks its directory entry and clusters as free. The photo itself stays on the card until a new file reuses that space. So:</p>
+  <ul>
+    <li><b>Don't take new photos or copy files to the card.</b> Put it aside.</li>
+    <li><b>Don't format it</b>, and don't run First Aid "to fix it".</li>
+    <li><b>Never save recovered files to the same card.</b> Always recover to your Mac or another disk.</li>
+  </ul>
+
+  <h2>Step 1: check the Trash first</h2>
+  <p>If you deleted the files in Finder, they may still be in the Trash. macOS keeps a removable disk's deleted items in a hidden <code>.Trashes</code> folder on that disk, and shows them in the Trash only <b>while the card is connected</b>. Insert the card, open the Trash, and drag the files back. If you already emptied the Trash, or deleted the photos on the camera itself, continue.</p>
+
+  <h2>Step 2: identify the card</h2>
+  <p>Insert the card and open Terminal:</p>
+  <pre><code>diskutil list external</code></pre>
+  <p>Find your card by its size and name, for example <code>/dev/disk4</code> with a partition <code>disk4s1</code> of type <code>Windows_FAT_32</code> or <code>ExFAT</code>. Double‑check the disk number. Every command below acts on whatever disk you name, and picking the wrong one can damage another drive.</p>
+
+  <h2>Step 3 (recommended): make a disk image</h2>
+  <p>Working on a copy protects the card from further damage and lets you try several tools. Unmount the card (don't eject it) and copy it byte by byte to your Mac:</p>
+  <pre><code>diskutil unmountDisk /dev/disk4
+sudo dd if=/dev/rdisk4 of=$HOME/sdcard.img bs=4m</code></pre>
+  <p><code>rdisk</code> (the raw device) is much faster than <code>disk</code>. The image is as large as the card, so a 64 GB card needs 64 GB free on the Mac. Press <kbd>Ctrl</kbd>+<kbd>T</kbd> in Terminal to see progress. Terminal may need <b>Full Disk Access</b> or removable volume access to read the device.</p>
+  <div class="note">
+    <p><b>Get <code>if=</code> and <code>of=</code> right.</b> <code>if</code> is the source (the card), <code>of</code> is the destination file. Swapping them overwrites the card.</p>
+  </div>
+
+  <h2>Step 4: scan for deleted files</h2>
+  <p>macOS has no built‑in undelete, so you need a recovery tool. There are two approaches, and good tools combine them:</p>
+  <h3>Reading the file system</h3>
+  <p>On FAT32 and exFAT, a deleted file's directory entry often survives with its name, size and first cluster. A tool that reads those entries can restore files <b>with their original names and folders</b>, including types it doesn't otherwise recognise.</p>
+  <h3>Signature carving</h3>
+  <p>Carving ignores the file system and scans every byte for known file headers (JPEG, PNG, HEIC, MP4, MOV, PDF and so on), then cuts out each file. It works even after a quick format or on a damaged card, but recovered files get generic names, and fragmented files can come out corrupt.</p>
+  <p>Free options include:</p>
+  <ul>
+    <li><b>PhotoRec</b> (open source, from CGSecurity): a well‑known command‑line carving tool that runs on macOS. Install it with <code>brew install testdisk</code> and run <code>sudo photorec</code>, or point it at your image file.</li>
+    <li><b>Glint</b> (free, see below): a native Mac app that combines carving with FAT/exFAT directory reading.</li>
+  </ul>
+  <p>Point the tool at the disk image you made, or at the card itself, and choose an output folder on your Mac.</p>
+
+  <h2>Step 5: check what came back</h2>
+  <p>Open the output folder and sort by kind and size. Use Quick Look (<kbd>Space</kbd>) to check photos and videos quickly. Expect some duplicates, thumbnails extracted from photos, and a few broken files. Once you have everything you need, copy it to a second location before you format and reuse the card.</p>
+
+  <h2>Cameras, phones and other file systems</h2>
+  <ul>
+    <li><b>Cameras and drones</b> almost always use FAT32 (cards up to 32 GB) or exFAT (larger cards), which is the best case for recovery.</li>
+    <li><b>APFS or Mac OS Extended USB drives</b> don't keep FAT‑style directory entries, so only carving helps, and only for supported file types. Names don't come back.</li>
+    <li><b>Internal Mac SSD</b>: deleted files are usually gone because of TRIM. Use Time Machine or iCloud's Recently Deleted instead.</li>
+    <li><b>Physically damaged cards</b> (not detected, bent, wet) need a data recovery lab. Don't keep plugging them in.</li>
+  </ul>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>File Recovery</b> scans USB sticks, SD cards, external disks or disk images (.dmg, .img, .iso, .bin) for deleted photos, videos, audio and documents. It carves JPEG, PNG, GIF, HEIC, WebP, MP4, MOV, 3GP, AVI, M4A, WAV, PDF, Office and ZIP files by signature. When it finds a FAT or exFAT file system it also reads the directory entries, so deleted files come back <b>with their original names</b>, files of any type can be recovered, and files that aren't deleted are skipped.</p>
+  <p>You choose what to look for and a destination folder; Glint refuses to save onto the disk being scanned. It can unmount the card's volumes before the scan and mount them again afterwards. Reading a raw disk needs administrator rights, so macOS asks for your password, or Glint's privileged helper does it once you've approved it.</p>
+
+  <h2>FAQ</h2>
+  <h3>Can I recover files deleted from my Mac's internal SSD the same way?</h3>
+  <p>Usually not. macOS uses TRIM on internal SSDs, so the drive erases freed blocks soon after deletion. For internal files, check the Trash, Time Machine, iCloud Drive's Recently Deleted, or the app's own trash.</p>
+  <h3>Does formatting an SD card make recovery impossible?</h3>
+  <p>A quick format usually only rewrites the file system tables, so carving tools can often still find photos and videos. A full or secure erase overwrites the data, and then nothing can be recovered.</p>
+  <h3>Why are some recovered photos corrupt or half grey?</h3>
+  <p>Large files are sometimes stored in pieces spread across the card. Signature carving assumes a file is in one piece, so fragmented files can come back broken. Recovering early, before the card is written to again, gives the best results.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="remove-photo-location-data-mac.html">How to remove location data from photos on a Mac</a></li>
+    <li><a href="check-ssd-health-mac.html">How to check SSD health on a Mac</a></li>
+    <li><a href="duplicate-photos.html">How to find duplicate and similar photos on a Mac</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clean Xcode DerivedData, Archives and simulators</title>
+<meta name="description" content="Where Xcode hides 50+ GB on a Mac, what is safe to delete (DerivedData, DeviceSupport, simulators) and what to keep (Archives with dSYMs).">
+<link rel="canonical" href="https://glintmac.com/guides/xcode-cleanup-deriveddata.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/xcode-cleanup-deriveddata.html">
+<meta property="og:title" content="How to clean Xcode DerivedData, Archives and simulators">
+<meta property="og:description" content="Where Xcode hides 50+ GB on a Mac, what is safe to delete (DerivedData, DeviceSupport, simulators) and what to keep (Archives with dSYMs).">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to clean Xcode DerivedData, Archives and simulators">
+<meta name="twitter:description" content="Where Xcode hides 50+ GB on a Mac, what is safe to delete (DerivedData, DeviceSupport, simulators) and what to keep (Archives with dSYMs).">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to clean Xcode DerivedData, Archives and simulators",
+ "description": "Where Xcode hides 50+ GB on a Mac, what is safe to delete (DerivedData, DeviceSupport, simulators) and what to keep (Archives with dSYMs).",
+ "url": "https://glintmac.com/guides/xcode-cleanup-deriveddata.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/xcode-cleanup-deriveddata.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to clean Xcode DerivedData, Archives and simulators",
+   "item": "https://glintmac.com/guides/xcode-cleanup-deriveddata.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Is it safe to delete the whole DerivedData folder?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. DerivedData only holds build products, indexes and logs that Xcode recreates. Quit Xcode first; the next build and indexing pass will take longer."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should I delete Xcode Archives?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Only archives you no longer need. Each archive contains the dSYM files needed to symbolicate crash reports for that build, so keep the archives of every version still in use, unless your dSYMs are stored elsewhere."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is ~/Library/Developer so big even after cleaning DerivedData?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Simulator devices and runtimes are usually the rest. Check ~/Library/Developer/CoreSimulator and the runtimes listed by xcrun simctl runtime list."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to clean Xcode DerivedData, Archives and simulators</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">Xcode is one of the hungriest apps on a Mac. Build products, indexes, symbol files for every iPhone you've plugged in, and simulators for several iOS versions add up to 30–100 GB in <code>~/Library/Developer</code>. Most of it is safe to delete, as long as you know which part is which.</p>
+
+  <h2>Check how big each part is</h2>
+  <p>Quit Xcode and the Simulator, then run:</p>
+  <pre><code>du -sh ~/Library/Developer/Xcode/* ~/Library/Developer/CoreSimulator/* 2&gt;/dev/null | sort -h</code></pre>
+  <p>Typical results, from usually‑biggest to usually‑smallest:</p>
+  <ul>
+    <li><b>DerivedData</b>: build output and indexes for every project you've opened.</li>
+    <li><b>CoreSimulator/Devices</b>: one folder per simulated device, including installed apps and their data.</li>
+    <li><b>iOS DeviceSupport</b> (and watchOS/tvOS): symbol files copied from each physical device and OS version you've connected.</li>
+    <li><b>Archives</b>: builds you made with Product › Archive.</li>
+    <li><b>CoreSimulator/Caches</b>: dyld and other simulator caches.</li>
+  </ul>
+  <p>Simulator runtimes themselves (each iOS version is several gigabytes) are stored by the system, not in your home folder; see below.</p>
+
+  <h2>1. DerivedData: delete freely</h2>
+  <p>Path: <code>~/Library/Developer/Xcode/DerivedData</code></p>
+  <p>Everything here is regenerated on the next build. Deleting it also fixes many "phantom" build errors and broken autocompletion. Either delete one project's folder, or clear the lot:</p>
+  <pre><code>rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre>
+  <p>In Xcode you can also open <b>Settings › Locations</b> and click the arrow next to the Derived Data path to open it in Finder. Expect the next build and indexing pass to be slow.</p>
+
+  <h2>2. Device support files: delete old versions</h2>
+  <p>Path: <code>~/Library/Developer/Xcode/iOS DeviceSupport</code></p>
+  <p>Each folder is named after an OS version and build, for example <code>17.5.1 (21F90)</code>, and can be 2–5 GB. Folders for iOS versions none of your devices run any more are dead weight. If you delete the folder for a device you still use, Xcode copies the symbols again the next time you connect it, which takes a few minutes.</p>
+
+  <h2>3. Simulators: remove devices and runtimes you don't use</h2>
+  <p>Never delete simulator folders by hand while the Simulator or Xcode is running. Use <code>simctl</code>, which ships with Xcode:</p>
+  <pre><code># simulators whose runtime is no longer installed
+xcrun simctl delete unavailable
+
+# list everything, then delete one by its UDID
+xcrun simctl list devices
+xcrun simctl delete &lt;UDID&gt;
+
+# reset all simulators to a clean state (keeps the devices, wipes their apps and data)
+xcrun simctl erase all</code></pre>
+  <p>Runtimes (one per iOS, watchOS, tvOS or visionOS version) are the bigger items. Remove the ones you don't need in <b>Xcode › Settings › Platforms</b> (called <b>Components</b> in newer Xcode versions): select a runtime and click the minus button. From Terminal on Xcode 15 and later:</p>
+  <pre><code>xcrun simctl runtime list
+xcrun simctl runtime delete &lt;runtime-identifier&gt;</code></pre>
+  <p>The simulator caches in <code>~/Library/Developer/CoreSimulator/Caches</code> are rebuilt automatically and can be cleared when the Simulator is closed.</p>
+
+  <h2>4. Archives: keep the ones you ship</h2>
+  <p>Path: <code>~/Library/Developer/Xcode/Archives</code>, organised by date.</p>
+  <p>This is the one folder to think about before deleting. An archive contains your app <b>and its dSYM files</b>, which turn raw crash addresses back into function names. If you delete the archive for a version people still run and your dSYMs aren't uploaded anywhere else (App Store Connect, a crash reporting service), crash reports from that version become much harder to read.</p>
+  <p>The safe way is the Organizer: <b>Window › Organizer › Archives</b>, right‑click an archive, choose <b>Show in Finder</b>, and copy it to external storage before deleting. Old test builds and archives of apps you no longer maintain can go.</p>
+
+  <h2>5. Other developer caches</h2>
+  <ul>
+    <li><code>~/Library/Caches/com.apple.dt.Xcode</code>: Xcode's own cache, rebuilt automatically.</li>
+    <li><code>~/Library/Developer/Xcode/UserData/Previews</code>: SwiftUI preview simulators; safe to delete when Xcode is closed.</li>
+    <li>Swift Package Manager: <code>~/Library/Caches/org.swift.swiftpm</code>. Packages download again when needed.</li>
+    <li>CocoaPods: <code>pod cache clean --all</code>.</li>
+    <li>Old Xcode versions in <code>/Applications</code>: each is 10 GB or more. Keep only the versions you build with.</li>
+  </ul>
+
+  <div class="note">
+    <p><b>Before you delete.</b> Quit Xcode and the Simulator first. Don't remove <code>~/Library/Developer</code> itself or touch <code>/Library/Developer/CommandLineTools</code> unless you mean to reinstall the command line tools (<code>xcode-select --install</code>).</p>
+  </div>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>Smart Clean</b> has a developer group with separate rules for <b>Xcode DerivedData</b>, <b>device support files</b> (iOS, watchOS and tvOS), <b>simulator caches</b> and <b>Xcode archives</b>, plus npm, pnpm and bun, Gradle and Cargo caches, each with its size. DerivedData and caches are deleted outright because Xcode rebuilds them. Archives aren't selected by default, and if you do select them they go to Quarantine first, so you can restore an archive if you need its dSYMs after all. Glint doesn't delete simulator devices or runtimes; use <code>simctl</code> or Xcode's Platforms settings for those.</p>
+
+  <h2>FAQ</h2>
+  <h3>Is it safe to delete the whole DerivedData folder?</h3>
+  <p>Yes. DerivedData only holds build products, indexes and logs that Xcode recreates. Quit Xcode first; the next build and indexing pass will take longer.</p>
+  <h3>Should I delete Xcode Archives?</h3>
+  <p>Only archives you no longer need. Each archive contains the dSYM files needed to symbolicate crash reports for that build, so keep the archives of every version still in use, unless your dSYMs are stored elsewhere.</p>
+  <h3>Why is ~/Library/Developer so big even after cleaning DerivedData?</h3>
+  <p>Simulator devices and runtimes are usually the rest. Check ~/Library/Developer/CoreSimulator and the runtimes listed by xcrun simctl runtime list.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="docker-disk-space-mac.html">How to clear Docker disk space on a Mac</a></li>
+    <li><a href="free-up-disk-space-mac.html">How to free up disk space on a Mac</a></li>
+    <li><a href="library-caches.html">Is it safe to delete ~/Library/Caches on a Mac?</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

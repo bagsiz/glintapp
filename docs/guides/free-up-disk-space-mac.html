@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to free up disk space on a Mac: 12 safe steps</title>
+<meta name="description" content="A practical checklist for reclaiming storage on macOS: Trash, Downloads, large files, caches, iPhone backups, Xcode, Docker, Photos and old apps.">
+<link rel="canonical" href="https://glintmac.com/guides/free-up-disk-space-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/free-up-disk-space-mac.html">
+<meta property="og:title" content="How to free up disk space on a Mac">
+<meta property="og:description" content="A practical checklist for reclaiming storage on macOS: Trash, Downloads, large files, caches, iPhone backups, Xcode, Docker, Photos and old apps.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to free up disk space on a Mac">
+<meta name="twitter:description" content="A practical checklist for reclaiming storage on macOS: Trash, Downloads, large files, caches, iPhone backups, Xcode, Docker, Photos and old apps.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to free up disk space on a Mac",
+ "description": "A practical checklist for reclaiming storage on macOS: Trash, Downloads, large files, caches, iPhone backups, Xcode, Docker, Photos and old apps.",
+ "url": "https://glintmac.com/guides/free-up-disk-space-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/free-up-disk-space-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to free up disk space on a Mac",
+   "item": "https://glintmac.com/guides/free-up-disk-space-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How much free space should a Mac have?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "There is no official number, but keeping at least 10–15% of the disk free (or 20–30 GB on smaller drives) leaves room for macOS updates, swap files and local Time Machine snapshots. When the disk is almost full, updates can fail and apps slow down."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why doesn't my free space go up after I delete files?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Files you delete go to the Trash first and still use space until you empty it. macOS may also keep local Time Machine snapshots that still reference the deleted data; they are removed automatically over time or when space runs low. Check System Settings › General › Storage again after a few minutes."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it safe to use a Mac cleaner app?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on what the app deletes and whether you can undo it. Prefer a tool that shows exactly what it will remove, never touches system folders, and lets you restore removed items for a while."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to free up disk space on a Mac</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">A full disk makes macOS updates fail, apps stall and photos refuse to import. The good news: most Macs hold tens of gigabytes that nobody needs. This checklist goes from the quickest, safest wins to the bigger jobs, and links to a detailed guide for each.</p>
+
+  <h2>First, see what is using the space</h2>
+  <p>Open <b>System Settings › General › Storage</b> (on macOS 12 and earlier, Apple menu › About This Mac › Storage). The coloured bar splits your disk into Applications, Documents, Photos, iCloud Drive, macOS and the infamous <a href="system-data.html">System Data</a>. Click the <b>ⓘ</b> button next to a category to see what is inside it.</p>
+  <p>The same pane offers Apple's own recommendations: <b>Store in iCloud</b>, <b>Optimize Storage</b> (removes watched Apple TV movies and shows), <b>Empty Trash Automatically</b> (deletes items that have been in the Trash for 30 days) and a document review. They are safe to enable, and they are a good first pass.</p>
+
+  <h2>1. Empty the Trash, including on external disks</h2>
+  <p>Items in the Trash still take space. Right‑click the Trash in the Dock and choose <b>Empty Trash</b>. Files deleted from a USB stick or external drive are kept in a hidden <code>.Trashes</code> folder on that drive, so empty the Trash while the drive is connected, otherwise the space on the drive doesn't come back. Apps such as Photos and Mail have their own "Recently Deleted" or Trash folders, too.</p>
+
+  <h2>2. Clean out Downloads</h2>
+  <p>Downloads collects installers you used once: <code>.dmg</code>, <code>.pkg</code>, <code>.zip</code> and <code>.xip</code> files. Once an app is installed, its installer is no longer needed. In Finder, open Downloads, switch to List view (<kbd>⌘2</kbd>) and click the <b>Size</b> column to put the biggest files first.</p>
+
+  <h2>3. Find the biggest files and folders</h2>
+  <p>A handful of forgotten videos, disk images or virtual machines often account for more space than everything else combined. See <a href="find-large-files-mac.html">How to find large files on a Mac</a> for Finder searches, Terminal one‑liners and visual tools.</p>
+
+  <h2>4. Remove apps you no longer use, with their leftovers</h2>
+  <p>Games, video editors and old Xcode versions are often several gigabytes each. Dragging an app to the Trash leaves its support files, caches and containers behind in <code>~/Library</code>. <a href="uninstall-apps-mac.html">How to completely uninstall apps on a Mac</a> shows where those leftovers live.</p>
+
+  <h2>5. Clear caches and logs</h2>
+  <p>Apps keep caches in <code>~/Library/Caches</code> and logs in <code>~/Library/Logs</code>. Clearing them is usually safe because apps rebuild what they need, but quit the app first. Details are in <a href="library-caches.html">Is it safe to delete ~/Library/Caches?</a></p>
+
+  <h2>6. Delete old iPhone and iPad backups</h2>
+  <p>Local device backups live in <code>~/Library/Application Support/MobileSync/Backup</code> and can reach 50 GB or more. Manage them from Finder: select your iPhone in the sidebar, click <b>Manage Backups…</b>, and delete the ones you no longer need. If you back up to iCloud instead, the local copies may be years old.</p>
+
+  <h2>7. Shrink Mail downloads</h2>
+  <p>When you open an attachment in Mail, a copy is saved in <code>~/Library/Containers/com.apple.mail/Data/Library/Mail Downloads</code>. Those copies can be removed; the attachments stay inside the messages on the mail server.</p>
+
+  <h2>8. Clean developer leftovers</h2>
+  <p>If you write code, this is often the biggest win. Xcode's DerivedData, device support files and simulators can take 50–100 GB; see <a href="xcode-cleanup-deriveddata.html">How to clean Xcode DerivedData, Archives and simulators</a>. Docker Desktop keeps every image, container and volume inside a single disk image; see <a href="docker-disk-space-mac.html">How to clear Docker disk space on a Mac</a>. Package managers add their own caches:</p>
+  <pre><code>npm cache clean --force      # ~/.npm/_cacache
+pnpm store prune             # unreferenced packages only
+brew cleanup                 # old Homebrew downloads and versions</code></pre>
+
+  <h2>9. Deal with duplicate photos</h2>
+  <p>Bursts, edited exports and repeated imports pile up quickly. Photos on macOS 13 and later has a built‑in <b>Duplicates</b> album in the sidebar. For photos stored in ordinary folders, see <a href="duplicate-photos.html">How to find duplicate and similar photos on a Mac</a>.</p>
+
+  <h2>10. Let iCloud keep the originals</h2>
+  <p>In Photos › Settings › iCloud, choose <b>Optimize Mac Storage</b> to keep smaller versions locally. For iCloud Drive, turn on <b>Optimize Mac Storage</b> in System Settings › [your name] › iCloud › iCloud Drive. Files stay visible in Finder and download on demand. Only do this if your iCloud plan has the room.</p>
+
+  <h2>11. Restart, and check local snapshots</h2>
+  <p>Swap files are cleared on restart, and a Mac that has been running for weeks can free several gigabytes just by restarting. Time Machine keeps local snapshots on the internal disk; macOS removes them itself when space runs low. List them with:</p>
+  <pre><code>tmutil listlocalsnapshots /</code></pre>
+
+  <h2>12. Move big archives to an external drive</h2>
+  <p>Finished video projects, old photo libraries and VM images don't have to live on the internal SSD. Copy them to an external disk, check that the copy opens, and only then delete the original.</p>
+
+  <h2>While you're at it</h2>
+  <p>A cleanup is a good moment to look after the rest of the Mac:</p>
+  <ul>
+    <li><b>Check the SSD's wear.</b> A disk that's constantly full and swapping writes more. See <a href="check-ssd-health-mac.html">How to check SSD health on a Mac</a>.</li>
+    <li><b>Trim what starts at login.</b> Leftover helpers from deleted apps keep running. See <a href="remove-login-items-mac.html">How to remove login items and launch agents</a>.</li>
+    <li><b>Strip locations before sharing photos.</b> See <a href="remove-photo-location-data-mac.html">How to remove location data from photos</a>.</li>
+    <li><b>Deleted something from a camera card by mistake?</b> Stop using it and see <a href="recover-deleted-files-sd-card-mac.html">How to recover deleted files from an SD card or USB stick</a>.</li>
+    <li><b>Comparing cleaner apps?</b> See <a href="free-cleanmymac-alternatives.html">Free CleanMyMac alternatives for macOS</a>.</li>
+  </ul>
+
+  <div class="note">
+    <p><b>What not to do.</b> Don't delete files in <code>/System</code>, <code>/private/var</code> or <code>/Library</code> by guesswork, don't remove folders such as <code>~/Library</code> themselves, and don't run <code>sudo rm -rf</code> commands copied from forums. Sizes you can't explain are usually snapshots, swap or app data that macOS manages itself.</p>
+  </div>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint is one free option that covers most of this list in one window. <b>Smart Clean</b> groups caches, logs, the Trash, Xcode and package‑manager leftovers, old iOS backups, Mail downloads and installers in Downloads, with a size for each rule. <b>Large Files</b>, <b>Duplicate Files</b>, <b>Similar Photos</b> and the <b>Space Map</b> sunburst help with the rest, and <b>Applications</b> removes apps together with their <code>~/Library</code> leftovers.</p>
+  <p>Caches that apps rebuild are deleted outright; everything else goes to <b>Quarantine</b> first and can be restored for 7 days by default. System folders and top‑level user folders are protected, and files of running apps that aren't safe to touch, such as Docker Desktop's, are skipped.</p>
+
+  <h2>FAQ</h2>
+  <h3>How much free space should a Mac have?</h3>
+  <p>There is no official number, but keeping at least 10–15% of the disk free (or 20–30 GB on smaller drives) leaves room for macOS updates, swap files and local Time Machine snapshots. When the disk is almost full, updates can fail and apps slow down.</p>
+  <h3>Why doesn't my free space go up after I delete files?</h3>
+  <p>Files you delete go to the Trash first and still use space until you empty it. macOS may also keep local Time Machine snapshots that still reference the deleted data; they are removed automatically over time or when space runs low. Check System Settings › General › Storage again after a few minutes.</p>
+  <h3>Is it safe to use a Mac cleaner app?</h3>
+  <p>It depends on what the app deletes and whether you can undo it. Prefer a tool that shows exactly what it will remove, never touches system folders, and lets you restore removed items for a while.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="find-large-files-mac.html">How to find large files on a Mac</a></li>
+    <li><a href="system-data.html">What is “System Data” on a Mac, and how do you shrink it?</a></li>
+    <li><a href="uninstall-apps-mac.html">How to completely uninstall apps on a Mac, leftovers included</a></li>
+    <li><a href="docker-disk-space-mac.html">How to clear Docker disk space on a Mac</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

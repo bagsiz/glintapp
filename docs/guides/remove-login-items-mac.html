@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remove login items and launch agents on Mac</title>
+<meta name="description" content="Stop apps and background helpers from starting at login on macOS: Login Items settings, LaunchAgents and LaunchDaemons folders, and launchctl.">
+<link rel="canonical" href="https://glintmac.com/guides/remove-login-items-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/remove-login-items-mac.html">
+<meta property="og:title" content="How to remove login items and launch agents on a Mac">
+<meta property="og:description" content="Stop apps and background helpers from starting at login on macOS: Login Items settings, LaunchAgents and LaunchDaemons folders, and launchctl.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to remove login items and launch agents on a Mac">
+<meta name="twitter:description" content="Stop apps and background helpers from starting at login on macOS: Login Items settings, LaunchAgents and LaunchDaemons folders, and launchctl.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to remove login items and launch agents on a Mac",
+ "description": "Stop apps and background helpers from starting at login on macOS: Login Items settings, LaunchAgents and LaunchDaemons folders, and launchctl.",
+ "url": "https://glintmac.com/guides/remove-login-items-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/remove-login-items-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to remove login items and launch agents on a Mac",
+   "item": "https://glintmac.com/guides/remove-login-items-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What is the difference between a launch agent and a launch daemon?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A launch agent runs on behalf of a logged-in user and can show things on screen. A launch daemon runs as a system service, usually as root, whether or not anyone is logged in. Agents live in LaunchAgents folders, daemons in /Library/LaunchDaemons."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it safe to remove launch agents?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Removing a third-party agent stops that helper from running; at worst a feature of its app, such as automatic updates or a menu bar icon, stops working. Never remove anything named com.apple.* or anything in /System/Library."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does a removed login item come back?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The app re-adds it when it starts, usually because of a “launch at login” or “start helper” option in its settings. Turn that option off in the app, or uninstall the app."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to remove login items and launch agents on a Mac</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">A Mac that takes ages to settle after login, or a mystery icon in the menu bar, usually means too many things start automatically. macOS has two kinds: <b>login items</b> you can see in System Settings, and <b>launch agents and daemons</b> that run quietly in the background. Here's how to find and remove both.</p>
+
+  <h2>Step 1: System Settings › Login Items</h2>
+  <p>Open <b>System Settings › General › Login Items &amp; Extensions</b> (just <b>Login Items</b> on macOS 13 Ventura and 14 Sonoma). There are two lists:</p>
+  <ul>
+    <li><b>Open at Login</b>: apps that open when you log in. Select one and click the <b>−</b> button to remove it. The app itself stays installed.</li>
+    <li><b>Allow in the Background</b>: helpers and services registered by apps, often by developer name. Switch one off to stop it running. Click <b>ⓘ</b> to see the files behind an item.</li>
+  </ul>
+  <p>Many apps also have their own "Open at login" or "Launch at startup" setting. If you remove an item and it reappears, switch that setting off in the app.</p>
+
+  <h2>Step 2: look in the LaunchAgents and LaunchDaemons folders</h2>
+  <p>Background services are defined by small <code>.plist</code> files in these folders. Open each with <b>Go › Go to Folder…</b> (<kbd>⇧⌘G</kbd>):</p>
+  <ul>
+    <li><code>~/Library/LaunchAgents</code>: agents for your account only. No admin password needed.</li>
+    <li><code>/Library/LaunchAgents</code>: agents for every user.</li>
+    <li><code>/Library/LaunchDaemons</code>: system‑wide services, usually running as root.</li>
+  </ul>
+  <p>Leave <code>/System/Library/LaunchAgents</code> and <code>/System/Library/LaunchDaemons</code> alone; they belong to macOS and are protected anyway.</p>
+  <p>The file name is usually the service's label, for example <code>com.google.keystone.agent.plist</code> for Google's updater. Quick Look (<kbd>Space</kbd>) shows what's inside: <code>ProgramArguments</code> is what runs, <code>RunAtLoad</code> means it starts at login or boot, and <code>KeepAlive</code> means macOS restarts it if it stops.</p>
+
+  <h2>Step 3: see what's running</h2>
+  <p>In Terminal, list the services loaded for your user, minus Apple's own:</p>
+  <pre><code>launchctl list | grep -v com.apple</code></pre>
+  <p>The first column is the process ID (a dash means not running right now), the second is the last exit status, the third is the label. To see everything macOS's Background Task Management knows about, including items registered by apps:</p>
+  <pre><code>sudo sfltool dumpbtm</code></pre>
+
+  <h2>Step 4: stop and remove a launch agent</h2>
+  <p>First unload it, so it stops now and doesn't restart:</p>
+  <pre><code># an agent in your own LaunchAgents folder
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.example.agent.plist
+
+# a system-wide daemon
+sudo launchctl bootout system /Library/LaunchDaemons/com.example.daemon.plist</code></pre>
+  <p>Then move the <code>.plist</code> to the Trash. If the plist points to a helper program that belonged to an app you've already deleted (often in <code>/Library/PrivilegedHelperTools</code> or <code>~/Library/Application Support</code>), remove that too.</p>
+  <div class="note">
+    <p><b>Disable before you delete if you're unsure.</b> <code>launchctl disable gui/$(id -u)/com.example.agent</code> stops a service from loading without deleting anything; <code>launchctl enable</code> undoes it. And never remove items named <code>com.apple.*</code>.</p>
+  </div>
+
+  <h2>Which items are worth removing?</h2>
+  <ul>
+    <li><b>Leftovers of apps you deleted.</b> If <code>ProgramArguments</code> points to a file that no longer exists, the agent fails silently at every login. Safe to remove.</li>
+    <li><b>Updaters</b> (Google, Microsoft, Adobe and others). Removing them stops automatic updates; the app may reinstall them when you next open it.</li>
+    <li><b>Menu bar helpers and sync tools you don't use.</b></li>
+    <li><b>Anything you don't recognise.</b> Search the label. Malware and adware often use launch agents with names made to look like Apple's (<code>com.apple.</code> lookalikes), random strings, or programs in hidden or temporary folders.</li>
+  </ul>
+  <p>If you're removing an app completely, also see <a href="uninstall-apps-mac.html">How to completely uninstall apps on a Mac</a>.</p>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint's <b>Startup Items</b> page lists launch agents and daemons from all three folders, grouped as your agents, agents for all users and system services, with tags for items that run at login or are kept alive. For agents in your own folder you can click <b>Remove</b>: Glint stops the service and moves its plist to Quarantine, so if something breaks you can restore it and it runs again at your next login. System‑wide items need an admin password to remove, so Glint shows them for reference only. A button opens macOS's Login Items settings for the rest. Glint's <b>Security Scan</b> separately flags suspicious background services, such as ones with fake Apple names, in hidden or temporary folders, or unsigned.</p>
+
+  <h2>FAQ</h2>
+  <h3>What is the difference between a launch agent and a launch daemon?</h3>
+  <p>A launch agent runs on behalf of a logged-in user and can show things on screen. A launch daemon runs as a system service, usually as root, whether or not anyone is logged in. Agents live in LaunchAgents folders, daemons in /Library/LaunchDaemons.</p>
+  <h3>Is it safe to remove launch agents?</h3>
+  <p>Removing a third-party agent stops that helper from running; at worst a feature of its app, such as automatic updates or a menu bar icon, stops working. Never remove anything named com.apple.* or anything in /System/Library.</p>
+  <h3>Why does a removed login item come back?</h3>
+  <p>The app re-adds it when it starts, usually because of a “launch at login” or “start helper” option in its settings. Turn that option off in the app, or uninstall the app.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="uninstall-apps-mac.html">How to completely uninstall apps on a Mac, leftovers included</a></li>
+    <li><a href="check-ssd-health-mac.html">How to check SSD health on a Mac</a></li>
+    <li><a href="free-up-disk-space-mac.html">How to free up disk space on a Mac</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

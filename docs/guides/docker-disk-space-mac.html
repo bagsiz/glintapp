@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to clear Docker disk space on Mac (Docker.raw)</title>
+<meta name="description" content="Why Docker.raw grows on macOS, how to reclaim space with docker system prune, and why you shouldn&#x27;t delete Docker files while Docker Desktop runs.">
+<link rel="canonical" href="https://glintmac.com/guides/docker-disk-space-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/docker-disk-space-mac.html">
+<meta property="og:title" content="How to clear Docker disk space on a Mac">
+<meta property="og:description" content="Why Docker.raw grows on macOS, how to reclaim space with docker system prune, and why you shouldn&#x27;t delete Docker files while Docker Desktop runs.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to clear Docker disk space on a Mac">
+<meta name="twitter:description" content="Why Docker.raw grows on macOS, how to reclaim space with docker system prune, and why you shouldn&#x27;t delete Docker files while Docker Desktop runs.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to clear Docker disk space on a Mac",
+ "description": "Why Docker.raw grows on macOS, how to reclaim space with docker system prune, and why you shouldn't delete Docker files while Docker Desktop runs.",
+ "url": "https://glintmac.com/guides/docker-disk-space-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/docker-disk-space-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to clear Docker disk space on a Mac",
+   "item": "https://glintmac.com/guides/docker-disk-space-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Can I delete Docker.raw?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Only if you accept losing every image, container, volume and build cache inside it, and only after quitting Docker Desktop. The cleaner way is Docker Desktop's Troubleshoot › Clean / Purge data, which recreates an empty disk image for you."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does docker system prune delete my volumes?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not by default. Volumes are only pruned when you add --volumes, and on recent Docker versions that removes anonymous volumes only. Named volumes need docker volume prune --all or docker volume rm."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does Finder show Docker.raw as 64 GB when my disk barely changed?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Docker.raw is a sparse file. Finder shows its maximum size, while the space really used on disk is smaller. Use du -h on the file to see the actual usage."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to clear Docker disk space on a Mac</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">Docker Desktop on a Mac runs containers inside a small Linux virtual machine, and everything that VM stores (images, containers, volumes, build cache) lives in one big disk image. That is why Docker can quietly take 30, 60 or 100 GB, and why deleting the wrong file can wipe all of it at once.</p>
+
+  <h2>Where Docker keeps its data on macOS</h2>
+  <p>The VM disk is a single file:</p>
+  <pre><code>~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw</code></pre>
+  <p>Docker.raw is a <b>sparse file</b>: its apparent size is the maximum you allowed (often 64 GB or more), but only the blocks actually written take space on the SSD. Finder shows the apparent size, which looks alarming. To see what it really uses:</p>
+  <pre><code>du -h ~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw</code></pre>
+  <p>Older Docker Desktop versions used <code>Docker.qcow2</code> instead; the advice below applies to both. Docker Desktop's logs live next to it, in <code>~/Library/Containers/com.docker.docker/Data/log</code>.</p>
+
+  <h2>Step 1: see what's using space inside Docker</h2>
+  <p>Start with Docker's own accounting. With Docker Desktop running, open Terminal:</p>
+  <pre><code>docker system df
+docker system df -v   # per image, container and volume</code></pre>
+  <p>The output has four lines: Images, Containers, Local Volumes and Build Cache, each with a <b>RECLAIMABLE</b> column. That column tells you how much a prune could free.</p>
+
+  <h2>Step 2: prune what you don't need</h2>
+  <p>Go from the safest command to the most aggressive, and read the confirmation prompt each time:</p>
+  <pre><code># stopped containers, unused networks, dangling images, build cache
+docker system prune
+
+# also every image not used by a container (they will be pulled again)
+docker system prune -a
+
+# build cache only (often the biggest item for people who build images)
+docker builder prune
+
+# unused volumes - this is where databases live, so be sure
+docker volume ls
+docker volume prune</code></pre>
+  <div class="note">
+    <p><b>Volumes hold data.</b> A local Postgres or MySQL container usually keeps its database in a volume. <code>docker system prune</code> leaves volumes alone unless you add <code>--volumes</code>. On recent Docker versions <code>docker volume prune</code> only removes anonymous volumes; named volumes need <code>--all</code>. Export anything you care about first.</p>
+  </div>
+  <p>Removing individual items is often better than a blanket prune:</p>
+  <pre><code>docker image ls --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}"
+docker image rm &lt;image&gt;
+docker rm &lt;container&gt;</code></pre>
+
+  <h2>Step 3: let macOS get the space back</h2>
+  <p>After a prune, the Linux VM frees the blocks and current Docker Desktop versions hand them back to macOS automatically, because Docker.raw is sparse. It can take a minute. Check again with the <code>du -h</code> command above, or in System Settings › General › Storage.</p>
+  <p>If the file hardly shrinks, restart Docker Desktop. If it still doesn't, use the reset in Step 5.</p>
+
+  <h2>Step 4: cap the disk image size</h2>
+  <p>In Docker Desktop, open <b>Settings › Resources › Advanced</b> and lower the disk image size limit (called "Virtual disk limit" in some versions). Docker never grows past this limit, so it's a simple guard against a runaway build cache. Lowering the limit can require Docker to recreate the disk image; Docker warns you if data will be lost.</p>
+
+  <h2>Step 5: the clean slate</h2>
+  <p>If you'd rather start fresh, use Docker's own reset instead of deleting files: click the <b>Troubleshoot</b> (bug) icon in Docker Desktop and choose <b>Clean / Purge data</b>. This deletes all images, containers, volumes and build cache, and leaves Docker in a working state. Everything you need will be pulled or built again.</p>
+
+  <h2>Why not just delete Docker.raw?</h2>
+  <p>Deleting <code>Docker.raw</code> by hand does the same as a purge, with two extra risks:</p>
+  <ul>
+    <li><b>While Docker Desktop is running, the VM has the file open.</b> Removing or moving it under a running VM can hang Docker, corrupt the disk image, or leave Docker unable to start until you reset it. The same goes for the log files and sockets in the Docker container folder.</li>
+    <li><b>It is all or nothing.</b> There's no partial delete. Every named volume, including local databases, goes with it.</li>
+  </ul>
+  <p>If you do decide to remove it, quit Docker Desktop first (Docker menu bar icon › Quit Docker Desktop) and make sure no <code>com.docker</code> processes are left in Activity Monitor.</p>
+
+  <h2>Other places Docker and containers use space</h2>
+  <ul>
+    <li><code>~/.docker</code>: CLI config, contexts and buildx state. Usually small.</li>
+    <li><code>~/Library/Containers/com.docker.docker/Data/log</code>: Docker Desktop logs. Safe to clear while Docker is quit.</li>
+    <li>Alternatives such as OrbStack, Colima or Podman keep their own VM disks elsewhere, each with its own prune commands. The <code>docker system df</code> and prune commands above work with any of them.</li>
+  </ul>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint does not reach inside Docker's disk image, so pruning images and volumes is still a job for the <code>docker</code> commands above. What Glint does is the surrounding cleanup: <b>Smart Clean</b> lists Docker Desktop's logs next to Xcode, npm, pnpm, Gradle and Cargo caches, and the <b>Space Map</b> shows how much the Docker container folder takes. While Docker Desktop is running, Glint skips its VM files, logs and sockets and tells you why, so nothing is removed under a running VM; quit Docker and scan again to include them.</p>
+
+  <h2>FAQ</h2>
+  <h3>Can I delete Docker.raw?</h3>
+  <p>Only if you accept losing every image, container, volume and build cache inside it, and only after quitting Docker Desktop. The cleaner way is Docker Desktop's Troubleshoot › Clean / Purge data, which recreates an empty disk image for you.</p>
+  <h3>Does docker system prune delete my volumes?</h3>
+  <p>Not by default. Volumes are only pruned when you add --volumes, and on recent Docker versions that removes anonymous volumes only. Named volumes need docker volume prune --all or docker volume rm.</p>
+  <h3>Why does Finder show Docker.raw as 64 GB when my disk barely changed?</h3>
+  <p>Docker.raw is a sparse file. Finder shows its maximum size, while the space really used on disk is smaller. Use du -h on the file to see the actual usage.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="free-up-disk-space-mac.html">How to free up disk space on a Mac</a></li>
+    <li><a href="xcode-cleanup-deriveddata.html">How to clean Xcode DerivedData, Archives and simulators</a></li>
+    <li><a href="system-data.html">What is “System Data” on a Mac, and how do you shrink it?</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to find large files on a Mac (Finder and Terminal)</title>
+<meta name="description" content="Find the biggest files and folders on macOS with Storage settings, Finder searches, Terminal commands like du and find, or a visual disk map.">
+<link rel="canonical" href="https://glintmac.com/guides/find-large-files-mac.html">
+<link rel="icon" href="../assets/favicon.png">
+<meta name="theme-color" content="#07080d">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Glint">
+<meta property="og:url" content="https://glintmac.com/guides/find-large-files-mac.html">
+<meta property="og:title" content="How to find large files on a Mac">
+<meta property="og:description" content="Find the biggest files and folders on macOS with Storage settings, Finder searches, Terminal commands like du and find, or a visual disk map.">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Glint — Your Mac, sparkling again. Free disk cleaner for macOS.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to find large files on a Mac">
+<meta name="twitter:description" content="Find the biggest files and folders on macOS with Storage settings, Finder searches, Terminal commands like du and find, or a visual disk map.">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
+<meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
+<link rel="stylesheet" href="../assets/page.css">
+
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "How to find large files on a Mac",
+ "description": "Find the biggest files and folders on macOS with Storage settings, Finder searches, Terminal commands like du and find, or a visual disk map.",
+ "url": "https://glintmac.com/guides/find-large-files-mac.html",
+ "mainEntityOfPage": "https://glintmac.com/guides/find-large-files-mac.html",
+ "inLanguage": "en",
+ "datePublished": "2026-11-13",
+ "dateModified": "2026-11-13",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "author": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Glint",
+  "url": "https://glintmac.com/",
+  "logo": {
+   "@type": "ImageObject",
+   "url": "https://glintmac.com/assets/icon.png"
+  }
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Glint",
+   "item": "https://glintmac.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://glintmac.com/guides/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "How to find large files on a Mac",
+   "item": "https://glintmac.com/guides/find-large-files-mac.html"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Why don't hidden folders show up in Finder searches?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Finder skips hidden folders and most of ~/Library by default. Press ⇧⌘. to show hidden files in a Finder window, or use the du and find commands in Terminal, which see everything your account can read."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does du say “Operation not permitted”?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "macOS protects some folders, such as Mail, Messages and other apps' containers, until you give Terminal Full Disk Access in System Settings › Privacy & Security. The errors are harmless; 2>/dev/null hides them."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it safe to delete large files in ~/Library?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not without knowing what they are. Large items there are often app data, such as a Photos library, a virtual machine or a Messages archive. Check which app owns a file before deleting it, and prefer the app's own delete option."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <a class="brand" href="../"><img src="../assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
+  <div class="spacer"></div>
+  <a class="navlink" href="./">Guides</a>
+  <a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download Glint</a>
+</nav>
+<main>
+<article>
+  <p class="crumbs"><a href="../">Glint</a> › <a href="./">Guides</a></p>
+  <span class="eyebrow">Guide</span>
+  <h1>How to find large files on a Mac</h1>
+  <p class="updated">Last updated <time datetime="2026-11-13">13 November 2026</time></p>
+  <p class="lead">When a Mac runs out of space, the cause is rarely thousands of small files. It is usually a few big ones: a forgotten 40 GB video export, a virtual machine, an old iPhone backup, a game. Here are four ways to find them, from the built‑in Storage pane to Terminal.</p>
+
+  <h2>Method 1: System Settings › Storage</h2>
+  <p>Open <b>System Settings › General › Storage</b> and click the <b>ⓘ</b> next to <b>Documents</b>. The <b>Large Files</b> tab lists files in your home folder sorted by size, with Kind and Last Accessed. Select one and click <b>Delete</b>, or right‑click it and choose <b>Show in Finder</b> to look before you decide. The other tabs (Downloads, Unsupported Apps, File Browser) are worth a look too.</p>
+  <p>This view doesn't include everything; app data in <code>~/Library</code>, other users' files and System Data aren't in the list.</p>
+
+  <h2>Method 2: a Finder search by size</h2>
+  <ol>
+    <li>Open a Finder window and press <kbd>⌘F</kbd>.</li>
+    <li>Click <b>This Mac</b> (or your home folder) to set the scope.</li>
+    <li>Click the first pop‑up menu (usually "Kind") and choose <b>Other…</b>. Search for <b>File Size</b>, tick it, and click OK.</li>
+    <li>Set the rule to <b>File Size › is greater than › 1 › GB</b>.</li>
+    <li>Switch to List view and click the <b>Size</b> column header to sort.</li>
+  </ol>
+  <p>Click <b>Save</b> to keep it as a Smart Folder in the sidebar. The search relies on Spotlight, so files in excluded or unindexed locations are missed.</p>
+
+  <h2>Method 3: show folder sizes in Finder</h2>
+  <p>To see which <i>folder</i> is big, open a folder in List view, choose <b>View › Show View Options</b> (<kbd>⌘J</kbd>), and tick <b>Calculate all sizes</b>. Click the Size column to sort, then drill into the biggest folder. It's slow on large folders, but it needs no other tools.</p>
+
+  <h2>Method 4: Terminal</h2>
+  <p>Terminal sees hidden folders and gives exact numbers. These commands only read, they don't delete anything.</p>
+  <h3>Biggest folders, one level deep</h3>
+  <pre><code>du -hd 1 ~ 2&gt;/dev/null | sort -h | tail -20</code></pre>
+  <p>Run it again on whatever comes out on top, for example <code>du -hd 1 ~/Library 2&gt;/dev/null | sort -h | tail -20</code>, and keep drilling down.</p>
+  <h3>Every file over 1 GB in your home folder</h3>
+  <pre><code>find ~ -type f -size +1G -exec ls -lh {} + 2&gt;/dev/null | awk '{print $5, $9}' | sort -h</code></pre>
+  <p>Change <code>+1G</code> to <code>+500M</code> for a longer list. Paths with spaces are cut off by the awk step; drop the <code>| awk …</code> part to see full lines.</p>
+  <h3>A Spotlight query (very fast)</h3>
+  <pre><code>mdfind "kMDItemFSSize &gt; 1000000000" -onlyin ~</code></pre>
+  <h3>The whole disk</h3>
+  <pre><code>sudo du -xhd 1 / 2&gt;/dev/null | sort -h</code></pre>
+  <p><code>-x</code> keeps du on the startup volume. Give Terminal <b>Full Disk Access</b> (System Settings › Privacy &amp; Security) for complete numbers.</p>
+
+  <h2>The usual suspects</h2>
+  <ul>
+    <li><b>Videos and screen recordings</b> in Movies, Desktop and Downloads.</li>
+    <li><b>Disk images and installers</b>: <code>.dmg</code>, <code>.iso</code>, <code>.pkg</code>, <code>.xip</code> (an Xcode download alone is over 10 GB).</li>
+    <li><b>Virtual machines</b>: Parallels (<code>~/Parallels</code>), UTM and VMware bundles; Docker's <code>Docker.raw</code>, see <a href="docker-disk-space-mac.html">clearing Docker disk space</a>.</li>
+    <li><b>iPhone and iPad backups</b> in <code>~/Library/Application Support/MobileSync/Backup</code>.</li>
+    <li><b>Photo and music libraries</b>: <code>Photos Library.photoslibrary</code> and Music folders. Manage these inside their apps rather than in Finder.</li>
+    <li><b>Developer data</b>: Xcode DerivedData and simulators, see <a href="xcode-cleanup-deriveddata.html">cleaning Xcode</a>.</li>
+    <li><b>Duplicates</b>: the same file saved twice, see <a href="duplicate-photos.html">finding duplicate photos</a>.</li>
+  </ul>
+
+  <div class="note">
+    <p><b>Big doesn't mean unneeded.</b> Before deleting a large file you don't recognise, check what it is with Get Info (<kbd>⌘I</kbd>) or by searching its name. Never delete files inside <code>/System</code>, <code>/private/var/vm</code> (swap and sleep image) or an app's package contents.</p>
+  </div>
+
+  <h2>Doing it with Glint</h2>
+  <p>Glint has two tools for this. <b>Large Files</b> lists every file above a threshold you pick (50 MB, 100 MB, 500 MB, 1 GB or 5 GB) with its size and when it was last used, so a 20 GB file untouched for two years stands out. <b>Space Map</b> draws your disk or any folder as a sunburst chart next to a folder tree, and you can drill into the biggest slice until you find the culprit. Anything you remove goes to Quarantine first and can be restored for 7 days by default, and system folders and top‑level user folders are protected.</p>
+
+  <h2>FAQ</h2>
+  <h3>Why don't hidden folders show up in Finder searches?</h3>
+  <p>Finder skips hidden folders and most of ~/Library by default. Press ⇧⌘. to show hidden files in a Finder window, or use the du and find commands in Terminal, which see everything your account can read.</p>
+  <h3>Why does du say “Operation not permitted”?</h3>
+  <p>macOS protects some folders, such as Mail, Messages and other apps' containers, until you give Terminal Full Disk Access in System Settings › Privacy & Security. The errors are harmless; 2>/dev/null hides them.</p>
+  <h3>Is it safe to delete large files in ~/Library?</h3>
+  <p>Not without knowing what they are. Large items there are often app data, such as a Photos library, a virtual machine or a Messages archive. Check which app owns a file before deleting it, and prefer the app's own delete option.</p>
+
+  <div class="cta">
+    <p>Glint is a free disk cleaner for macOS 14 Sonoma and later, on Apple Silicon and Intel. No limits, no account, and everything stays on your Mac.</p>
+    <p><a class="btn" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg">Download for Mac</a></p>
+    <p class="muted"><a href="../">What Glint does</a> · <a href="../#faq">FAQ</a> · <a href="../#safety">Safe by design</a></p>
+  </div>
+  <h2>Related guides</h2>
+  <ul>
+    <li><a href="free-up-disk-space-mac.html">How to free up disk space on a Mac</a></li>
+    <li><a href="system-data.html">What is “System Data” on a Mac, and how do you shrink it?</a></li>
+    <li><a href="duplicate-photos.html">How to find duplicate and similar photos on a Mac</a></li>
+    <li><a href="uninstall-apps-mac.html">How to completely uninstall apps on a Mac, leftovers included</a></li>
+    <li><a href="./">All guides</a></li>
+  </ul>
+</article>
+</main>
+<footer>
+  <div class="links"><a href="../">Glint</a><a href="./">Guides</a><a href="../privacy.html">Privacy</a><a href="https://github.com/bagsiz/glintapp/issues">Support &amp; bug reports</a></div>
+  <div class="legal">Glint is an independent app and is not affiliated with Apple Inc. Mac and macOS are trademarks of Apple Inc.</div>
+</footer>
+</body>
+</html>
