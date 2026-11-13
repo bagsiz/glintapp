@@ -7,16 +7,16 @@
 <meta name="description" content="Glint is a free Mac disk cleaner: smart cleanup, space map, similar photos, disk health, browser privacy, security scan and file recovery. No limits, nothing sent anywhere.">
 <link rel="icon" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/icon.png">
-<link rel="canonical" href="https://bagsiz.github.io/glintapp/">
+<link rel="canonical" href="https://glintmac.com/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#07080d">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Glint">
-<meta property="og:url" content="https://bagsiz.github.io/glintapp/">
+<meta property="og:url" content="https://glintmac.com/">
 <meta property="og:title" content="Glint — Free Disk Cleaner for Mac">
 <meta property="og:description" content="Clean gigabytes, find look-alike photos, check disk health, wipe browser trails and recover deleted files. Free, no limits, macOS 14+, everything stays on your Mac.">
-<meta property="og:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta property="og:image" content="https://glintmac.com/assets/og.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Glint — Free Disk Cleaner for Mac">
 <meta name="twitter:description" content="Smart cleanup, similar photos, disk health, browser privacy and file recovery. Free, no limits, nothing sent anywhere.">
-<meta name="twitter:image" content="https://bagsiz.github.io/glintapp/assets/og.jpg">
+<meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
 <meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
 <!-- jsonld -->
 <script type="application/ld+json">
@@ -36,8 +36,12 @@
  "name": "Glint",
  "alternateName": "Glint — Disk Cleaner",
  "description": "Free disk cleaner for macOS with smart cleanup, space map, similar photos, disk health, browser privacy, sensitive-file and security scans, and file recovery. Everything runs on your Mac.",
- "url": "https://bagsiz.github.io/glintapp/",
- "image": "https://bagsiz.github.io/glintapp/assets/og.jpg",
+ "url": "https://glintmac.com/",
+ "image": "https://glintmac.com/assets/og.jpg",
+ "screenshot": "https://glintmac.com/assets/og.jpg",
+ "publisher": {
+  "@id": "https://glintmac.com/#organization"
+ },
  "operatingSystem": "macOS 14 Sonoma or later",
  "applicationCategory": "UtilitiesApplication",
  "processorRequirements": "Apple Silicon or Intel",
@@ -160,9 +164,45 @@
  ]
 }
 </script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://glintmac.com/#organization",
+   "name": "Glint",
+   "url": "https://glintmac.com/",
+   "logo": {
+    "@type": "ImageObject",
+    "url": "https://glintmac.com/assets/icon.png",
+    "width": 256,
+    "height": 256
+   },
+   "sameAs": [
+    "https://github.com/bagsiz/glintapp"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://glintmac.com/#website",
+   "name": "Glint",
+   "url": "https://glintmac.com/",
+   "inLanguage": [
+    "en",
+    "tr"
+   ],
+   "publisher": {
+    "@id": "https://glintmac.com/#organization"
+   }
+  }
+ ]
+}
+</script>
 <!-- /jsonld -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -560,7 +600,7 @@ footer .legal { max-width: 640px; margin: 0 auto; font-size: 12px; }
 <body>
 
 <nav id="nav">
-  <a class="brand" href="#top"><img src="assets/icon.png" alt="">Glint</a>
+  <a class="brand" href="#top"><img src="assets/icon.png" alt="" width="30" height="30" decoding="async">Glint</a>
   <div class="spacer"></div>
   <div class="lang"><button data-lang="en">EN</button><button data-lang="tr">TR</button></div>
   <a class="ghost" href="#faq" data-i18n="fFaq">FAQ</a>
@@ -573,7 +613,7 @@ footer .legal { max-width: 640px; margin: 0 auto; font-size: 12px; }
 <header class="hero" id="top">
   <canvas class="stars" id="stars"></canvas>
   <div class="hero-inner">
-    <div class="logo-orb"><div class="ring"></div><div class="ring"></div><div class="ring"></div><img src="assets/icon.png" alt="Glint"></div>
+    <div class="logo-orb"><div class="ring"></div><div class="ring"></div><div class="ring"></div><img src="assets/icon.png" alt="Glint" width="256" height="256" decoding="async" fetchpriority="high"></div>
     <h1><span class="grad" data-i18n="heroTitle">Your Mac, sparkling again.</span></h1>
     <p class="lead" data-i18n="heroLead">Glint cleans gigabytes of clutter, finds your look‑alike photos, guards your privacy and even rescues deleted files from SD cards — all on your Mac, nothing sent anywhere.</p>
     <div class="cta">
@@ -722,7 +762,7 @@ footer .legal { max-width: 640px; margin: 0 auto; font-size: 12px; }
           <div class="menubar"><b></b><span style="font-weight:600">Finder</span><span>File</span><span>Edit</span><span>View</span>
             <div class="r"><span class="gl" id="mbfree">✦ 112 GB</span><span>🔋</span><span>Wi‑Fi</span><span>Sun 9:41</span></div></div>
           <div class="drop" id="drop">
-            <div style="display:flex;align-items:center;gap:8px"><img src="assets/icon.png" width="22" alt=""><b>Glint</b></div>
+            <div style="display:flex;align-items:center;gap:8px"><img src="assets/icon.png" width="22" height="22" alt="" loading="lazy" decoding="async"><b>Glint</b></div>
             <div style="display:flex;justify-content:space-between;margin-top:10px"><span>Macintosh HD</span><b id="dfree">112 GB free</b></div>
             <div class="pb"><i id="dpb" style="width:78%"></i></div>
             <div class="muted" data-i18n="m_mb_q">Quarantine 2.1 GB</div>
@@ -807,7 +847,7 @@ footer .legal { max-width: 640px; margin: 0 auto; font-size: 12px; }
 </section>
 
 <section class="final" id="get">
-  <img class="icon reveal" src="assets/icon.png" alt="">
+  <img class="icon reveal" src="assets/icon.png" alt="" width="110" height="110" loading="lazy" decoding="async">
   <h2 class="big-h reveal"><span class="grad" data-i18n="finalTitle">Give your Mac a glint.</span></h2>
   <p class="reveal" data-i18n="finalText">Every removal goes to Quarantine first, so you can always bring it back. No accounts, no tracking, no cloud.</p>
   <a class="btn reveal dl" href="https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg><span data-i18n="downloadMac">Download for Mac</span></a>

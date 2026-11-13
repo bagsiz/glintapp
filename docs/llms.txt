@@ -3,7 +3,7 @@
 > Glint is a free, native macOS app (SwiftUI) for freeing disk space, protecting privacy, checking the Mac's security and disk health, and recovering deleted files from USB sticks and SD cards. It is available now, has no paid tier, subscription or cleaning limit, needs no account, and makes no network requests of its own: all scanning and analysis runs on the Mac. Turkish and English interface.
 
 - Download: https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg
-- Website: https://bagsiz.github.io/glintapp/
+- Website: https://glintmac.com/
 - Source and issue tracker: https://github.com/bagsiz/glintapp
 - Price: free (no paid tier, no subscription, no per-clean limit)
 - Requirements: macOS 14 Sonoma or later; Apple Silicon or Intel (one universal app)
@@ -40,12 +40,12 @@
 
 - No analytics, telemetry, crash reporting, ads or account
 - Files, file names and scan results are never uploaded
-- Full privacy note: https://bagsiz.github.io/glintapp/privacy.html
+- Full privacy note: https://glintmac.com/privacy.html
 
 ## Pages
 
-- [Home and FAQ](https://bagsiz.github.io/glintapp/): features, how it works, safety principles, frequently asked questions
-- [Privacy note](https://bagsiz.github.io/glintapp/privacy.html)
-- [What is "System Data" on a Mac?](https://bagsiz.github.io/glintapp/guides/system-data.html)
-- [Is it safe to delete ~/Library/Caches?](https://bagsiz.github.io/glintapp/guides/library-caches.html)
-- [How to find duplicate photos on a Mac](https://bagsiz.github.io/glintapp/guides/duplicate-photos.html)
+- [Home and FAQ](https://glintmac.com/): features, how it works, safety principles, frequently asked questions
+- [Privacy note](https://glintmac.com/privacy.html)
+- [What is "System Data" on a Mac?](https://glintmac.com/guides/system-data.html)
+- [Is it safe to delete ~/Library/Caches?](https://glintmac.com/guides/library-caches.html)
+- [How to find duplicate photos on a Mac](https://glintmac.com/guides/duplicate-photos.html)

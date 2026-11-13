@@ -2,7 +2,7 @@
 
 Free, native macOS app for cleaning up disk space, protecting your privacy and checking your Mac's security — plus file recovery for USB sticks and SD cards. Turkish and English UI.
 
-**[⬇︎ Download Glint.dmg](https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg)** · **[Website](https://bagsiz.github.io/glintapp/)** · **[FAQ](https://bagsiz.github.io/glintapp/#faq)**
+**[⬇︎ Download Glint.dmg](https://github.com/bagsiz/glintapp/releases/latest/download/Glint.dmg)** · **[Website](https://glintmac.com/)** · **[FAQ](https://glintmac.com/#faq)**
 
 - macOS 14 Sonoma or later, Apple Silicon and Intel
 - Signed with a Developer ID and notarized by Apple
