@@ -38,7 +38,7 @@
 
 ## Privacy
 
-- No analytics, telemetry, crash reporting, ads or account
+- The app has no analytics, telemetry, crash reporting, ads or account (the website uses Google Analytics with cookie consent)
 - Files, file names and scan results are never uploaded
 - Full privacy note: https://glintmac.com/privacy.html
 

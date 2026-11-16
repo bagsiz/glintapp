@@ -3,8 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager with Consent Mode: no cookies until the visitor accepts (assets/consent.js) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500});
+try { if (localStorage.getItem('glint-consent') === 'granted') gtag('consent', 'update', {analytics_storage: 'granted'}); } catch (e) {}
+dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WRN5CB7T"></script>
+<script defer src="/assets/consent.js"></script>
 <title>Privacy — Glint, the free disk cleaner for Mac</title>
-<meta name="description" content="What Glint collects: nothing. No analytics, no account, no network requests from the app. What stays on your Mac, and what this website loads.">
+<meta name="description" content="What the Glint app collects: nothing. No analytics, no account, no network requests from the app. What stays on your Mac, and what this website loads and measures.">
 <link rel="canonical" href="https://glintmac.com/privacy.html">
 <link rel="icon" href="assets/favicon.png">
 <meta name="theme-color" content="#07080d">
@@ -25,13 +35,14 @@
 <meta name="twitter:image" content="https://glintmac.com/assets/og.jpg">
 <meta name="twitter:image:alt" content="Glint — Your Mac, sparkling again.">
 <link rel="stylesheet" href="assets/page.css">
+<style>.consent-reset{font:inherit;color:var(--teal);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}</style>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "WebPage",
  "name": "Glint privacy note",
  "url": "https://glintmac.com/privacy.html",
- "description": "What Glint collects: nothing. No analytics, no account, no network requests from the app. What stays on your Mac, and what this website loads.",
+ "description": "What the Glint app collects: nothing. No analytics, no account, no network requests from the app. What stays on your Mac, and what this website loads and measures.",
  "inLanguage": [
   "en",
   "tr"
@@ -105,7 +116,8 @@
 
   <h2>This website</h2>
   <ul>
-    <li>No cookies, no analytics, no tracking scripts.</li>
+    <li>This website (not the app) uses Google Analytics, loaded through Google Tag Manager, to count visits and see which pages are read. Analytics cookies (<code>_ga</code>, <code>_ga_*</code>) are stored only if you click <b>Accept</b> in the cookie bar; until then Google receives cookieless, anonymous signals only. Advertising features are switched off. Google's <a href="https://policies.google.com/privacy">privacy policy</a> applies to that data.</li>
+    <li>Your cookie choice is kept in your browser's local storage. <button type="button" class="consent-reset" onclick="window.glintConsent &amp;&amp; glintConsent.reset()">Change cookie choice</button></li>
     <li>The site is hosted on GitHub Pages, which may log visitors' IP addresses for security, as described in GitHub's privacy statement.</li>
     <li>The home page loads its typefaces from Google Fonts, so your browser contacts Google's servers for those files.</li>
     <li>The home page shows a Product Hunt badge image loaded from producthunt.com (api.producthunt.com), so your browser contacts Product Hunt's servers for that image.</li>
@@ -147,7 +159,8 @@
 
   <h2>Bu web sitesi</h2>
   <ul>
-    <li>Çerez yok, analiz yok, takip betiği yok.</li>
+    <li>Bu web sitesi (uygulama değil), ziyaretleri saymak ve hangi sayfaların okunduğunu görmek için Google Tag Manager üzerinden yüklenen Google Analytics kullanır. Analiz çerezleri (<code>_ga</code>, <code>_ga_*</code>) yalnızca çerez bandında <b>Kabul et</b>'e tıklarsan kaydedilir; o zamana kadar Google'a yalnızca çerezsiz, anonim sinyaller gider. Reklam özellikleri kapalıdır. Bu veriler için Google'ın <a href="https://policies.google.com/privacy?hl=tr">gizlilik politikası</a> geçerlidir.</li>
+    <li>Çerez tercihin tarayıcının yerel depolamasında tutulur. <button type="button" class="consent-reset" onclick="window.glintConsent &amp;&amp; glintConsent.reset()">Çerez tercihini değiştir</button></li>
     <li>Site GitHub Pages'te barındırılır; GitHub, gizlilik bildiriminde anlatıldığı gibi güvenlik amacıyla ziyaretçilerin IP adreslerini kaydedebilir.</li>
     <li>Ana sayfa yazı tiplerini Google Fonts'tan yükler; bu yüzden tarayıcın bu dosyalar için Google sunucularına bağlanır.</li>
     <li>Ana sayfa, producthunt.com'dan (api.producthunt.com) yüklenen bir Product Hunt rozet görseli gösterir; bu yüzden tarayıcın bu görsel için Product Hunt sunucularına bağlanır.</li>

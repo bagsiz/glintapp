@@ -3,6 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager with Consent Mode: no cookies until the visitor accepts (assets/consent.js) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500});
+try { if (localStorage.getItem('glint-consent') === 'granted') gtag('consent', 'update', {analytics_storage: 'granted'}); } catch (e) {}
+dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WRN5CB7T"></script>
+<script defer src="/assets/consent.js"></script>
 <title>Clean Xcode DerivedData, Archives and simulators</title>
 <meta name="description" content="Where Xcode hides 50+ GB on a Mac, what is safe to delete (DerivedData, DeviceSupport, simulators) and what to keep (Archives with dSYMs).">
 <link rel="canonical" href="https://glintmac.com/guides/xcode-cleanup-deriveddata.html">
